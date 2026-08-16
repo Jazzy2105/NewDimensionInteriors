@@ -1,0 +1,60 @@
+---
+// "Materials & suppliers" — a raised panel reused on Home and Projects with
+// slightly different note copy per page.
+import { suppliers } from '../../data/suppliers.js';
+
+interface Props {
+  note: string;
+}
+const { note } = Astro.props;
+---
+
+<section class="raised-panel suppliers" aria-label="Materials and suppliers">
+  <div class="suppliers__header">
+    <span class="kicker">Materials &amp; suppliers</span>
+    <span class="suppliers__note">{note}</span>
+  </div>
+  <div class="suppliers__row">
+    {suppliers.map((name) => <span class="suppliers__name">{name}</span>)}
+  </div>
+</section>
+
+<style>
+  .suppliers__header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 26px clamp(16px, 2.4vw, 32px);
+    border-bottom: 2px solid var(--color-divider);
+  }
+
+  .suppliers__note {
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--color-neutral-600);
+    max-width: 52ch;
+  }
+
+  .suppliers__row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px clamp(16px, 2vw, 32px);
+    padding: clamp(24px, 3vw, 40px) clamp(16px, 2.4vw, 32px);
+  }
+
+  .suppliers__name {
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: clamp(15px, 1.5vw, 21px);
+    letter-spacing: -0.01em;
+    color: var(--color-neutral-700);
+    transition: color 200ms ease;
+  }
+  .suppliers__name:hover {
+    color: #fff;
+  }
+</style>

@@ -1,0 +1,75 @@
+---
+// "02 — Built-in cupboards" — flat, image-left / text-right. Shows the
+// first featured photo from src/assets/images/cupboards/ once one exists;
+// falls back to a labeled placeholder frame (see that folder's README).
+import { Image } from 'astro:assets';
+import { getFeatured } from '../../data/photo-library.js';
+import IconArrowRight from '../icons/IconArrowRight.astro';
+import PlaceholderPhoto from '../ui/PlaceholderPhoto.astro';
+
+const photo = getFeatured('cupboards', 1)[0];
+---
+
+<section id="cupboards" class="flat-section split">
+  <div class="split__media">
+    {
+      photo ? (
+        <Image src={photo.image} alt={photo.alt} width={1200} format="webp" loading="lazy" class="split__img" />
+      ) : (
+        <PlaceholderPhoto brief="Drop a built-in cupboard photo" />
+      )
+    }
+  </div>
+  <div class="split__copy">
+    <span class="kicker">02 — Built-in cupboards</span>
+    <h2 class="split__heading">Storage built into the wall, not against it.</h2>
+    <p class="split__body">
+      Bedroom wardrobes, walk-in dressing rooms, hallway and linen cupboards — fitted floor to ceiling with hanging
+      rails, drawer banks and shelving laid out around what you actually own.
+    </p>
+    <a href="/projects" class="arrow-link">
+      See cupboards
+      <IconArrowRight />
+    </a>
+  </div>
+</section>
+
+<style>
+  .split {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  }
+
+  .split__media {
+    position: relative;
+    min-height: min(70vh, 560px);
+  }
+  .split__media :global(.split__img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .split__copy {
+    padding: clamp(32px, 5vw, 80px) var(--section-pad-x);
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    justify-content: center;
+    border-left: 2px solid var(--color-divider);
+  }
+
+  .split__heading {
+    font-size: clamp(30px, 3.8vw, 54px);
+    line-height: 0.98;
+    letter-spacing: -0.03em;
+  }
+
+  .split__body {
+    margin: 0;
+    max-width: 520px;
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--color-neutral-700);
+  }
+</style>

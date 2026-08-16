@@ -1,0 +1,266 @@
+/*
+  N.D.I. design tokens.
+  Values are transcribed from the client's design handoff (../README.md at the
+  project root) — a dark, red-accented, photography-led system. Change a look
+  here and it ripples through every component, since they all read these
+  custom properties rather than hard-coding colors.
+*/
+:root {
+  /* ground + surface */
+  --color-bg: #070707;
+  --color-surface: #161514;
+  --color-text: #f5f3f2;
+  --color-divider: #38342f;
+  --color-panel-border: #2e2a27;
+  --color-tile-bg: #111013;
+  --color-footer-bg: #040404;
+  --color-hero-bg: #0a0a0c;
+
+  /* brand red */
+  --color-accent: #bc1313;
+  --color-accent-100: #fdecec;
+  --color-accent-200: #f7cfcf;
+  --color-accent-300: #f08b8b;
+  --color-accent-400: #e35555;
+  --color-accent-500: #cc2020;
+  --color-accent-600: #a20f0f;
+  --color-accent-700: #7e0c0c;
+  --color-accent-800: #5c0a0a;
+  --color-accent-900: #3d0b0b;
+  --color-cta-border: #6d0d0d;
+
+  /* neutral ramp */
+  --color-neutral-100: #100f0f;
+  --color-neutral-200: #1b1a19;
+  --color-neutral-300: #272524;
+  --color-neutral-400: #3b3836;
+  --color-neutral-500: #6b6663;
+  --color-neutral-600: #9a9491;
+  --color-neutral-700: #c3bebb;
+  --color-neutral-800: #dedad8;
+  --color-neutral-900: #f2f0ef;
+
+  /* type */
+  --font-heading: 'Archivo Variable', system-ui, sans-serif;
+  --font-body: 'Archivo Variable', system-ui, sans-serif;
+
+  /* raised-panel geometry, reused by every "raised" section */
+  --panel-radius: 20px;
+  --panel-margin: clamp(18px, 2.6vw, 38px);
+  --panel-inset: calc(100% - clamp(32px, 5.2vw, 76px));
+  --panel-max-width: 1720px;
+  --section-pad-y: clamp(32px, 5vw, 80px);
+  --section-pad-x: clamp(16px, 3vw, 40px);
+
+  /* shadows */
+  --shadow-panel: inset 0 2px 0 rgba(255, 255, 255, 0.05), 0 30px 60px -22px rgba(0, 0, 0, 0.95),
+    0 80px 120px -60px rgba(188, 19, 19, 0.22);
+  --shadow-cta: 0 40px 90px -30px rgba(188, 19, 19, 0.5);
+  --shadow-nav: 0 18px 40px -18px rgba(0, 0, 0, 0.9);
+}
+
+/* the animated "sky" background — see components/atmosphere/SiteAtmosphere.astro */
+@keyframes ndiSkyA {
+  0%,
+  100% {
+    transform: translate3d(-3%, -2%, 0) scale(1.18);
+  }
+  50% {
+    transform: translate3d(4%, 3%, 0) scale(1.34);
+  }
+}
+@keyframes ndiSkyB {
+  0%,
+  100% {
+    transform: translate3d(5%, 4%, 0) scale(1.3);
+  }
+  50% {
+    transform: translate3d(-6%, -5%, 0) scale(1.12);
+  }
+}
+@keyframes ndiSkyC {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1.1);
+    opacity: 0.85;
+  }
+  50% {
+    transform: translate3d(-4%, 5%, 0) scale(1.28);
+    opacity: 1;
+  }
+}
+/* hero photo Ken Burns */
+@keyframes ndiKB {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.12);
+  }
+}
+/* lightbox / modal entrance */
+@keyframes ndiRise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+/* nav page-transition label */
+@keyframes ndiLabelIn {
+  from {
+    opacity: 0;
+    transform: translateY(34px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-heading);
+  font-weight: 900;
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+::selection {
+  background: var(--color-accent-200);
+}
+
+/* raised panel: the floating, bordered, drop-shadowed slab every other
+   section sits in. Flat sections are full-bleed instead — see the
+   `.flat-section` utility below. */
+.raised-panel {
+  position: relative;
+  margin: var(--panel-margin) auto;
+  width: var(--panel-inset);
+  max-width: var(--panel-max-width);
+  background: var(--color-surface);
+  border: 2px solid var(--color-panel-border);
+  border-radius: var(--panel-radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-panel);
+}
+
+.flat-section {
+  position: relative;
+  border-top: 2px solid var(--color-divider);
+  border-bottom: 2px solid var(--color-divider);
+  background: rgba(5, 5, 5, 0.22);
+}
+
+.red-band {
+  position: relative;
+  background: var(--color-accent);
+  color: #fff;
+  border-top: 2px solid var(--color-cta-border);
+  border-bottom: 2px solid var(--color-cta-border);
+  box-shadow: var(--shadow-cta);
+}
+
+/* "01 — Kitchens" style kicker used above every section heading */
+.kicker {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-accent-400);
+}
+
+/* the trailing-arrow text link used to point at /projects, /about, etc. */
+.arrow-link {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border-bottom: 3px solid var(--color-accent);
+  padding-bottom: 6px;
+  width: fit-content;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 14px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 18px 26px;
+  border: 0;
+  cursor: pointer;
+}
+
+.btn-accent {
+  background: var(--color-accent);
+  color: #fff;
+}
+.btn-accent:hover {
+  background: var(--color-accent-600);
+}
+
+.btn-ghost {
+  color: #fff;
+  border: 2px solid rgba(255, 255, 255, 0.6);
+}
+.btn-ghost:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.btn-white {
+  background: #fff;
+  color: var(--color-accent-700);
+}
+.btn-white:hover {
+  background: var(--color-accent-100);
+}

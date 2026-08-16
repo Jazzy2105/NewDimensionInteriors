@@ -1,0 +1,37 @@
+---
+// Projects — filterable gallery. See README.md's "Projects (Projects.dc.html)"
+// section for the filter/lightbox behavior this was transcribed from.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteNav from '../components/nav/SiteNav.astro';
+import SiteFooter from '../components/footer/SiteFooter.astro';
+import Lightbox from '../components/gallery/Lightbox.astro';
+import ProjectsHeader from '../components/projects/ProjectsHeader.astro';
+import KitchensGridPanel from '../components/projects/KitchensGridPanel.astro';
+import CupboardsGridPanel from '../components/projects/CupboardsGridPanel.astro';
+import VanitiesGridPanel from '../components/projects/VanitiesGridPanel.astro';
+import DecorGridPanel from '../components/projects/DecorGridPanel.astro';
+import SuppliersPanel from '../components/ui/SuppliersPanel.astro';
+import CtaBand from '../components/ui/CtaBand.astro';
+import { hasPhotos } from '../data/photo-library.js';
+---
+
+<BaseLayout title="Projects" description="Kitchens, built-in cupboards, vanities and home decor fitted by N.D.I. — browse the gallery by category.">
+  <SiteNav active="projects" />
+
+  <main>
+    <ProjectsHeader />
+    <KitchensGridPanel />
+    <CupboardsGridPanel />
+    <VanitiesGridPanel />
+    <DecorGridPanel />
+    <SuppliersPanel note="Board, stone and hardware from established South African and European suppliers." />
+    <CtaBand heading="Send us a photo of your room. We'll send back a plan." />
+  </main>
+
+  <SiteFooter />
+
+  <Lightbox groupId="projects-kitchens" withNav />
+  {hasPhotos('cupboards') && <Lightbox groupId="projects-cupboards" withNav />}
+  {hasPhotos('vanities') && <Lightbox groupId="projects-vanities" withNav />}
+  {hasPhotos('decor') && <Lightbox groupId="projects-decor" withNav />}
+</BaseLayout>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&display=swap">
+<link rel="stylesheet" href="_ds/modernist-dccc7be5-f9a3-4c2c-b9f6-7fa541981b64/styles.css">
+<script src="_ds/modernist-dccc7be5-f9a3-4c2c-b9f6-7fa541981b64/_ds_bundle.js"></script>
+<style>
+  :root {
+    --color-accent: #BC1313; --color-accent-100: #fdecec; --color-accent-200: #f7cfcf; --color-accent-300: #f08b8b; --color-accent-400: #e35555; --color-accent-500: #cc2020; --color-accent-600: #a20f0f; --color-accent-700: #7e0c0c; --color-accent-800: #5c0a0a; --color-accent-900: #3d0b0b;
+    --color-bg: #070707; --color-surface: #161514; --color-text: #f5f3f2; --color-divider: #38342f;
+    --color-neutral-100: #100f0f; --color-neutral-200: #1b1a19; --color-neutral-300: #272524; --color-neutral-400: #3b3836; --color-neutral-500: #6b6663; --color-neutral-600: #9a9491; --color-neutral-700: #c3bebb; --color-neutral-800: #dedad8; --color-neutral-900: #f2f0ef;
+  }
+  a { color: var(--color-text); text-decoration: none; }
+  a:hover { color: var(--color-accent-400); }
+  html { scroll-behavior: smooth; }
+  @keyframes ndiLabelIn { from { opacity: 0; transform: translateY(34px); } to { opacity: 1; transform: none; } }
+</style>
+</helmet>
+<header style="background:rgba(10,10,10,0.86);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom:2px solid var(--color-text);box-shadow:0 18px 40px -18px rgba(0,0,0,0.9);font-family:var(--font-body);color:var(--color-text)">
+  <div style="display:flex;align-items:stretch;justify-content:space-between;gap:24px;padding:0 clamp(16px,3vw,40px);height:76px">
+    <a href="Home.dc.html" style="display:flex;align-items:center;gap:14px">
+      <img src="assets/ndi-logo.png" alt="N.D.I." style="height:46px;width:auto;display:block">
+      <span style="font-size:9.5px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--color-neutral-600);max-width:8em;line-height:1.5">Kitchens &amp; Cupboards</span>
+    </a>
+    <nav style="display:flex;align-items:stretch;margin-left:auto">
+      <a href="Home.dc.html" onClick="{{ nav.homeGo }}" style="display:flex;align-items:center;justify-content:center;width:clamp(112px,11vw,160px);padding:0 8px;font-size:12.5px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;border-bottom:4px solid {{ nav.home }}">Home</a>
+      <a href="About.dc.html" onClick="{{ nav.aboutGo }}" style="display:flex;align-items:center;justify-content:center;width:clamp(112px,11vw,160px);padding:0 8px;font-size:12.5px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;border-bottom:4px solid {{ nav.about }}">About Us</a>
+      <a href="Projects.dc.html" onClick="{{ nav.projectsGo }}" style="display:flex;align-items:center;justify-content:center;width:clamp(112px,11vw,160px);padding:0 8px;font-size:12.5px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;border-bottom:4px solid {{ nav.projects }}">Projects</a>
+      <a href="Home.dc.html#contact" onClick="{{ nav.contactGo }}" style="display:flex;align-items:center;justify-content:center;width:clamp(112px,11vw,160px);padding:0 8px;font-size:12.5px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;border-bottom:4px solid {{ nav.contact }}">Contact Us</a>
+    </nav>
+    <a href="{{ waHref }}" target="_blank" style="align-self:center;display:inline-flex;align-items:center;gap:10px;background:var(--color-accent);color:#fff;font-family:var(--font-heading);font-weight:800;font-size:13px;letter-spacing:0.06em;text-transform:uppercase;padding:14px 20px" style-hover="background:var(--color-accent-600)">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+      <span>WhatsApp us</span>
+    </a>
+  </div>
+</header>
+
+<div style="position:fixed;inset:0;z-index:500;pointer-events:none;background:var(--color-accent);display:flex;flex-direction:column;justify-content:flex-end;padding:clamp(24px,5vw,72px);will-change:transform;transform:{{ panel.transform }};transition:{{ panel.transition }};visibility:{{ panel.visibility }}">
+  <div style="display:flex;flex-direction:column;gap:16px;animation:ndiLabelIn 240ms cubic-bezier(0.6,0,0.2,1) both">
+    <span style="width:64px;height:5px;background:#fff"></span>
+    <span style="font-family:var(--font-heading);font-weight:900;color:#fff;font-size:clamp(40px,8vw,120px);line-height:0.9;letter-spacing:-0.04em">{{ panel.label }}</span>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:90},&quot;active&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;home&quot;,&quot;about&quot;,&quot;projects&quot;,&quot;contact&quot;,&quot;&quot;],&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;whatsappNumber&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;27000000000&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+const KEYS = ['contact'];
+
+class Component extends DCLogic {
+  state = { spy: null, phase: 'idle', label: '' };
+
+  componentDidMount() {
+    this.onScroll = () => {
+      let cur = null, found = false;
+      for (const k of KEYS) {
+        const el = document.getElementById(k);
+        if (!el) continue;
+        found = true;
+        if (el.getBoundingClientRect().top <= 160) cur = k;
+      }
+      if (found && cur !== this.state.spy) this.setState({ spy: cur });
+    };
+    window.addEventListener('scroll', this.onScroll, { passive: true });
+    this.onScroll();
+  }
+
+  componentWillUnmount() {
+    if (this.onScroll) window.removeEventListener('scroll', this.onScroll);
+    clearTimeout(this.t);
+  }
+
+  travel(href, label) {
+    return e => {
+      if (e) e.preventDefault();
+      if (this.leaving) return;
+      const hash = href.indexOf('#');
+      if (hash > -1) {
+        const el = document.getElementById(href.slice(hash + 1));
+        if (el) { window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 74, behavior: 'smooth' }); return; }
+      }
+      this.leaving = true;
+      this.setState({ phase: 'up0', label });
+      requestAnimationFrame(() => requestAnimationFrame(() => this.setState({ phase: 'up1' })));
+      this.t = setTimeout(() => { window.location.href = href; }, 300);
+    };
+  }
+
+  panel() {
+    if (this.state.phase === 'up0') return { transform: 'translateY(101%)', transition: 'none', visibility: 'visible' };
+    if (this.state.phase === 'up1') return { transform: 'translateY(0)', transition: 'transform 260ms cubic-bezier(0.6, 0, 0.2, 1)', visibility: 'visible' };
+    return { transform: 'translateY(101%)', transition: 'none', visibility: 'hidden' };
+  }
+
+  renderVals() {
+    const active = this.state.spy || this.props.active || '';
+    const mark = k => (active === k ? 'var(--color-accent)' : 'transparent');
+    const p = this.panel();
+    return {
+      panel: { transform: p.transform, transition: p.transition, visibility: p.visibility, label: this.state.label || 'N.D.I.' },
+      waHref: 'https://wa.me/' + String(this.props.whatsappNumber ?? '27000000000').replace(/[^0-9]/g, ''),
+      nav: {
+        home: mark('home'), about: mark('about'), projects: mark('projects'), contact: mark('contact'),
+        homeGo: this.travel('Home.dc.html', 'Home'),
+        aboutGo: this.travel('About.dc.html', 'About Us'),
+        projectsGo: this.travel('Projects.dc.html', 'Projects'),
+        contactGo: this.travel('Home.dc.html#contact', 'Contact')
+      }
+    };
+  }
+}
+</script>
+</body>
+</html>

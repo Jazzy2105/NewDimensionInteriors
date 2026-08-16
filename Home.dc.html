@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&display=swap">
+<link rel="stylesheet" href="_ds/modernist-dccc7be5-f9a3-4c2c-b9f6-7fa541981b64/styles.css">
+<script src="_ds/modernist-dccc7be5-f9a3-4c2c-b9f6-7fa541981b64/_ds_bundle.js"></script>
+<script src="./image-slot.js"></script>
+<style>
+  @keyframes ndiSkyA { 0% { transform: translate3d(-3%, -2%, 0) scale(1.18); } 50% { transform: translate3d(4%, 3%, 0) scale(1.34); } 100% { transform: translate3d(-3%, -2%, 0) scale(1.18); } }
+  @keyframes ndiSkyB { 0% { transform: translate3d(5%, 4%, 0) scale(1.3); } 50% { transform: translate3d(-6%, -5%, 0) scale(1.12); } 100% { transform: translate3d(5%, 4%, 0) scale(1.3); } }
+  @keyframes ndiSkyC { 0% { transform: translate3d(0, 0, 0) scale(1.1); opacity: 0.85; } 50% { transform: translate3d(-4%, 5%, 0) scale(1.28); opacity: 1; } 100% { transform: translate3d(0, 0, 0) scale(1.1); opacity: 0.85; } }
+  :root {
+    --color-accent: #BC1313; --color-accent-100: #fdecec; --color-accent-200: #f7cfcf; --color-accent-300: #f08b8b; --color-accent-400: #e35555; --color-accent-500: #cc2020; --color-accent-600: #a20f0f; --color-accent-700: #7e0c0c; --color-accent-800: #5c0a0a; --color-accent-900: #3d0b0b;
+    --color-bg: #070707; --color-surface: #161514; --color-text: #f5f3f2; --color-divider: #38342f;
+    --color-neutral-100: #100f0f; --color-neutral-200: #1b1a19; --color-neutral-300: #272524; --color-neutral-400: #3b3836; --color-neutral-500: #6b6663; --color-neutral-600: #9a9491; --color-neutral-700: #c3bebb; --color-neutral-800: #dedad8; --color-neutral-900: #f2f0ef;
+  }
+  body { margin: 0; background: var(--color-bg); color: var(--color-text); font-family: var(--font-body); -webkit-font-smoothing: antialiased; }
+  * { box-sizing: border-box; }
+  a { color: var(--color-text); text-decoration: none; }
+  a:hover { color: var(--color-accent-400); }
+  @keyframes ndiKB { from { transform: scale(1.0); } to { transform: scale(1.12); } }
+  @keyframes ndiRise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+  ::selection { background: var(--color-accent-200); }
+</style>
+</helmet>
+
+<div style="min-height:100vh">
+  <div aria-hidden="true" style="position:fixed;inset:0;z-index:-5;pointer-events:none;background:#050505"></div>
+  <div aria-hidden="true" style="position:fixed;inset:-18%;z-index:-4;pointer-events:none;background:radial-gradient(52% 44% at 50% 6%, #2b2930 0%, #201f25 34%, rgba(24,23,28,0) 72%), radial-gradient(70% 58% at 50% 34%, #16161b 0%, rgba(22,22,27,0) 70%);animation:ndiSkyC 38s ease-in-out infinite;will-change:transform,opacity"></div>
+  <div aria-hidden="true" style="position:fixed;inset:-22%;z-index:-3;pointer-events:none;background:radial-gradient(46% 38% at 14% 30%, #1b1d26 0%, rgba(27,29,38,0) 66%), radial-gradient(44% 36% at 88% 22%, #241a1a 0%, rgba(36,26,26,0) 64%), radial-gradient(56% 46% at 62% 88%, #14161c 0%, rgba(20,22,28,0) 68%);animation:ndiSkyA 52s ease-in-out infinite;will-change:transform"></div>
+  <div aria-hidden="true" style="position:fixed;inset:-26%;z-index:-2;pointer-events:none;background:radial-gradient(40% 34% at 80% 64%, rgba(140,18,18,0.26) 0%, rgba(140,18,18,0) 68%), radial-gradient(38% 32% at 10% 78%, rgba(48,52,66,0.34) 0%, rgba(48,52,66,0) 66%), radial-gradient(30% 26% at 44% 12%, rgba(188,19,19,0.16) 0%, rgba(188,19,19,0) 70%);animation:ndiSkyB 74s ease-in-out infinite;will-change:transform"></div>
+  <div aria-hidden="true" style="position:fixed;inset:0;z-index:-1;pointer-events:none;background-image:url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E&quot;);opacity:0.05;mix-blend-mode:overlay"></div>
+  <div aria-hidden="true" style="position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(120% 90% at 50% 24%, rgba(0,0,0,0) 42%, rgba(0,0,0,0.62) 100%)"></div>
+
+  <dc-import name="SiteNav" style="position:sticky;top:0;z-index:60" active="home" hint-size="100%,76px"></dc-import>
+
+  <section id="hero" data-screen-label="Hero" style="position:relative;height:calc(100vh - 76px);min-height:600px;overflow:hidden;background:#0a0a0c">
+    <div style="position:absolute;inset:0;overflow:hidden;transition:opacity 1400ms ease;opacity:{{ hero.o1 }}">
+      <img src="assets/kitchen-01.jpg" alt="Marble island kitchen with walnut cabinetry" style="width:100%;height:100%;object-fit:cover;animation:ndiKB 14s ease-out infinite alternate">
+    </div>
+    <div style="position:absolute;inset:0;overflow:hidden;transition:opacity 1400ms ease;opacity:{{ hero.o2 }}">
+      <img src="assets/kitchen-08.jpg" alt="Wide fitted kitchen with stone tops" style="width:100%;height:100%;object-fit:cover;animation:ndiKB 14s ease-out infinite alternate">
+    </div>
+    <div style="position:absolute;inset:0;overflow:hidden;transition:opacity 1400ms ease;opacity:{{ hero.o3 }}">
+      <img src="assets/kitchen-07.jpg" alt="Contemporary kitchen with tall units" style="width:100%;height:100%;object-fit:cover;animation:ndiKB 14s ease-out infinite alternate">
+    </div>
+    <div style="position:absolute;inset:0;overflow:hidden;transition:opacity 1400ms ease;opacity:{{ hero.o4 }}">
+      <img src="assets/kitchen-10.jpg" alt="Open-plan kitchen and living space" style="width:100%;height:100%;object-fit:cover;animation:ndiKB 14s ease-out infinite alternate">
+    </div>
+    <div style="position:absolute;inset:0;overflow:hidden;transition:opacity 1400ms ease;opacity:{{ hero.o5 }}">
+      <img src="assets/kitchen-05.jpg" alt="Kitchen detail with integrated appliances" style="width:100%;height:100%;object-fit:cover;animation:ndiKB 14s ease-out infinite alternate">
+    </div>
+    <div style="position:absolute;inset:0;overflow:hidden;transition:opacity 1400ms ease;opacity:{{ hero.o6 }}">
+      <img src="assets/kitchen-03.jpg" alt="Built-in cupboards in a fitted kitchen" style="width:100%;height:100%;object-fit:cover;animation:ndiKB 14s ease-out infinite alternate">
+    </div>
+    <div style="position:absolute;inset:0;background:linear-gradient(100deg, rgba(6,6,6,0.9) 0%, rgba(6,6,6,0.5) 44%, rgba(6,6,6,0.08) 74%)"></div>
+
+    <div style="position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;gap:36px;padding:clamp(24px,4vw,64px)">
+      <div style="display:flex;flex-direction:column;gap:22px;max-width:min(940px,80vw)">
+        <div style="display:flex;align-items:center;gap:18px;flex-wrap:wrap">
+          <img src="assets/ndi-logo.png" alt="N.D.I." style="height:clamp(52px,6vw,88px);width:auto;display:block">
+          <span style="color:#fff;font-size:11px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase">Custom cabinetry · Gauteng</span>
+        </div>
+        <h1 style="margin:0;font-family:var(--font-heading);font-weight:900;color:#fff;font-size:clamp(40px,7.2vw,104px);line-height:0.92;letter-spacing:-0.035em;text-wrap:balance">The kitchen is<br>the room you<br>actually live in.</h1>
+        <p style="margin:0;max-width:560px;color:rgba(255,255,255,0.82);font-size:clamp(15px,1.3vw,19px);line-height:1.55">Designed, manufactured and fitted by one workshop — kitchens, vanities and built-in cupboards made to measure, with no middleman between the drawing and the door.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:12px;padding-top:8px">
+          <a href="{{ waHref }}" target="_blank" style="display:inline-flex;align-items:center;background:var(--color-accent);color:#fff;font-family:var(--font-heading);font-weight:800;font-size:14px;letter-spacing:0.06em;text-transform:uppercase;padding:18px 26px" style-hover="background:var(--color-accent-600)">{{ ctaLabel }}</a>
+          <a href="#kitchens" style="display:inline-flex;align-items:center;color:#fff;font-family:var(--font-heading);font-weight:800;font-size:14px;letter-spacing:0.06em;text-transform:uppercase;padding:18px 26px;border:2px solid rgba(255,255,255,0.6)" style-hover="background:rgba(255,255,255,0.12)">See the work</a>
+        </div>
+      </div>
+
+      <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:24px;border-top:2px solid rgba(255,255,255,0.35);padding-top:16px">
+        <div style="display:flex;gap:8px;align-items:center">
+          <button onClick="{{ hero.go1 }}" style="width:clamp(28px,5vw,64px);height:4px;border:0;padding:0;cursor:pointer;background:{{ hero.b1 }};transition:background 300ms"></button>
+          <button onClick="{{ hero.go2 }}" style="width:clamp(28px,5vw,64px);height:4px;border:0;padding:0;cursor:pointer;background:{{ hero.b2 }};transition:background 300ms"></button>
+          <button onClick="{{ hero.go3 }}" style="width:clamp(28px,5vw,64px);height:4px;border:0;padding:0;cursor:pointer;background:{{ hero.b3 }};transition:background 300ms"></button>
+          <button onClick="{{ hero.go4 }}" style="width:clamp(28px,5vw,64px);height:4px;border:0;padding:0;cursor:pointer;background:{{ hero.b4 }};transition:background 300ms"></button>
+          <button onClick="{{ hero.go5 }}" style="width:clamp(28px,5vw,64px);height:4px;border:0;padding:0;cursor:pointer;background:{{ hero.b5 }};transition:background 300ms"></button>
+          <button onClick="{{ hero.go6 }}" style="width:clamp(28px,5vw,64px);height:4px;border:0;padding:0;cursor:pointer;background:{{ hero.b6 }};transition:background 300ms"></button>
+        </div>
+        <div style="display:flex;align-items:baseline;gap:8px;color:#fff;font-family:var(--font-heading);font-weight:800">
+          <span style="font-size:clamp(28px,3.2vw,44px);line-height:1">{{ heroNum }}</span>
+          <span style="font-size:13px;opacity:0.6">/ {{ heroTotal }}</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="position:relative;border-top:2px solid var(--color-divider);border-bottom:2px solid var(--color-divider);background:rgba(5,5,5,0.22)">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr))">
+      <div style="padding:clamp(24px,3vw,40px);border-right:2px solid var(--color-divider);display:flex;flex-direction:column;gap:8px">
+        <span style="font-family:var(--font-heading);font-weight:900;font-size:clamp(30px,3.4vw,46px);line-height:1;letter-spacing:-0.03em">25<span style="color:var(--color-accent)">+</span></span>
+        <span style="font-size:12px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--color-neutral-600)">Years at the bench</span>
+      </div>
+      <div style="padding:clamp(24px,3vw,40px);border-right:2px solid var(--color-divider);display:flex;flex-direction:column;gap:8px">
+        <span style="font-family:var(--font-heading);font-weight:900;font-size:clamp(30px,3.4vw,46px);line-height:1;letter-spacing:-0.03em">One</span>
+        <span style="font-size:12px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--color-neutral-600)">Workshop, start to finish</span>
+      </div>
+      <div style="padding:clamp(24px,3vw,40px);border-right:2px solid var(--color-divider);display:flex;flex-direction:column;gap:8px">
+        <span style="font-family:var(--font-heading);font-weight:900;font-size:clamp(30px,3.4vw,46px);line-height:1;letter-spacing:-0.03em">5000<span style="color:var(--color-accent)">+</span></span>
+        <span style="font-size:12px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--color-neutral-600)">Clients served</span>
+      </div>
+      <div style="padding:clamp(24px,3vw,40px);display:flex;flex-direction:column;gap:8px">
+        <span style="font-family:var(--font-heading);font-weight:900;font-size:clamp(30px,3.4vw,46px);line-height:1;letter-spacing:-0.03em">Free</span>
+        <span style="font-size:12px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--color-neutral-600)">Measure &amp; quotation</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="kitchens" data-screen-label="Kitchens" style="position:relative;margin:clamp(18px,2.6vw,38px) auto;width:calc(100% - clamp(32px,5.2vw,76px));max-width:1720px;background:var(--color-surface);border:2px solid #2e2a27;border-radius:20px;overflow:hidden;box-shadow:inset 0 2px 0 rgba(255,255,255,0.05), 0 30px 60px -22px rgba(0,0,0,0.95), 0 80px 120px -60px rgba(188,19,19,0.22)">
+    <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:24px;padding:clamp(40px,6vw,88px) clamp(16px,3vw,40px) clamp(24px,3vw,40px)">
+      <div style="display:flex;flex-direction:column;gap:14px;max-width:720px">
+        <span style="font-size:11px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:var(--color-accent-400)">01 — Kitchens</span>
+        <h2 style="margin:0;font-family:var(--font-heading);font-weight:900;font-size:clamp(32px,4.6vw,68px);line-height:0.98;letter-spacing:-0.03em">Every kitchen is drawn around one house.</h2>
+        <p style="margin:0;max-width:560px;font-size:16px;line-height:1.6;color:var(--color-neutral-700)">Stone tops, veneer and matt finishes, soft-close hardware, tall units that use the ceiling. We measure on site, cut in our own workshop, and fit it ourselves.</p>
+      </div>
+      <a href="Projects.dc.html" style="display:inline-flex;align-items:center;gap:10px;font-family:var(--font-heading);font-weight:800;font-size:13px;letter-spacing:0.1em;text-transform:uppercase;border-bottom:3px solid var(--color-accent);padding-bottom:6px">View the kitchen gallery
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+      </a>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2px;background:var(--color-divider);border-top:2px solid var(--color-text)">
+      <button onClick="{{ open1 }}" style="position:relative;display:block;padding:0;border:0;cursor:zoom-in;background:#111013;overflow:hidden;aspect-ratio:4/3">
+        <img src="assets/kitchen-01.jpg" alt="Marble island kitchen by N.D.I." style="width:100%;height:100%;object-fit:cover;transition:transform 900ms cubic-bezier(0.2,0.7,0.2,1)" style-hover="transform:scale(1.06)">
+        <span style="position:absolute;left:0;bottom:0;display:flex;align-items:center;gap:8px;background:var(--color-bg);padding:10px 14px;font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase">Marble island</span>
+      </button>
+      <button onClick="{{ open2 }}" style="position:relative;display:block;padding:0;border:0;cursor:zoom-in;background:#111013;overflow:hidden;aspect-ratio:4/3">
+        <img src="assets/kitchen-04.jpg" alt="Lit island kitchen by N.D.I." style="width:100%;height:100%;object-fit:cover;transition:transform 900ms cubic-bezier(0.2,0.7,0.2,1)" style-hover="transform:scale(1.06)">
+        <span style="position:absolute;left:0;bottom:0;display:flex;align-items:center;gap:8px;background:var(--color-bg);padding:10px 14px;font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase">Lit island</span>
+      </button>
+      <button onClick="{{ open3 }}" style="position:relative;display:block;padding:0;border:0;cursor:zoom-in;background:#111013;overflow:hidden;aspect-ratio:4/3">
+        <img src="assets/kitchen-07.jpg" alt="Tall units fitted by N.D.I." style="width:100%;height:100%;object-fit:cover;transition:transform 900ms cubic-bezier(0.2,0.7,0.2,1)" style-hover="transform:scale(1.06)">
+        <span style="position:absolute;left:0;bottom:0;display:flex;align-items:center;gap:8px;background:var(--color-bg);padding:10px 14px;font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase">Tall units</span>
+      </button>
+      <button onClick="{{ open4 }}" style="position:relative;display:block;padding:0;border:0;cursor:zoom-in;background:#111013;overflow:hidden;aspect-ratio:4/3">
+        <img src="assets/kitchen-02.jpg" alt="Galley kitchen by N.D.I." style="width:100%;height:100%;object-fit:cover;transition:transform 900ms cubic-bezier(0.2,0.7,0.2,1)" style-hover="transform:scale(1.06)">
+        <span style="position:absolute;left:0;bottom:0;display:flex;align-items:center;gap:8px;background:var(--color-bg);padding:10px 14px;font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase">Galley run</span>
+      </button>
+      <button onClick="{{ open5 }}" style="position:relative;display:block;padding:0;border:0;cursor:zoom-in;background:#111013;overflow:hidden;aspect-ratio:4/3">
+        <img src="assets/kitchen-06.jpg" alt="Scullery cabinetry by N.D.I." style="width:100%;height:100%;object-fit:cover;transition:transform 900ms cubic-bezier(0.2,0.7,0.2,1)" style-hover="transform:scale(1.06)">
+        <span style="position:absolute;left:0;bottom:0;display:flex;align-items:center;gap:8px;background:var(--color-bg);padding:10px 14px;font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase">Scullery</span>
+      </button>
+      <button onClick="{{ open6 }}" style="position:relative;display:block;padding:0;border:0;cursor:zoom-in;background:#111013;overflow:hidden;aspect-ratio:4/3">
+        <img src="assets/kitchen-09.jpg" alt="Cupboard detail by N.D.I." style="width:100%;height:100%;object-fit:cover;transition:transform 900ms cubic-bezier(0.2,0.7,0.2,1)" style-hover="transform:scale(1.06)">
+        <span style="position:absolute;left:0;bottom:0;display:flex;align-items:center;gap:8px;background:var(--color-bg);padding:10px 14px;font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase">Cupboard detail</span>
+      </button>
+    </div>
+  </section>
+
+  <section id="cupboards" data-screen-label="Built-in cupboards" style="position:relative;border-top:2px solid var(--color-divider);border-bottom:2px solid var(--color-divider);background:rgba(5,5,5,0.22);display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr))">
+    <div style="position:relative;min-height:min(70vh,560px);order:0">
+      <image-slot id="ndi-bic-hero" shape="rect" fit="cover" placeholder="Drop a built-in cupboard photo"></image-slot>
+    </div>
+    <div style="padding:clamp(32px,5vw,80px) clamp(16px,3vw,40px);display:flex;flex-direction:column;gap:18px;justify-content:center;border-left:2px solid var(--color-divider)">
+      <span style="font-size:11px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:var(--color-accent-400)">02 — Built-in cupboards</span>
+      <h2 style="margin:0;font-family:var(--font-heading);font-weight:900;font-size:clamp(30px,3.8vw,54px);line-height:0.98;letter-spacing:-0.03em">Storage built into the wall, not against it.</h2>
+      <p style="margin:0;max-width:520px;font-size:16px;line-height:1.6;color:var(--color-neutral-700)">Bedroom wardrobes, walk-in dressing rooms, hallway and linen cupboards — fitted floor to ceiling with hanging rails, drawer banks and shelving laid out around what you actually own.</p>
+      <a href="Projects.dc.html" style="align-self:flex-start;display:inline-flex;align-items:center;gap:10px;font-family:var(--font-heading);font-weight:800;font-size:13px;letter-spacing:0.1em;text-transform:uppercase;border-bottom:3px solid var(--color-accent);padding-bottom:6px">See cupboards
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+      </a>
+    </div>
+  </section>
+
+  <section id="vanities" data-screen-label="Vanities" style="position:relative;margin:clamp(18px,2.6vw,38px) auto;width:calc(100% - clamp(32px,5.2vw,76px));max-width:1720px;background:var(--color-surface);border:2px solid #2e2a27;border-radius:20px;overflow:hidden;box-shadow:inset 0 2px 0 rgba(255,255,255,0.05), 0 30px 60px -22px rgba(0,0,0,0.95), 0 80px 120px -60px rgba(188,19,19,0.22);display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr))">
+    <div style="padding:clamp(32px,5vw,80px) clamp(16px,3vw,40px);display:flex;flex-direction:column;gap:18px;justify-content:center;border-right:2px solid var(--color-divider)">
+      <span style="font-size:11px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:var(--color-accent-400)">03 — Vanities &amp; bathrooms</span>
+      <h2 style="margin:0;font-family:var(--font-heading);font-weight:900;font-size:clamp(30px,3.8vw,54px);line-height:0.98;letter-spacing:-0.03em">Wet rooms, dry joinery.</h2>
+      <p style="margin:0;max-width:520px;font-size:16px;line-height:1.6;color:var(--color-neutral-700)">Moisture-rated boards, sealed edges and stone tops cut to the basin. Floating vanities, mirror cabinets and matching linen cupboards in the same finish as your kitchen.</p>
+      <a href="Projects.dc.html" style="align-self:flex-start;display:inline-flex;align-items:center;gap:10px;font-family:var(--font-heading);font-weight:800;font-size:13px;letter-spacing:0.1em;text-transform:uppercase;border-bottom:3px solid var(--color-accent);padding-bottom:6px">See vanities
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+      </a>
+    </div>
+    <div style="position:relative;min-height:min(70vh,560px)">
+      <image-slot id="ndi-vanity-hero" shape="rect" fit="cover" placeholder="Drop a vanity / bathroom photo"></image-slot>
+    </div>
+  </section>
+
+  <section id="decor" data-screen-label="Home decor" style="position:relative;border-top:2px solid var(--color-divider);border-bottom:2px solid var(--color-divider);background:rgba(5,5,5,0.22);display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr))">
+    <div style="position:relative;min-height:min(70vh,560px);order:0">
+      <image-slot id="ndi-decor-hero" shape="rect" fit="cover" placeholder="Drop a home decor / joinery photo"></image-slot>
+    </div>
+    <div style="padding:clamp(32px,5vw,80px) clamp(16px,3vw,40px);display:flex;flex-direction:column;gap:18px;justify-content:center;border-left:2px solid var(--color-divider)">
+      <span style="font-size:11px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:var(--color-accent-400)">04 — Home decor</span>
+      <h2 style="margin:0;font-family:var(--font-heading);font-weight:900;font-size:clamp(30px,3.8vw,54px);line-height:0.98;letter-spacing:-0.03em">The pieces that finish the room.</h2>
+      <p style="margin:0;max-width:520px;font-size:16px;line-height:1.6;color:var(--color-neutral-700)">Wall units, floating shelves, TV and fireplace surrounds, bars, study desks and headboards — made in the same timbers and finishes as the rest of the house so nothing looks bought in.</p>
+      <a href="Projects.dc.html" style="align-self:flex-start;display:inline-flex;align-items:center;gap:10px;font-family:var(--font-heading);font-weight:800;font-size:13px;letter-spacing:0.1em;text-transform:uppercase;border-bottom:3px solid var(--color-accent);padding-bottom:6px">See home decor
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+      </a>
+    </div>
+  </section>
+
+  <sc-if value="{{ showProcess }}" hint-placeholder-val="{{ true }}">
+    <section style="position:relative;border-top:2px solid var(--color-divider);border-bottom:2px solid var(--color-divider);background:rgba(5,5,5,0.22)">
+      <div style="padding:clamp(40px,6vw,80px) clamp(16px,3vw,40px) clamp(20px,3vw,32px);display:flex;flex-direction:column;gap:12px">
+        <span style="font-size:11px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:var(--color-accent-400)">How it works</span>
+        <h2 style="margin:0;font-family:var(--font-heading);font-weight:900;font-size:clamp(28px,3.4vw,48px);line-height:1;letter-spacing:-0.03em">Four steps, one point of contact.</h2>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));border-top:2px solid var(--color-text)">
+        <div style="padding:clamp(24px,3vw,36px);border-right:2px solid var(--color-divider);display:flex;flex-direction:column;gap:12px">
+          <span style="font-family:var(--font-heading);font-weight:900;font-size:14px;color:var(--color-accent)">01</span>
+          <h3 style="margin:0;font-family:var(--font-heading);font-weight:800;font-size:20px;letter-spacing:-0.01em">Site measure</h3>
+          <p style="margin:0;font-size:14.5px;line-height:1.6;color:var(--color-neutral-700)">We come to you, measure the room and talk through how you cook and store.</p>
+        </div>
+        <div style="padding:clamp(24px,3vw,36px);border-right:2px solid var(--color-divider);display:flex;flex-direction:column;gap:12px">
+          <span style="font-family:var(--font-heading);font-weight:900;font-size:14px;color:var(--color-accent)">02</span>
+          <h3 style="margin:0;font-family:var(--font-heading);font-weight:800;font-size:20px;letter-spacing:-0.01em">Drawing &amp; quote</h3>
+          <p style="margin:0;font-size:14.5px;line-height:1.6;color:var(--color-neutral-700)">A layout, finish samples and a fixed written price. No line items you can't read.</p>
+        </div>
+        <div style="padding:clamp(24px,3vw,36px);border-right:2px solid var(--color-divider);display:flex;flex-direction:column;gap:12px">
+          <span style="font-family:var(--font-heading);font-weight:900;font-size:14px;color:var(--color-accent)">03</span>
+          <h3 style="margin:0;font-family:var(--font-heading);font-weight:800;font-size:20px;letter-spacing:-0.01em">Manufacture</h3>
+          <p style="margin:0;font-size:14.5px;line-height:1.6;color:var(--color-neutral-700)">Cut, edged and assembled in our workshop, so tolerances stay ours to fix.</p>
+        </div>
+        <div style="padding:clamp(24px,3vw,36px);display:flex;flex-direction:column;gap:12px">
+          <span style="font-family:var(--font-heading);font-weight:900;font-size:14px;color:var(--color-accent)">04</span>
+          <h3 style="margin:0;font-family:var(--font-heading);font-weight:800;font-size:20px;letter-spacing:-0.01em">Installation</h3>
+          <p style="margin:0;font-size:14.5px;line-height:1.6;color:var(--color-neutral-700)">Our own team fits, levels and hands over — plus a snag visit after two weeks.</p>
+        </div>
+      </div>
+    </section>
+  </sc-if>
+
+  <section id="about" data-screen-label="About" style="position:relative;margin:clamp(18px,2.6vw,38px) auto;width:calc(100% - clamp(32px,5.2vw,76px));max-width:1720px;background:var(--color-surface);border:2px solid #2e2a27;border-radius:20px;overflow:hidden;box-shadow:inset 0 2px 0 rgba(255,255,255,0.05), 0 30px 60px -22px rgba(0,0,0,0.95), 0 80px 120px -60px rgba(188,19,19,0.22);display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr))">
+    <div style="padding:clamp(40px,6vw,88px) clamp(16px,3vw,40px);display:flex;flex-direction:column;gap:20px;border-right:2px solid var(--color-divider)">
+      <span style="font-size:11px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:var(--color-accent-400)">About N.D.I.</span>
+      <h2 style="margin:0;font-family:var(--font-heading);font-weight:900;font-size:clamp(30px,3.8vw,56px);line-height:0.98;letter-spacing:-0.03em">A family workshop, not a showroom chain.</h2>
+      <p style="margin:0;max-width:560px;font-size:16px;line-height:1.65;color:var(--color-neutral-700)">N.D.I. has been making kitchens and built-in cupboards for three decades. The person who measures your room is the person who draws it, and the workshop that cuts it is fifteen minutes from your house.</p>
+      <p style="margin:0;max-width:560px;font-size:16px;line-height:1.65;color:var(--color-neutral-700)">That's the whole proposition: fewer hands, better joints, and a phone number that answers after the invoice is paid.</p>
+      <a href="About.dc.html" style="align-self:flex-start;display:inline-flex;align-items:center;gap:10px;font-family:var(--font-heading);font-weight:800;font-size:13px;letter-spacing:0.1em;text-transform:uppercase;border-bottom:3px solid var(--color-accent);padding-bottom:6px">More about us
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+      </a>
+    </div>
+    <div style="display:grid;grid-template-rows:1fr 1fr">
+      <div style="position:relative;min-height:220px;border-bottom:2px solid var(--color-divider);overflow:hidden">
+        <img src="assets/kitchen-10.jpg" alt="Fitted kitchen by N.D.I." style="width:100%;height:100%;object-fit:cover">
+      </div>
+      <div style="position:relative;min-height:220px;overflow:hidden">
+        <img src="assets/kitchen-05.jpg" alt="Detail of fitted cabinetry" style="width:100%;height:100%;object-fit:cover">
+      </div>
+    </div>
+  </section>
+
+  <section data-screen-label="Suppliers" style="position:relative;margin:clamp(18px,2.6vw,38px) auto;width:calc(100% - clamp(32px,5.2vw,76px));max-width:1720px;background:var(--color-surface);border:2px solid #2e2a27;border-radius:20px;overflow:hidden;box-shadow:inset 0 2px 0 rgba(255,255,255,0.05), 0 30px 60px -22px rgba(0,0,0,0.95), 0 80px 120px -60px rgba(188,19,19,0.22)">
+    <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:20px;padding:26px clamp(16px,2.4vw,32px);border-bottom:2px solid var(--color-divider)">
+      <span style="font-size:11px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:var(--color-accent-400)">Materials &amp; suppliers</span>
+      <span style="font-size:14px;line-height:1.5;color:var(--color-neutral-600);max-width:52ch">We buy board, stone and hardware from established South African and European suppliers — so the finish you choose is one we can match again in five years.</span>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:20px clamp(16px,2vw,32px);padding:clamp(24px,3vw,40px) clamp(16px,2.4vw,32px)">
+        <span style="font-family:var(--font-heading);font-weight:800;font-size:clamp(15px,1.5vw,21px);letter-spacing:-0.01em;color:var(--color-neutral-700)" style-hover="color:#fff">PG Bison</span>
+        <span style="font-family:var(--font-heading);font-weight:800;font-size:clamp(15px,1.5vw,21px);letter-spacing:-0.01em;color:var(--color-neutral-700)" style-hover="color:#fff">Sonae Novolam</span>
+        <span style="font-family:var(--font-heading);font-weight:800;font-size:clamp(15px,1.5vw,21px);letter-spacing:-0.01em;color:var(--color-neutral-700)" style-hover="color:#fff">SenoSA</span>
+        <span style="font-family:var(--font-heading);font-weight:800;font-size:clamp(15px,1.5vw,21px);letter-spacing:-0.01em;color:var(--color-neutral-700)" style-hover="color:#fff">Egger</span>
+        <span style="font-family:var(--font-heading);font-weight:800;font-size:clamp(15px,1.5vw,21px);letter-spacing:-0.01em;color:var(--color-neutral-700)" style-hover="color:#fff">AG Marble and Granite</span>
+        <span style="font-family:var(--font-heading);font-weight:800;font-size:clamp(15px,1.5vw,21px);letter-spacing:-0.01em;color:var(--color-neutral-700)" style-hover="color:#fff">Wood@Ease</span>
+    </div>
+  </section>
+
+  <section style="position:relative;background:var(--color-accent);color:#fff;border-top:2px solid #6d0d0d;border-bottom:2px solid #6d0d0d;box-shadow:0 40px 90px -30px rgba(188,19,19,0.5)">
+    <div style="padding:clamp(48px,8vw,120px) clamp(16px,3vw,40px);display:flex;flex-direction:column;gap:28px;align-items:flex-start">
+      <h2 style="margin:0;font-family:var(--font-heading);font-weight:900;font-size:clamp(34px,6vw,88px);line-height:0.94;letter-spacing:-0.035em;max-width:16em">Built in our workshop. Fitted in your home.</h2>
+      <a href="{{ waHref }}" target="_blank" style="display:inline-flex;align-items:center;gap:12px;background:#fff;color:var(--color-accent-700);font-family:var(--font-heading);font-weight:800;font-size:14px;letter-spacing:0.06em;text-transform:uppercase;padding:20px 28px" style-hover="background:var(--color-accent-100)">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+        <span>{{ ctaLabel }}</span>
+      </a>
+    </div>
+  </section>
+
+  <section id="contact" data-screen-label="Contact" style="position:relative;margin:clamp(18px,2.6vw,38px) auto;width:calc(100% - clamp(32px,5.2vw,76px));max-width:1720px;background:var(--color-surface);border:2px solid #2e2a27;border-radius:20px;overflow:hidden;box-shadow:inset 0 2px 0 rgba(255,255,255,0.05), 0 30px 60px -22px rgba(0,0,0,0.95), 0 80px 120px -60px rgba(188,19,19,0.22);display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr))">
+    <div style="padding:clamp(40px,6vw,80px) clamp(16px,3vw,40px);display:flex;flex-direction:column;gap:18px;border-right:2px solid var(--color-divider)">
+      <span style="font-size:11px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:var(--color-accent-400)">Get a quote</span>
+      <h2 style="margin:0;font-family:var(--font-heading);font-weight:900;font-size:clamp(28px,3.4vw,48px);line-height:1;letter-spacing:-0.03em">Tell us about the room.</h2>
+      <p style="margin:0;max-width:480px;font-size:15.5px;line-height:1.6;color:var(--color-neutral-700)">Send a photo and rough measurements and we'll come back with a ballpark before we visit.</p>
+      <div style="display:flex;flex-direction:column;gap:2px;margin-top:8px;border-top:2px solid var(--color-divider);padding-top:16px">
+        <a href="tel:+27000000000" style="display:flex;justify-content:space-between;gap:16px;padding:12px 0;border-bottom:1px solid var(--color-neutral-300);font-size:15px" style-hover="color:var(--color-accent-400)"><span style="font-weight:700;letter-spacing:0.1em;text-transform:uppercase;font-size:11px;color:var(--color-neutral-600)">Phone</span><span>+27 (0) 00 000 0000</span></a>
+        <a href="mailto:info@n-d-i.co.za" style="display:flex;justify-content:space-between;gap:16px;padding:12px 0;border-bottom:1px solid var(--color-neutral-300);font-size:15px" style-hover="color:var(--color-accent-400)"><span style="font-weight:700;letter-spacing:0.1em;text-transform:uppercase;font-size:11px;color:var(--color-neutral-600)">Email</span><span>info@n-d-i.co.za</span></a>
+        <div style="display:flex;justify-content:space-between;gap:16px;padding:12px 0;font-size:15px"><span style="font-weight:700;letter-spacing:0.1em;text-transform:uppercase;font-size:11px;color:var(--color-neutral-600)">Workshop</span><span>Gauteng, South Africa</span></div>
+      </div>
+    </div>
+    <div style="padding:clamp(40px,6vw,80px) clamp(16px,3vw,40px);display:flex;flex-direction:column;gap:18px">
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <label for="ndi-name" style="font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--color-neutral-700)">Name</label>
+        <input id="ndi-name" class="input" type="text" placeholder="Your name">
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <label for="ndi-contact" style="font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--color-neutral-700)">Phone or email</label>
+        <input id="ndi-contact" class="input" type="text" placeholder="How should we reach you?">
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <label for="ndi-brief" style="font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--color-neutral-700)">What are you planning?</label>
+        <textarea id="ndi-brief" class="input" rows="4" placeholder="New kitchen, replacing doors, vanity for a guest bathroom…" style="resize:vertical;font-family:var(--font-body)"></textarea>
+      </div>
+      <button onClick="{{ submit }}" style="align-self:flex-start;display:inline-flex;align-items:center;background:var(--color-accent);color:#fff;border:0;cursor:pointer;font-family:var(--font-heading);font-weight:800;font-size:13.5px;letter-spacing:0.06em;text-transform:uppercase;padding:18px 26px" style-hover="background:var(--color-accent-600)">{{ submitLabel }}</button>
+    </div>
+  </section>
+
+  <footer style="position:relative;margin-top:clamp(18px,2.6vw,38px);border-top:2px solid var(--color-divider);background:#040404;color:var(--color-neutral-600)">
+    <div style="display:flex;flex-wrap:wrap;gap:32px;justify-content:space-between;padding:clamp(32px,4vw,56px) clamp(16px,3vw,40px)">
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <span style="font-family:var(--font-heading);font-weight:900;font-size:26px;color:#fff;letter-spacing:-0.02em">N.D.I.</span>
+        <span style="font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase">Kitchens · Vanities · Built-in cupboards</span>
+      </div>
+      <nav style="display:flex;flex-wrap:wrap;gap:20px 28px;align-items:flex-start">
+        <a href="Projects.dc.html" style="color:var(--color-neutral-700);font-size:12px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase" style-hover="color:#fff">Kitchens</a>
+        <a href="Projects.dc.html" style="color:var(--color-neutral-700);font-size:12px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase" style-hover="color:#fff">Vanities</a>
+        <a href="Projects.dc.html" style="color:var(--color-neutral-700);font-size:12px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase" style-hover="color:#fff">Offices</a>
+        <a href="About.dc.html" style="color:var(--color-neutral-700);font-size:12px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase" style-hover="color:#fff">About</a>
+        <a href="#contact" style="color:var(--color-neutral-700);font-size:12px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase" style-hover="color:#fff">Contact</a>
+      </nav>
+      <span style="font-size:12px;color:var(--color-neutral-500)">© N.D.I. Kitchens. All rights reserved.</span>
+    </div>
+  </footer>
+
+  <sc-if value="{{ lightboxOpen }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ closeLightbox }}" style="position:fixed;inset:0;z-index:200;background:rgba(20,19,18,0.94);display:flex;align-items:center;justify-content:center;padding:clamp(16px,4vw,64px);cursor:zoom-out;animation:ndiRise 240ms ease-out">
+      <div role="img" aria-label="Project photograph" style="width:100%;height:100%;background-image:url({{ lightboxSrc }});background-size:contain;background-repeat:no-repeat;background-position:center"></div>
+      <button onClick="{{ closeLightbox }}" style="position:absolute;top:20px;right:20px;width:48px;height:48px;background:transparent;border:2px solid rgba(255,255,255,0.5);color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center" style-hover="background:var(--color-accent);border-color:var(--color-accent)">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"></path></svg>
+      </button>
+    </div>
+  </sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;whatsappNumber&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;27000000000&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Contact&quot;},&quot;ctaLabel&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;WhatsApp us&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Contact&quot;},&quot;heroSeconds&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:6,&quot;min&quot;:3,&quot;max&quot;:12,&quot;step&quot;:1,&quot;unit&quot;:&quot;s&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Hero&quot;},&quot;showProcess&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Sections&quot;}}">
+class Component extends DCLogic {
+  state = { hero: 0, lightbox: null, sent: false };
+
+  componentDidMount() {
+    this.timer = setInterval(() => {
+      this.setState(s => ({ hero: (s.hero + 1) % this.heroSrcs().length }));
+    }, (this.props.heroSeconds ?? 6) * 1000);
+    this.onKey = e => { if (e.key === 'Escape') this.setState({ lightbox: null }); };
+    window.addEventListener('keydown', this.onKey);
+  }
+  componentWillUnmount() { clearInterval(this.timer); window.removeEventListener('keydown', this.onKey); }
+
+  heroSrcs() {
+    return [
+      ['assets/kitchen-01.jpg', 'Marble island kitchen with walnut cabinetry'],
+      ['assets/kitchen-08.jpg', 'Wide fitted kitchen with stone tops'],
+      ['assets/kitchen-07.jpg', 'Contemporary kitchen with tall units'],
+      ['assets/kitchen-10.jpg', 'Open-plan kitchen and living space'],
+      ['assets/kitchen-05.jpg', 'Kitchen detail with integrated appliances'],
+      ['assets/kitchen-03.jpg', 'Built-in cupboards in a fitted kitchen']
+    ];
+  }
+
+  gallery() {
+    return [
+      ['assets/kitchen-01.jpg', 'Marble island'],
+      ['assets/kitchen-04.jpg', 'Lit island'],
+      ['assets/kitchen-07.jpg', 'Tall units'],
+      ['assets/kitchen-02.jpg', 'Galley run'],
+      ['assets/kitchen-06.jpg', 'Scullery'],
+      ['assets/kitchen-09.jpg', 'Cupboard detail']
+    ];
+  }
+
+  renderVals() {
+    const srcs = this.heroSrcs();
+    const i = this.state.hero;
+    const hero = {};
+    srcs.forEach((s, n) => {
+      hero['o' + (n + 1)] = n === i ? 1 : 0;
+      hero['b' + (n + 1)] = n === i ? 'var(--color-accent)' : 'rgba(255,255,255,0.45)';
+      hero['go' + (n + 1)] = () => this.setState({ hero: n });
+    });
+    const opens = {};
+    this.gallery().forEach(([src], n) => {
+      opens['open' + (n + 1)] = () => this.setState({ lightbox: src });
+    });
+    return {
+      hero,
+      ...opens,
+      waHref: 'https://wa.me/' + String(this.props.whatsappNumber ?? '27000000000').replace(/[^0-9]/g, ''),
+      ctaLabel: this.props.ctaLabel ?? 'WhatsApp us',
+      showProcess: this.props.showProcess ?? true,
+      heroTotal: String(srcs.length).padStart(2, '0'),
+      heroNum: String(i + 1).padStart(2, '0'),
+      heroSlides: srcs.map(([src, alt], n) => ({
+        src, alt,
+        op: n === i ? 1 : 0,
+        bar: n === i ? 'var(--color-accent)' : 'rgba(255,255,255,0.45)',
+        go: () => this.setState({ hero: n })
+      })),
+      featured: this.gallery().map(([src, label]) => ({
+        src, label, alt: label + ' — kitchen by N.D.I.',
+        open: () => this.setState({ lightbox: src })
+      })),
+      lightboxOpen: !!this.state.lightbox,
+      lightboxSrc: this.state.lightbox || '',
+      closeLightbox: () => this.setState({ lightbox: null }),
+      submit: () => this.setState({ sent: true }),
+      submitLabel: this.state.sent ? 'Thank you — we’ll be in touch' : 'Send the enquiry'
+    };
+  }
+}
+</script>
+</body>
+</html>

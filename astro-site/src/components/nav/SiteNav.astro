@@ -1,0 +1,260 @@
+---
+// Sticky site header: logo, the four tabs, the WhatsApp CTA, and the red
+// panel that slides up on navigation. See "Shared: site nav" in
+// ../../../README.md for the full behavior spec.
+import { Image } from 'astro:assets';
+import logo from '../../assets/images/ndi-logo.png';
+import { siteConfig, waHref } from '../../data/site-config.js';
+import IconMessageSquare from '../icons/IconMessageSquare.astro';
+
+interface Props {
+  /** Which tab is active for this page. Home only: a scroll listener can
+   *  override this to "contact" once the #contact section is in view. */
+  active: 'home' | 'about' | 'projects' | '';
+}
+const { active } = Astro.props;
+
+const tabs = [
+  { key: 'home', label: 'Home', href: '/' },
+  { key: 'about', label: 'About Us', href: '/about' },
+  { key: 'projects', label: 'Projects', href: '/projects' },
+  { key: 'contact', label: 'Contact Us', href: '/#contact' },
+];
+---
+
+<header class="site-nav" data-site-nav data-initial-active={active}>
+  <div class="site-nav__row">
+    <a href="/" class="site-nav__brand" data-nav-link data-nav-label="Home">
+      <Image src={logo} alt="N.D.I." height={46} style="height: 46px; width: auto;" />
+      <span class="site-nav__brand-label">Kitchens &amp; Cupboards</span>
+    </a>
+
+    <nav class="site-nav__tabs">
+      {
+        tabs.map((tab) => (
+          <a
+            href={tab.href}
+            class="site-nav__tab"
+            data-nav-link
+            data-nav-label={tab.label}
+            data-tab={tab.key}
+            style={{ borderBottomColor: active === tab.key ? 'var(--color-accent)' : 'transparent' }}
+          >
+            {tab.label}
+          </a>
+        ))
+      }
+    </nav>
+
+    <a href={waHref()} target="_blank" rel="noopener" class="site-nav__whatsapp">
+      <IconMessageSquare size={16} />
+      <span>WhatsApp us</span>
+    </a>
+  </div>
+</header>
+
+<div class="nav-transition-panel" data-nav-panel>
+  <div class="nav-transition-panel__inner" data-nav-panel-inner>
+    <span class="nav-transition-panel__bar"></span>
+    <span class="nav-transition-panel__label" data-nav-panel-label>{siteConfig.businessName}</span>
+  </div>
+</div>
+
+<style>
+  .site-nav {
+    position: sticky;
+    top: 0;
+    z-index: 60;
+    background: rgba(10, 10, 10, 0.86);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border-bottom: 2px solid var(--color-text);
+    box-shadow: var(--shadow-nav);
+    font-family: var(--font-body);
+    color: var(--color-text);
+  }
+
+  .site-nav__row {
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 0 var(--section-pad-x);
+    height: 76px;
+  }
+
+  .site-nav__brand {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .site-nav__brand-label {
+    font-size: 9.5px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-neutral-600);
+    max-width: 8em;
+    line-height: 1.5;
+  }
+
+  .site-nav__tabs {
+    display: flex;
+    align-items: stretch;
+    margin-left: auto;
+  }
+
+  .site-nav__tab {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: clamp(112px, 11vw, 160px);
+    padding: 0 8px;
+    font-size: 12.5px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-align: center;
+    border-bottom: 4px solid transparent;
+    transition: border-color 200ms ease;
+  }
+
+  .site-nav__whatsapp {
+    align-self: center;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--color-accent);
+    color: #fff;
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 14px 20px;
+    white-space: nowrap;
+  }
+  .site-nav__whatsapp:hover {
+    background: var(--color-accent-600);
+  }
+
+  /* the full-viewport red panel that slides up on tab navigation */
+  .nav-transition-panel {
+    position: fixed;
+    inset: 0;
+    z-index: 500;
+    pointer-events: none;
+    background: var(--color-accent);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: clamp(24px, 5vw, 72px);
+    will-change: transform;
+    transform: translateY(101%);
+    visibility: hidden;
+  }
+  .nav-transition-panel.is-armed {
+    visibility: visible;
+    transition: none;
+  }
+  .nav-transition-panel.is-active {
+    transform: translateY(0);
+    transition: transform 260ms cubic-bezier(0.6, 0, 0.2, 1);
+  }
+
+  .nav-transition-panel__inner {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    animation: ndiLabelIn 240ms cubic-bezier(0.6, 0, 0.2, 1) both;
+  }
+
+  .nav-transition-panel__bar {
+    width: 64px;
+    height: 5px;
+    background: #fff;
+  }
+
+  .nav-transition-panel__label {
+    font-family: var(--font-heading);
+    font-weight: 900;
+    color: #fff;
+    font-size: clamp(40px, 8vw, 120px);
+    line-height: 0.9;
+    letter-spacing: -0.04em;
+  }
+</style>
+
+<script>
+  // Sticky-nav behavior: (1) a scroll spy that lights the "Contact Us" tab
+  // once #contact scrolls near the top of the viewport (Home page only —
+  // other pages simply don't have a #contact element, so this is a no-op
+  // there); (2) a page-transition panel that slides up over the tab labels
+  // before the browser actually navigates, matching the handoff spec.
+  const nav = document.querySelector<HTMLElement>('[data-site-nav]');
+  const panel = document.querySelector<HTMLElement>('[data-nav-panel]');
+  const panelLabel = document.querySelector<HTMLElement>('[data-nav-panel-label]');
+  if (nav && panel && panelLabel) {
+    const tabs = Array.from(nav.querySelectorAll<HTMLAnchorElement>('[data-tab]'));
+    const initialActive = nav.dataset.initialActive || '';
+
+    const paint = (activeKey: string) => {
+      for (const tab of tabs) {
+        tab.style.borderBottomColor = tab.dataset.tab === activeKey ? 'var(--color-accent)' : 'transparent';
+      }
+    };
+
+    const contactEl = document.getElementById('contact');
+    const onScroll = () => {
+      if (!contactEl) return;
+      const overContact = contactEl.getBoundingClientRect().top <= 160;
+      paint(overContact ? 'contact' : initialActive);
+    };
+    if (contactEl) {
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+    }
+
+    let leaving = false;
+    const links = document.querySelectorAll<HTMLAnchorElement>('[data-nav-link]');
+    for (const link of links) {
+      link.addEventListener('click', (event) => {
+        const href = link.getAttribute('href') || '';
+        const hashIndex = href.indexOf('#');
+
+        // Same-page anchor (e.g. clicking "Contact Us" while already on
+        // Home): skip the transition panel, smooth-scroll instead.
+        if (hashIndex > -1) {
+          const targetId = href.slice(hashIndex + 1);
+          const targetEl = document.getElementById(targetId);
+          if (targetEl) {
+            event.preventDefault();
+            window.scrollTo({ top: targetEl.getBoundingClientRect().top + window.scrollY - 74, behavior: 'smooth' });
+            return;
+          }
+        }
+
+        if (leaving) {
+          event.preventDefault();
+          return;
+        }
+        event.preventDefault();
+        leaving = true;
+        panelLabel.textContent = link.dataset.navLabel || '';
+        panel.classList.add('is-armed');
+        // Force a reflow so the "is-armed" state (panel below the fold, no
+        // transition) is committed before we animate it up.
+        void panel.offsetHeight;
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            panel.classList.add('is-active');
+          });
+        });
+        setTimeout(() => {
+          window.location.href = href;
+        }, 300);
+      });
+    }
+  }
+</script>

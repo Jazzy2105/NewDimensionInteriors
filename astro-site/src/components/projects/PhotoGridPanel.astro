@@ -1,0 +1,133 @@
+---
+// Generic real-photo gallery panel for the Projects page — used directly by
+// KitchensGridPanel.astro, and by CupboardsGridPanel / VanitiesGridPanel /
+// DecorGridPanel.astro once real photos exist for those categories (see
+// PlaceholderGridPanel.astro for what renders before that). Pair this with
+// a <Lightbox groupId={lightboxGroup} withNav /> rendered once on the page.
+import { Image, getImage } from 'astro:assets';
+import { getPhotos } from '../../data/photo-library.js';
+
+interface Props {
+  category: string;
+  title: string;
+  description?: string;
+  lightboxGroup: string;
+}
+const { category, title, description, lightboxGroup } = Astro.props;
+
+const photos = getPhotos(category);
+
+// A larger rendition of each photo for the lightbox, generated once at
+// build time alongside the grid thumbnail.
+const gallery = await Promise.all(
+  photos.map(async (photo, i) => {
+    const full = await getImage({ src: photo.image, width: 1800, format: 'webp', quality: 82 });
+    return { ...photo, fullSrc: full.src, number: String(i + 1).padStart(2, '0') };
+  })
+);
+---
+
+<section class="raised-panel projects-panel" data-project-category={category}>
+  <div class="projects-panel__header">
+    <span class="projects-panel__bar"></span>
+    <span class="projects-panel__title">{title}</span>
+    {description && <span class="projects-panel__description">{description}</span>}
+  </div>
+  <div class="projects-panel__grid">
+    {
+      gallery.map((photo) => (
+        <button
+          type="button"
+          class="projects-panel__tile"
+          style={{ aspectRatio: photo.aspect, gridColumn: photo.wide ? 'span 2' : undefined }}
+          data-lightbox-trigger={lightboxGroup}
+          data-full={photo.fullSrc}
+          data-caption={photo.caption}
+          data-alt={photo.alt}
+        >
+          <Image src={photo.image} alt={photo.alt} width={900} format="webp" quality={80} loading="lazy" class="projects-panel__img" />
+          <span class="projects-panel__caption">
+            <span class="projects-panel__number">{photo.number}</span>
+            <span>{photo.caption}</span>
+          </span>
+        </button>
+      ))
+    }
+  </div>
+</section>
+
+<style>
+  .projects-panel__header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 14px;
+    padding: 22px clamp(16px, 2.4vw, 30px);
+    border-bottom: 2px solid var(--color-divider);
+  }
+
+  .projects-panel__bar {
+    width: 30px;
+    height: 4px;
+    background: var(--color-accent);
+  }
+
+  .projects-panel__title {
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 13px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  .projects-panel__description {
+    font-size: 13px;
+    color: var(--color-neutral-600);
+  }
+
+  .projects-panel__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 2px;
+    background: var(--color-divider);
+  }
+
+  .projects-panel__tile {
+    position: relative;
+    display: block;
+    padding: 0;
+    border: 0;
+    cursor: zoom-in;
+    background: var(--color-tile-bg);
+    overflow: hidden;
+  }
+
+  .projects-panel__tile :global(.projects-panel__img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 900ms cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+  .projects-panel__tile:hover :global(.projects-panel__img) {
+    transform: scale(1.05);
+  }
+
+  .projects-panel__caption {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--color-bg);
+    padding: 10px 14px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .projects-panel__number {
+    color: var(--color-accent-400);
+  }
+</style>

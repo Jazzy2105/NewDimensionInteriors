@@ -1,0 +1,64 @@
+---
+// Flat stats strip directly under the hero.
+import { siteConfig } from '../../data/site-config.js';
+
+const stats = [
+  { value: siteConfig.yearsAtBench, suffix: '+', label: 'Years at the bench' },
+  { value: 'One', suffix: '', label: 'Workshop, start to finish' },
+  { value: siteConfig.clientsServed, suffix: '+', label: 'Clients served' },
+  { value: 'Free', suffix: '', label: 'Measure & quotation' },
+];
+---
+
+<section class="flat-section stats" aria-label="N.D.I. in numbers">
+  <div class="stats__grid">
+    {
+      stats.map((stat) => (
+        <div class="stats__cell">
+          <span class="stats__value">
+            {stat.value}
+            {stat.suffix && <span class="stats__plus">{stat.suffix}</span>}
+          </span>
+          <span class="stats__label">{stat.label}</span>
+        </div>
+      ))
+    }
+  </div>
+</section>
+
+<style>
+  .stats__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  }
+
+  .stats__cell {
+    padding: clamp(24px, 3vw, 40px);
+    border-right: 2px solid var(--color-divider);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .stats__cell:last-child {
+    border-right: 0;
+  }
+
+  .stats__value {
+    font-family: var(--font-heading);
+    font-weight: 900;
+    font-size: clamp(30px, 3.4vw, 46px);
+    line-height: 1;
+    letter-spacing: -0.03em;
+  }
+  .stats__plus {
+    color: var(--color-accent);
+  }
+
+  .stats__label {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-neutral-600);
+  }
+</style>

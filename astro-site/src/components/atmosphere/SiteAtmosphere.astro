@@ -1,0 +1,76 @@
+---
+// The "sky" — six fixed, pointer-events-none layers rendered once per page
+// (behind everything else) so the black ground reads as an illuminated night
+// sky with a focal point at top-centre instead of flat #000. See the
+// "The background (the sky)" section of ../../../README.md for the spec this
+// was transcribed from. Layers are transform-only animations so they stay on
+// the compositor; `prefers-reduced-motion` freezes them (see global.css).
+---
+
+<div class="ndi-sky" aria-hidden="true">
+  <div class="ndi-sky__base"></div>
+  <div class="ndi-sky__glow"></div>
+  <div class="ndi-sky__blacks"></div>
+  <div class="ndi-sky__blooms"></div>
+  <div class="ndi-sky__grain"></div>
+  <div class="ndi-sky__vignette"></div>
+</div>
+
+<style>
+  .ndi-sky > div {
+    position: fixed;
+    pointer-events: none;
+  }
+
+  .ndi-sky__base {
+    inset: 0;
+    z-index: -5;
+    background: #050505;
+  }
+
+  .ndi-sky__glow {
+    inset: -18%;
+    z-index: -4;
+    background:
+      radial-gradient(52% 44% at 50% 6%, #2b2930 0%, #201f25 34%, rgba(24, 23, 28, 0) 72%),
+      radial-gradient(70% 58% at 50% 34%, #16161b 0%, rgba(22, 22, 27, 0) 70%);
+    animation: ndiSkyC 38s ease-in-out infinite;
+    will-change: transform, opacity;
+  }
+
+  .ndi-sky__blacks {
+    inset: -22%;
+    z-index: -3;
+    background:
+      radial-gradient(46% 38% at 14% 30%, #1b1d26 0%, rgba(27, 29, 38, 0) 66%),
+      radial-gradient(44% 36% at 88% 22%, #241a1a 0%, rgba(36, 26, 26, 0) 64%),
+      radial-gradient(56% 46% at 62% 88%, #14161c 0%, rgba(20, 22, 28, 0) 68%);
+    animation: ndiSkyA 52s ease-in-out infinite;
+    will-change: transform;
+  }
+
+  .ndi-sky__blooms {
+    inset: -26%;
+    z-index: -2;
+    background:
+      radial-gradient(40% 34% at 80% 64%, rgba(140, 18, 18, 0.26) 0%, rgba(140, 18, 18, 0) 68%),
+      radial-gradient(38% 32% at 10% 78%, rgba(48, 52, 66, 0.34) 0%, rgba(48, 52, 66, 0) 66%),
+      radial-gradient(30% 26% at 44% 12%, rgba(188, 19, 19, 0.16) 0%, rgba(188, 19, 19, 0) 70%);
+    animation: ndiSkyB 74s ease-in-out infinite;
+    will-change: transform;
+  }
+
+  .ndi-sky__grain {
+    inset: 0;
+    z-index: -1;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+    opacity: 0.05;
+    mix-blend-mode: overlay;
+  }
+
+  .ndi-sky__vignette {
+    inset: 0;
+    z-index: -1;
+    background: radial-gradient(120% 90% at 50% 24%, rgba(0, 0, 0, 0) 42%, rgba(0, 0, 0, 0.62) 100%);
+  }
+</style>

@@ -1,0 +1,110 @@
+---
+// Flat page header: kicker, h1, intro copy, and the five category filter
+// pills. The pills' click handling (and showing/hiding the panels below)
+// lives in the <script> at the bottom of this file.
+const filters = [
+  { key: 'all', label: 'All work' },
+  { key: 'kitchens', label: 'Kitchens' },
+  { key: 'cupboards', label: 'Built-in cupboards' },
+  { key: 'vanities', label: 'Vanities' },
+  { key: 'decor', label: 'Home decor' },
+];
+---
+
+<section class="flat-section projects-header">
+  <div class="projects-header__intro">
+    <span class="kicker">Projects</span>
+    <h1 class="projects-header__heading">Work we have fitted.</h1>
+    <p class="projects-header__body">
+      Kitchens, built-in cupboards, vanities and home decor — drawn, built and installed by our own team. Click any
+      photograph to see it full size.
+    </p>
+  </div>
+  <div class="projects-header__filters" data-project-filters>
+    {
+      filters.map((filter, i) => (
+        <button type="button" class="filter-pill" data-filter={filter.key} aria-pressed={i === 0 ? 'true' : 'false'}>
+          {filter.label}
+        </button>
+      ))
+    }
+  </div>
+</section>
+
+<style>
+  .projects-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 28px;
+    padding: clamp(36px, 6vw, 80px) var(--section-pad-x) clamp(24px, 3vw, 36px);
+  }
+
+  .projects-header__intro {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    max-width: 760px;
+  }
+
+  .projects-header__heading {
+    font-size: clamp(38px, 6.4vw, 92px);
+    line-height: 0.94;
+    letter-spacing: -0.035em;
+  }
+
+  .projects-header__body {
+    margin: 0;
+    max-width: 600px;
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--color-neutral-700);
+  }
+
+  .projects-header__filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .filter-pill {
+    cursor: pointer;
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 14px 20px;
+    border-radius: 999px;
+    border: 2px solid var(--color-neutral-400);
+    background: transparent;
+    color: var(--color-neutral-700);
+    transition: all 220ms ease;
+  }
+  .filter-pill[aria-pressed='true'] {
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+    color: #fff;
+  }
+</style>
+
+<script>
+  const bar = document.querySelector('[data-project-filters]');
+  const panels = Array.from(document.querySelectorAll('[data-project-category]'));
+  if (bar) {
+    const pills = Array.from(bar.querySelectorAll('[data-filter]'));
+
+    const applyFilter = (key) => {
+      pills.forEach((pill) => pill.setAttribute('aria-pressed', String(pill.getAttribute('data-filter') === key)));
+      panels.forEach((panel) => {
+        const category = panel.getAttribute('data-project-category');
+        panel.style.display = key === 'all' || key === category ? '' : 'none';
+      });
+    };
+
+    pills.forEach((pill) => {
+      pill.addEventListener('click', () => applyFilter(pill.getAttribute('data-filter') || 'all'));
+    });
+  }
+</script>

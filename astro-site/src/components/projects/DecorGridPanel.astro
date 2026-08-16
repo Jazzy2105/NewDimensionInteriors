@@ -1,0 +1,24 @@
+---
+// Switches from a placeholder grid to a real photo grid automatically once
+// photos exist in src/assets/images/decor/ — see that folder's README.
+import { hasPhotos } from '../../data/photo-library.js';
+import PhotoGridPanel from './PhotoGridPanel.astro';
+import PlaceholderGridPanel from './PlaceholderGridPanel.astro';
+
+const placeholderTiles = [
+  { brief: 'Wall unit / media wall', aspect: '2/1', wide: true },
+  { brief: 'Floating shelves', aspect: '3/2' },
+  { brief: 'Fireplace or TV surround', aspect: '3/2' },
+  { brief: 'Bar or servery', aspect: '3/4' },
+  { brief: 'Study desk, full wall', aspect: '16/10', wide: true },
+];
+const description = 'Wall units, floating shelves, surrounds, bars, desks and headboards.';
+---
+
+{
+  hasPhotos('decor') ? (
+    <PhotoGridPanel category="decor" title="Home decor" description={description} lightboxGroup="projects-decor" />
+  ) : (
+    <PlaceholderGridPanel category="decor" title="Home decor" description={description} tiles={placeholderTiles} />
+  )
+}

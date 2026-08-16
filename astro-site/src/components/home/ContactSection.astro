@@ -1,0 +1,178 @@
+---
+// The quote-request form. Per the handoff (README.md: "The form is not
+// wired — no endpoint, no validation"), this only swaps the button label on
+// submit for now. Wire `data-contact-form`'s submit handler below to a real
+// endpoint (a serverless function, Formspree, etc.) when the client decides
+// where enquiries should land.
+import { siteConfig } from '../../data/site-config.js';
+---
+
+<section id="contact" class="raised-panel contact">
+  <div class="contact__info">
+    <span class="kicker">Get a quote</span>
+    <h2 class="contact__heading">Tell us about the room.</h2>
+    <p class="contact__body">Send a photo and rough measurements and we'll come back with a ballpark before we visit.</p>
+    <div class="contact__details">
+      <a href={siteConfig.phoneHref} class="contact__detail">
+        <span class="contact__detail-label">Phone</span>
+        <span>{siteConfig.phoneDisplay}</span>
+      </a>
+      <a href={`mailto:${siteConfig.email}`} class="contact__detail">
+        <span class="contact__detail-label">Email</span>
+        <span>{siteConfig.email}</span>
+      </a>
+      <div class="contact__detail contact__detail--static">
+        <span class="contact__detail-label">Workshop</span>
+        <span>{siteConfig.workshopLocation}</span>
+      </div>
+    </div>
+  </div>
+
+  <form class="contact__form" data-contact-form>
+    <div class="contact__field">
+      <label for="ndi-name">Name</label>
+      <input id="ndi-name" name="name" class="input" type="text" placeholder="Your name" required />
+    </div>
+    <div class="contact__field">
+      <label for="ndi-contact">Phone or email</label>
+      <input id="ndi-contact" name="contact" class="input" type="text" placeholder="How should we reach you?" required />
+    </div>
+    <div class="contact__field">
+      <label for="ndi-brief">What are you planning?</label>
+      <textarea id="ndi-brief" name="brief" class="input" rows="4" placeholder="New kitchen, replacing doors, vanity for a guest bathroom…"></textarea>
+    </div>
+    <button type="submit" class="btn btn-accent contact__submit" data-contact-submit>Send the enquiry</button>
+  </form>
+</section>
+
+<style>
+  .contact {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  }
+
+  .contact__info {
+    padding: clamp(40px, 6vw, 80px) var(--section-pad-x);
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    border-right: 2px solid var(--color-divider);
+  }
+
+  .contact__heading {
+    font-size: clamp(28px, 3.4vw, 48px);
+    line-height: 1;
+    letter-spacing: -0.03em;
+  }
+
+  .contact__body {
+    margin: 0;
+    max-width: 480px;
+    font-size: 15.5px;
+    line-height: 1.6;
+    color: var(--color-neutral-700);
+  }
+
+  .contact__details {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin-top: 8px;
+    border-top: 2px solid var(--color-divider);
+    padding-top: 16px;
+  }
+
+  .contact__detail {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--color-neutral-300);
+    font-size: 15px;
+    transition: color 200ms ease;
+  }
+  .contact__detail:hover {
+    color: var(--color-accent-400);
+  }
+  .contact__detail--static {
+    border-bottom: 0;
+  }
+
+  .contact__detail-label {
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-size: 11px;
+    color: var(--color-neutral-600);
+  }
+
+  .contact__form {
+    padding: clamp(40px, 6vw, 80px) var(--section-pad-x);
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .contact__field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .contact__field label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-neutral-700);
+  }
+
+  .contact__submit {
+    align-self: flex-start;
+    font-size: 13.5px;
+  }
+</style>
+
+<style is:global>
+  /* Shared field styling for the contact form's inputs/textarea. */
+  .input {
+    width: 100%;
+    min-height: 44px;
+    padding: 10px 12px;
+    font: inherit;
+    font-size: 15px;
+    color: var(--color-text);
+    background: var(--color-neutral-100);
+    border: 1px solid var(--color-neutral-400);
+    caret-color: var(--color-accent);
+  }
+  .input::placeholder {
+    color: var(--color-neutral-500);
+  }
+  .input:hover {
+    border-color: var(--color-neutral-500);
+  }
+  .input:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 0;
+    border-color: var(--color-accent);
+  }
+  textarea.input {
+    min-height: 96px;
+    resize: vertical;
+    font-family: var(--font-body);
+  }
+</style>
+
+<script>
+  const form = document.querySelector('[data-contact-form]');
+  const submitBtn = document.querySelector('[data-contact-submit]');
+  if (form && submitBtn) {
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      // TODO: POST the form data to a real endpoint here once the client
+      // confirms where enquiries should be delivered (README "Open items").
+      submitBtn.textContent = "Thank you — we'll be in touch";
+      submitBtn.setAttribute('disabled', 'true');
+    });
+  }
+</script>

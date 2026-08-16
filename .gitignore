@@ -1,0 +1,13 @@
+# Astro build artifacts (astro-site/ has its own .gitignore too, but this
+# catches anything at the repo root as the project grows).
+astro-site/node_modules/
+astro-site/dist/
+astro-site/.astro/
+
+# OS cruft
+.DS_Store
+Thumbs.db
+
+# editor
+.vscode/*
+!.vscode/extensions.json

@@ -1,0 +1,23 @@
+---
+// About Us — see README.md's "About Us (About.dc.html)" section.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteNav from '../components/nav/SiteNav.astro';
+import SiteFooter from '../components/footer/SiteFooter.astro';
+import AboutHeader from '../components/about/AboutHeader.astro';
+import AboutPhoto from '../components/about/AboutPhoto.astro';
+import AboutStory from '../components/about/AboutStory.astro';
+import CtaBand from '../components/ui/CtaBand.astro';
+---
+
+<BaseLayout title="About Us" description="N.D.I. has been designing, making and fitting kitchens, vanities and built-in cupboards from the same Gauteng workshop for three decades.">
+  <SiteNav active="about" />
+
+  <main>
+    <AboutHeader />
+    <AboutPhoto />
+    <AboutStory />
+    <CtaBand heading="Come and see the workshop." />
+  </main>
+
+  <SiteFooter />
+</BaseLayout>

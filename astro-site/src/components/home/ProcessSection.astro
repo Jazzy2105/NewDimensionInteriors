@@ -1,0 +1,79 @@
+---
+// "How it works" — four numbered steps, flat section.
+const steps = [
+  { n: '01', title: 'Site measure', body: 'We come to you, measure the room and talk through how you cook and store.' },
+  { n: '02', title: 'Drawing & quote', body: "A layout, finish samples and a fixed written price. No line items you can't read." },
+  { n: '03', title: 'Manufacture', body: 'Cut, edged and assembled in our workshop, so tolerances stay ours to fix.' },
+  { n: '04', title: 'Installation', body: 'Our own team fits, levels and hands over — plus a snag visit after two weeks.' },
+];
+---
+
+<section class="flat-section process">
+  <div class="process__header">
+    <span class="kicker">How it works</span>
+    <h2 class="process__heading">Four steps, one point of contact.</h2>
+  </div>
+  <div class="process__grid">
+    {
+      steps.map((step) => (
+        <div class="process__cell">
+          <span class="process__number">{step.n}</span>
+          <h3 class="process__title">{step.title}</h3>
+          <p class="process__body">{step.body}</p>
+        </div>
+      ))
+    }
+  </div>
+</section>
+
+<style>
+  .process__header {
+    padding: clamp(40px, 6vw, 80px) var(--section-pad-x) clamp(20px, 3vw, 32px);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .process__heading {
+    font-size: clamp(28px, 3.4vw, 48px);
+    line-height: 1;
+    letter-spacing: -0.03em;
+  }
+
+  .process__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    border-top: 2px solid var(--color-text);
+  }
+
+  .process__cell {
+    padding: clamp(24px, 3vw, 36px);
+    border-right: 2px solid var(--color-divider);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .process__cell:last-child {
+    border-right: 0;
+  }
+
+  .process__number {
+    font-family: var(--font-heading);
+    font-weight: 900;
+    font-size: 14px;
+    color: var(--color-accent);
+  }
+
+  .process__title {
+    font-size: 20px;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+  }
+
+  .process__body {
+    margin: 0;
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: var(--color-neutral-700);
+  }
+</style>

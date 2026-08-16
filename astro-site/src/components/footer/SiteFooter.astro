@@ -1,0 +1,94 @@
+---
+// Shared footer for every page. See "Shared: footer" in ../../../README.md.
+import { Image } from 'astro:assets';
+import logo from '../../assets/images/ndi-logo.png';
+import { siteConfig } from '../../data/site-config.js';
+
+const navLinks = [
+  { label: 'Home', href: '/' },
+  { label: 'About Us', href: '/about' },
+  { label: 'Projects', href: '/projects' },
+  { label: 'Contact Us', href: '/#contact' },
+];
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="site-footer__row">
+    <div class="site-footer__brand">
+      <Image src={logo} alt="N.D.I." height={60} style="height: 60px; width: auto; margin-left: -6px;" />
+      <span class="site-footer__tagline">Kitchens &middot; Built-in cupboards &middot; Vanities &middot; Home decor</span>
+      <span class="site-footer__address">{siteConfig.workshopLocation} &middot; {siteConfig.email}</span>
+    </div>
+
+    <nav class="site-footer__nav">
+      {
+        navLinks.map((link) => (
+          <a href={link.href}>{link.label}</a>
+        ))
+      }
+    </nav>
+
+    <span class="site-footer__copyright">&copy; {year} {siteConfig.businessName} Kitchens. All rights reserved.</span>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    position: relative;
+    margin-top: var(--panel-margin);
+    border-top: 2px solid var(--color-divider);
+    background: var(--color-footer-bg);
+    color: var(--color-neutral-600);
+    font-family: var(--font-body);
+  }
+
+  .site-footer__row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 32px;
+    justify-content: space-between;
+    padding: clamp(32px, 4vw, 56px) var(--section-pad-x);
+  }
+
+  .site-footer__brand {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .site-footer__tagline {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  .site-footer__address {
+    font-size: 13px;
+    color: var(--color-neutral-500);
+    margin-top: 6px;
+  }
+
+  .site-footer__nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px 28px;
+    align-items: flex-start;
+  }
+  .site-footer__nav a {
+    color: var(--color-neutral-600);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .site-footer__nav a:hover {
+    color: #fff;
+  }
+
+  .site-footer__copyright {
+    font-size: 12px;
+    color: var(--color-neutral-500);
+  }
+</style>

@@ -1,0 +1,99 @@
+---
+// Two-column flat section: narrative copy left, a label/value spec list
+// right (Established, Where we work, etc).
+import { siteConfig } from '../../data/site-config.js';
+
+const specs = [
+  { label: 'Established', value: siteConfig.established },
+  { label: 'Where we work', value: 'Gauteng & surrounds' },
+  { label: 'What we make', value: 'Kitchens · Vanities · BICs' },
+  { label: 'Guarantee', value: 'Workmanship warranted' },
+  { label: 'Quotation', value: 'Free, on site' },
+];
+---
+
+<section class="flat-section story">
+  <div class="story__copy">
+    <h2 class="story__heading">A family workshop, not a showroom chain.</h2>
+    <p class="story__body">
+      N.D.I. began as one man, one van and a bandsaw. Three decades later the same principle runs the business: the
+      person who measures your room is the person who draws it, and the workshop that cuts it is fifteen minutes
+      from your house.
+    </p>
+    <p class="story__body">
+      We don't sell flat-packs and we don't subcontract the fitting. Fewer hands touch the work, which is why the
+      joints line up and why the number you called still answers after the invoice is paid.
+    </p>
+  </div>
+  <dl class="story__specs">
+    {
+      specs.map((spec) => (
+        <div class="story__spec-row">
+          <dt>{spec.label}</dt>
+          <dd>{spec.value}</dd>
+        </div>
+      ))
+    }
+  </dl>
+</section>
+
+<style>
+  .story {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  }
+
+  .story__copy {
+    padding: clamp(32px, 5vw, 72px) var(--section-pad-x);
+    border-right: 2px solid var(--color-divider);
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .story__heading {
+    font-size: clamp(24px, 2.6vw, 34px);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+  }
+
+  .story__body {
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.65;
+    color: var(--color-neutral-700);
+  }
+
+  .story__specs {
+    margin: 0;
+    padding: clamp(32px, 5vw, 72px) var(--section-pad-x);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .story__spec-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 16px 0;
+    border-bottom: 2px solid var(--color-divider);
+  }
+  .story__spec-row:last-child {
+    border-bottom: 0;
+  }
+
+  .story__spec-row dt {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-neutral-600);
+  }
+
+  .story__spec-row dd {
+    margin: 0;
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 17px;
+  }
+</style>

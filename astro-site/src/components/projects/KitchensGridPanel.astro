@@ -1,0 +1,10 @@
+---
+// The Projects page's kitchens gallery. Kitchens always has real photos
+// (the original 10 + whatever's added since — see
+// src/assets/images/kitchens/README.md), so this is a thin wrapper around
+// the shared PhotoGridPanel; compare to CupboardsGridPanel.astro etc., which
+// fall back to a placeholder until real photos exist for those categories.
+import PhotoGridPanel from './PhotoGridPanel.astro';
+---
+
+<PhotoGridPanel category="kitchens" title="Kitchens" lightboxGroup="projects-kitchens" />

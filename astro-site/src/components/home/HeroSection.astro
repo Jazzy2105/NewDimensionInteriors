@@ -1,0 +1,229 @@
+---
+// Full-bleed hero: six cross-fading photos (each running a slow Ken Burns
+// zoom), auto-advancing on an interval, with clickable progress bars.
+import { Image } from 'astro:assets';
+import { getHeroPhotos } from '../../data/photo-library.js';
+import { siteConfig, waHref } from '../../data/site-config.js';
+import logo from '../../assets/images/ndi-logo.png';
+
+const HERO_SECONDS = 6;
+
+// Which photos appear here (and in what order) is controlled by `hero` /
+// `heroOrder` in src/data/photo-meta.js — see that file to change the pick.
+const slides = getHeroPhotos(6);
+---
+
+<section id="hero" class="hero" data-hero data-hero-seconds={HERO_SECONDS}>
+  <div class="hero__slides">
+    {
+      slides.map((slide, i) => (
+        <div class="hero__slide" data-hero-slide style={{ opacity: i === 0 ? 1 : 0 }}>
+          <Image src={slide.image} alt={slide.heroAlt} width={1920} format="webp" quality={80} loading="eager" class="hero__img" />
+        </div>
+      ))
+    }
+  </div>
+  <div class="hero__scrim"></div>
+
+  <div class="hero__content">
+    <div class="hero__intro">
+      <div class="hero__brandline">
+        <Image src={logo} alt="N.D.I." width={176} format="webp" class="hero__logo" />
+        <span class="hero__kicker">{siteConfig.tagline}</span>
+      </div>
+      <h1 class="hero__heading">The kitchen is<br />the room you<br />actually live in.</h1>
+      <p class="hero__body">
+        Designed, manufactured and fitted by one workshop — kitchens, vanities and built-in cupboards made to
+        measure, with no middleman between the drawing and the door.
+      </p>
+      <div class="hero__actions">
+        <a href={waHref()} target="_blank" rel="noopener" class="btn btn-accent">WhatsApp us</a>
+        <a href="#kitchens" class="btn btn-ghost">See the work</a>
+      </div>
+    </div>
+
+    <div class="hero__footer">
+      <div class="hero__bars">
+        {
+          slides.map((_, i) => (
+            <button type="button" class="hero__bar" data-hero-bar style={{ background: i === 0 ? 'var(--color-accent)' : 'rgba(255,255,255,0.45)' }} aria-label={`Show slide ${i + 1} of ${slides.length}`} />
+          ))
+        }
+      </div>
+      <div class="hero__counter">
+        <span class="hero__counter-current" data-hero-counter>01</span>
+        <span class="hero__counter-total">/ {String(slides.length).padStart(2, '0')}</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    height: calc(100vh - 76px);
+    min-height: 600px;
+    overflow: hidden;
+    background: var(--color-hero-bg);
+  }
+
+  .hero__slides {
+    position: absolute;
+    inset: 0;
+  }
+
+  .hero__slide {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    transition: opacity 1400ms ease;
+  }
+
+  .hero__slide :global(.hero__img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    animation: ndiKB 14s ease-out infinite alternate;
+  }
+
+  .hero__scrim {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(100deg, rgba(6, 6, 6, 0.9) 0%, rgba(6, 6, 6, 0.5) 44%, rgba(6, 6, 6, 0.08) 74%);
+  }
+
+  .hero__content {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 36px;
+    padding: clamp(24px, 4vw, 64px);
+  }
+
+  .hero__intro {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    max-width: min(940px, 80vw);
+  }
+
+  .hero__brandline {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    flex-wrap: wrap;
+  }
+  .hero__brandline :global(.hero__logo) {
+    height: clamp(52px, 6vw, 88px);
+    width: auto;
+  }
+
+  .hero__kicker {
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+  }
+
+  .hero__heading {
+    color: #fff;
+    font-size: clamp(40px, 7.2vw, 104px);
+    line-height: 0.92;
+    letter-spacing: -0.035em;
+    text-wrap: balance;
+  }
+
+  .hero__body {
+    margin: 0;
+    max-width: 560px;
+    color: rgba(255, 255, 255, 0.82);
+    font-size: clamp(15px, 1.3vw, 19px);
+    line-height: 1.55;
+  }
+
+  .hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding-top: 8px;
+  }
+
+  .hero__footer {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+    border-top: 2px solid rgba(255, 255, 255, 0.35);
+    padding-top: 16px;
+  }
+
+  .hero__bars {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+
+  .hero__bar {
+    width: clamp(28px, 5vw, 64px);
+    height: 4px;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+    transition: background 300ms;
+  }
+
+  .hero__counter {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    color: #fff;
+    font-family: var(--font-heading);
+    font-weight: 800;
+  }
+  .hero__counter-current {
+    font-size: clamp(28px, 3.2vw, 44px);
+    line-height: 1;
+  }
+  .hero__counter-total {
+    font-size: 13px;
+    opacity: 0.6;
+  }
+</style>
+
+<script>
+  const hero = document.querySelector('[data-hero]');
+  if (hero) {
+    const seconds = Number(hero.getAttribute('data-hero-seconds') || '6');
+    const slides = Array.from(hero.querySelectorAll('[data-hero-slide]'));
+    const bars = Array.from(hero.querySelectorAll('[data-hero-bar]'));
+    const counter = hero.querySelector('[data-hero-counter]');
+    let index = 0;
+
+    const paint = () => {
+      slides.forEach((slide, i) => {
+        slide.style.opacity = i === index ? '1' : '0';
+      });
+      bars.forEach((bar, i) => {
+        bar.style.background = i === index ? 'var(--color-accent)' : 'rgba(255,255,255,0.45)';
+      });
+      if (counter) counter.textContent = String(index + 1).padStart(2, '0');
+    };
+
+    bars.forEach((bar, i) => {
+      bar.addEventListener('click', () => {
+        index = i;
+        paint();
+      });
+    });
+
+    if (slides.length > 1) {
+      setInterval(() => {
+        index = (index + 1) % slides.length;
+        paint();
+      }, seconds * 1000);
+    }
+  }
+</script>

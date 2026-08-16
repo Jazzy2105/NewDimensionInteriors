@@ -1,0 +1,25 @@
+---
+// Switches from a placeholder grid to a real photo grid automatically once
+// photos exist in src/assets/images/cupboards/ — see that folder's README.
+import { hasPhotos } from '../../data/photo-library.js';
+import PhotoGridPanel from './PhotoGridPanel.astro';
+import PlaceholderGridPanel from './PlaceholderGridPanel.astro';
+
+const placeholderTiles = [
+  { brief: 'Bedroom wardrobe run', aspect: '2/1', wide: true },
+  { brief: 'Walk-in dressing room', aspect: '3/4' },
+  { brief: 'Drawer bank and rails', aspect: '3/2' },
+  { brief: 'Hallway cupboard', aspect: '3/2' },
+  { brief: 'Sliding door wardrobe', aspect: '16/10', wide: true },
+  { brief: 'Linen and shelving detail', aspect: '3/2' },
+];
+const description = 'Wardrobes, dressing rooms, hallway and linen cupboards, floor to ceiling.';
+---
+
+{
+  hasPhotos('cupboards') ? (
+    <PhotoGridPanel category="cupboards" title="Built-in cupboards" description={description} lightboxGroup="projects-cupboards" />
+  ) : (
+    <PlaceholderGridPanel category="cupboards" title="Built-in cupboards" description={description} tiles={placeholderTiles} />
+  )
+}

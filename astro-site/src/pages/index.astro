@@ -1,0 +1,42 @@
+---
+// Home — hero, stats, the four category sections, process, suppliers,
+// about preview, closing CTA and the contact form. See README.md's "Home
+// order" note for why the raised/flat rhythm alternates the way it does.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteNav from '../components/nav/SiteNav.astro';
+import SiteFooter from '../components/footer/SiteFooter.astro';
+import Lightbox from '../components/gallery/Lightbox.astro';
+import HeroSection from '../components/home/HeroSection.astro';
+import StatsSection from '../components/home/StatsSection.astro';
+import KitchensSection from '../components/home/KitchensSection.astro';
+import CupboardsSection from '../components/home/CupboardsSection.astro';
+import VanitiesSection from '../components/home/VanitiesSection.astro';
+import DecorSection from '../components/home/DecorSection.astro';
+import ProcessSection from '../components/home/ProcessSection.astro';
+import AboutPreviewSection from '../components/home/AboutPreviewSection.astro';
+import ContactSection from '../components/home/ContactSection.astro';
+import SuppliersPanel from '../components/ui/SuppliersPanel.astro';
+import CtaBand from '../components/ui/CtaBand.astro';
+---
+
+<BaseLayout title="Home">
+  <SiteNav active="home" />
+
+  <main>
+    <HeroSection />
+    <StatsSection />
+    <KitchensSection />
+    <CupboardsSection />
+    <VanitiesSection />
+    <DecorSection />
+    <ProcessSection />
+    <SuppliersPanel note="We buy board, stone and hardware from established South African and European suppliers — so the finish you choose is one we can match again in five years." />
+    <AboutPreviewSection />
+    <CtaBand heading="Built in our workshop. Fitted in your home." withIcon variant="home" />
+    <ContactSection />
+  </main>
+
+  <SiteFooter />
+
+  <Lightbox groupId="home-kitchens" />
+</BaseLayout>

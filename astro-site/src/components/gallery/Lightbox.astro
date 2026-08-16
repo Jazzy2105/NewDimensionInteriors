@@ -1,0 +1,186 @@
+---
+// A fullscreen photo viewer. Drop one of these once per page and pair it with
+// trigger buttons anywhere on the page carrying:
+//   data-lightbox-trigger={groupId} data-full="<big image url>"
+//   data-alt="..." data-caption="..." (caption only matters when withNav)
+//
+// withNav=false (Home's category grids): click anywhere to close, no
+// prev/next — matches the simple per-tile viewer in the handoff.
+// withNav=true (Projects gallery): prev/next buttons + wrapping Arrow-key
+// stepping, Escape to close, caption bottom-left. Backdrop click does
+// nothing, matching the handoff spec exactly.
+import IconChevronLeft from '../icons/IconChevronLeft.astro';
+import IconChevronRight from '../icons/IconChevronRight.astro';
+import IconClose from '../icons/IconClose.astro';
+
+interface Props {
+  groupId: string;
+  withNav?: boolean;
+}
+const { groupId, withNav = false } = Astro.props;
+---
+
+<div class="lightbox" data-lightbox-root={groupId} data-with-nav={withNav ? 'true' : 'false'} hidden>
+  <div class="lightbox__image" data-lightbox-image role="img" aria-label="Project photograph"></div>
+
+  {
+    withNav && (
+      <>
+        <button type="button" class="lightbox__side lightbox__side--prev" data-lightbox-prev aria-label="Previous photograph">
+          <IconChevronLeft />
+        </button>
+        <button type="button" class="lightbox__side lightbox__side--next" data-lightbox-next aria-label="Next photograph">
+          <IconChevronRight />
+        </button>
+        <span class="lightbox__caption" data-lightbox-caption />
+      </>
+    )
+  }
+
+  <button type="button" class="lightbox__close" data-lightbox-close aria-label="Close">
+    <IconClose />
+  </button>
+</div>
+
+<style>
+  .lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    background: rgba(6, 6, 6, 0.95);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: clamp(16px, 4vw, 72px);
+    animation: ndiRise 240ms ease-out;
+  }
+  .lightbox[hidden] {
+    display: none;
+  }
+  .lightbox[data-with-nav='false'] {
+    background: rgba(20, 19, 18, 0.94);
+    cursor: zoom-out;
+  }
+
+  .lightbox__image {
+    width: 100%;
+    height: 100%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  .lightbox__side {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 52px;
+    height: 52px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.45);
+    color: #fff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .lightbox__side:hover {
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+  }
+  .lightbox__side--prev {
+    left: 16px;
+  }
+  .lightbox__side--next {
+    right: 16px;
+  }
+
+  .lightbox__caption {
+    position: absolute;
+    bottom: 22px;
+    left: 24px;
+    color: #fff;
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 13px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .lightbox__close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 48px;
+    height: 48px;
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    color: #fff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .lightbox__close:hover {
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+  }
+</style>
+
+<script>
+  const roots = document.querySelectorAll('[data-lightbox-root]');
+
+  for (const root of roots) {
+    const groupId = root.getAttribute('data-lightbox-root') || '';
+    const withNav = root.getAttribute('data-with-nav') === 'true';
+    const imageEl = root.querySelector('[data-lightbox-image]');
+    const captionEl = root.querySelector('[data-lightbox-caption]');
+    const closeBtn = root.querySelector('[data-lightbox-close]');
+    const prevBtn = root.querySelector('[data-lightbox-prev]');
+    const nextBtn = root.querySelector('[data-lightbox-next]');
+    const triggers = Array.from(document.querySelectorAll(`[data-lightbox-trigger="${groupId}"]`));
+    if (!imageEl || triggers.length === 0) continue;
+
+    let index = -1;
+
+    const show = (i) => {
+      index = i;
+      const trigger = triggers[i];
+      const full = trigger.getAttribute('data-full') || '';
+      const caption = trigger.getAttribute('data-caption') || '';
+      const alt = trigger.getAttribute('data-alt') || 'Project photograph';
+      imageEl.style.backgroundImage = `url("${full}")`;
+      imageEl.setAttribute('aria-label', alt);
+      if (captionEl) captionEl.textContent = caption;
+      root.hidden = false;
+    };
+
+    const close = () => {
+      index = -1;
+      root.hidden = true;
+    };
+
+    const step = (delta) => {
+      if (index === -1) return;
+      const n = triggers.length;
+      show((index + delta + n) % n);
+    };
+
+    triggers.forEach((trigger, i) => trigger.addEventListener('click', () => show(i)));
+    closeBtn?.addEventListener('click', close);
+    prevBtn?.addEventListener('click', () => step(-1));
+    nextBtn?.addEventListener('click', () => step(1));
+
+    if (!withNav) {
+      // Home's simple viewer: clicking anywhere (image included) closes it.
+      root.addEventListener('click', close);
+    }
+
+    window.addEventListener('keydown', (event) => {
+      if (root.hidden) return;
+      if (event.key === 'Escape') close();
+      if (withNav && event.key === 'ArrowRight') step(1);
+      if (withNav && event.key === 'ArrowLeft') step(-1);
+    });
+  }
+</script>

@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&display=swap">
+<link rel="stylesheet" href="_ds/modernist-dccc7be5-f9a3-4c2c-b9f6-7fa541981b64/styles.css">
+<script src="_ds/modernist-dccc7be5-f9a3-4c2c-b9f6-7fa541981b64/_ds_bundle.js"></script>
+<script src="./image-slot.js"></script>
+<style>
+  @keyframes ndiSkyA { 0% { transform: translate3d(-3%, -2%, 0) scale(1.18); } 50% { transform: translate3d(4%, 3%, 0) scale(1.34); } 100% { transform: translate3d(-3%, -2%, 0) scale(1.18); } }
+  @keyframes ndiSkyB { 0% { transform: translate3d(5%, 4%, 0) scale(1.3); } 50% { transform: translate3d(-6%, -5%, 0) scale(1.12); } 100% { transform: translate3d(5%, 4%, 0) scale(1.3); } }
+  @keyframes ndiSkyC { 0% { transform: translate3d(0, 0, 0) scale(1.1); opacity: 0.85; } 50% { transform: translate3d(-4%, 5%, 0) scale(1.28); opacity: 1; } 100% { transform: translate3d(0, 0, 0) scale(1.1); opacity: 0.85; } }
+  @keyframes ndiRise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+  :root {
+    --color-accent: #BC1313; --color-accent-100: #fdecec; --color-accent-200: #f7cfcf; --color-accent-300: #f08b8b; --color-accent-400: #e35555; --color-accent-500: #cc2020; --color-accent-600: #a20f0f; --color-accent-700: #7e0c0c; --color-accent-800: #5c0a0a; --color-accent-900: #3d0b0b;
+    --color-bg: #070707; --color-surface: #161514; --color-text: #f5f3f2; --color-divider: #38342f;
+    --color-neutral-100: #100f0f; --color-neutral-200: #1b1a19; --color-neutral-300: #272524; --color-neutral-400: #3b3836; --color-neutral-500: #6b6663; --color-neutral-600: #9a9491; --color-neutral-700: #c3bebb; --color-neutral-800: #dedad8; --color-neutral-900: #f2f0ef;
+  }
+  body { margin: 0; background: var(--color-bg); color: var(--color-text); font-family: var(--font-body); -webkit-font-smoothing: antialiased; }
+  * { box-sizing: border-box; }
+  a { color: var(--color-text); text-decoration: none; }
+  a:hover { color: var(--color-accent-400); }
+</style>
+</helmet>
+
+<div style="min-height:100vh">
+  <div aria-hidden="true" style="position:fixed;inset:0;z-index:-5;pointer-events:none;background:#050505"></div>
+  <div aria-hidden="true" style="position:fixed;inset:-18%;z-index:-4;pointer-events:none;background:radial-gradient(52% 44% at 50% 6%, #2b2930 0%, #201f25 34%, rgba(24,23,28,0) 72%), radial-gradient(70% 58% at 50% 34%, #16161b 0%, rgba(22,22,27,0) 70%);animation:ndiSkyC 38s ease-in-out infinite;will-change:transform,opacity"></div>
+  <div aria-hidden="true" style="position:fixed;inset:-22%;z-index:-3;pointer-events:none;background:radial-gradient(46% 38% at 14% 30%, #1b1d26 0%, rgba(27,29,38,0) 66%), radial-gradient(44% 36% at 88% 22%, #241a1a 0%, rgba(36,26,26,0) 64%), radial-gradient(56% 46% at 62% 88%, #14161c 0%, rgba(20,22,28,0) 68%);animation:ndiSkyA 52s ease-in-out infinite;will-change:transform"></div>
+  <div aria-hidden="true" style="position:fixed;inset:-26%;z-index:-2;pointer-events:none;background:radial-gradient(40% 34% at 80% 64%, rgba(140,18,18,0.26) 0%, rgba(140,18,18,0) 68%), radial-gradient(38% 32% at 10% 78%, rgba(48,52,66,0.34) 0%, rgba(48,52,66,0) 66%), radial-gradient(30% 26% at 44% 12%, rgba(188,19,19,0.16) 0%, rgba(188,19,19,0) 70%);animation:ndiSkyB 74s ease-in-out infinite;will-change:transform"></div>
+  <div aria-hidden="true" style="position:fixed;inset:0;z-index:-1;pointer-events:none;background-image:url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E&quot;);opacity:0.05;mix-blend-mode:overlay"></div>
+  <div aria-hidden="true" style="position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(120% 90% at 50% 24%, rgba(0,0,0,0) 42%, rgba(0,0,0,0.62) 100%)"></div>
+
+  <dc-import name="SiteNav" style="position:sticky;top:0;z-index:60" active="projects" hint-size="100%,76px"></dc-import>
+
+  <section data-screen-label="Projects header" style="position:relative;border-top:2px solid var(--color-divider);border-bottom:2px solid var(--color-divider);background:rgba(5,5,5,0.22);display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:28px;padding:clamp(36px,6vw,80px) clamp(16px,3vw,40px) clamp(24px,3vw,36px)">
+    <div style="display:flex;flex-direction:column;gap:14px;max-width:760px">
+      <span style="font-size:11px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:var(--color-accent-400)">Projects</span>
+      <h1 style="margin:0;font-family:var(--font-heading);font-weight:900;font-size:clamp(38px,6.4vw,92px);line-height:0.94;letter-spacing:-0.035em">Work we have fitted.</h1>
+      <p style="margin:0;max-width:600px;font-size:16px;line-height:1.6;color:var(--color-neutral-700)">Kitchens, built-in cupboards, vanities and home decor — drawn, built and installed by our own team. Click any photograph to see it full size.</p>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px">
+      <button onClick="{{ filter.allGo }}" style="cursor:pointer;font-family:var(--font-heading);font-weight:800;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;padding:14px 20px;border-radius:999px;border:2px solid {{ filter.allBorder }};background:{{ filter.allBg }};color:{{ filter.allColor }};transition:all 220ms ease">All work</button>
+      <button onClick="{{ filter.kitchensGo }}" style="cursor:pointer;font-family:var(--font-heading);font-weight:800;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;padding:14px 20px;border-radius:999px;border:2px solid {{ filter.kitchensBorder }};background:{{ filter.kitchensBg }};color:{{ filter.kitchensColor }};transition:all 220ms ease">Kitchens</button>
+      <button onClick="{{ filter.cupboardsGo }}" style="cursor:pointer;font-family:var(--font-heading);font-weight:800;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;padding:14px 20px;border-radius:999px;border:2px solid {{ filter.cupboardsBorder }};background:{{ filter.cupboardsBg }};color:{{ filter.cupboardsColor }};transition:all 220ms ease">Built-in cupboards</button>
+      <button onClick="{{ filter.vanitiesGo }}" style="cursor:pointer;font-family:var(--font-heading);font-weight:800;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;padding:14px 20px;border-radius:999px;border:2px solid {{ filter.vanitiesBorder }};background:{{ filter.vanitiesBg }};color:{{ filter.vanitiesColor }};transition:all 220ms ease">Vanities</button>
+      <button onClick="{{ filter.decorGo }}" style="cursor:pointer;font-family:var(--font-heading);font-weight:800;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;padding:14px 20px;border-radius:999px;border:2px solid {{ filter.decorBorder }};background:{{ filter.decorBg }};color:{{ filter.decorColor }};transition:all 220ms ease">Home decor</button>
+    </div>
+  </section>
+
+  <section data-screen-label="Kitchens grid" style="display:{{ show.kitchens }};position:relative;margin:clamp(18px,2.6vw,38px) auto;width:calc(100% - clamp(32px,5.2vw,76px));max-width:1720px;background:var(--color-surface);border:2px solid #2e2a27;border-radius:20px;overflow:hidden;box-shadow:inset 0 2px 0 rgba(255,255,255,0.05), 0 30px 60px -22px rgba(0,0,0,0.95), 0 80px 120px -60px rgba(188,19,19,0.22)">
+    <div style="display:flex;align-items:center;gap:14px;padding:22px clamp(16px,2.4vw,30px);border-bottom:2px solid var(--color-divider)">
+      <span style="width:30px;height:4px;background:var(--color-accent)"></span>
+      <span style="font-family:var(--font-heading);font-weight:800;font-size:13px;letter-spacing:0.16em;text-transform:uppercase">Kitchens</span>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:2px;background:var(--color-divider)">
+      <button onClick="{{ open1 }}" style="position:relative;display:block;padding:0;border:0;cursor:zoom-in;background:#111013;overflow:hidden;aspect-ratio:16/10;grid-column:span 2">
+        <img src="assets/kitchen-01.jpg" alt="Marble island, walnut fronts — kitchen fitted by N.D.I." style="width:100%;height:100%;object-fit:cover;transition:transform 900ms cubic-bezier(0.2,0.7,0.2,1)" style-hover="transform:scale(1.05)">
+        <span style="position:absolute;left:0;bottom:0;display:flex;align-items:center;gap:10px;background:var(--color-bg);padding:10px 14px;font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase"><span style="color:var(--color-accent-400)">01</span><span>Marble island, walnut fronts</span></span>
+      </button>
+      <button onClick="{{ open2 }}" style="position:relative;display:block;padding:0;border:0;cursor:zoom-in;background:#111013;overflow:hidden;aspect-ratio:3/4">
+        <img src="assets/kitchen-04.jpg" alt="Lit island, travertine — kitchen fitted by N.D.I." style="width:100%;height:100%;object-fit:cover;transition:transform 900ms cubic-bezier(0.2,0.7,0.2,1)" style-hover="transform:scale(1.05)">
+        <span style="position:absolute;left:0;bottom:0;display:flex;align-items:center;gap:10px;background:var(--color-bg);padding:10px 14px;font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase"><span style="color:var(--color-accent-400)">02</span><span>Lit island, travertine</span></span>
+      </button>
+      <button onClick="{{ open3 }}" style="position:relative;display:block;padding:0;border:0;cursor:zoom-in;background:#111013;overflow:hidden;aspect-ratio:3/2">
+        <img src="assets/kitchen-07.jpg" alt="Tall units to ceiling — kitchen fitted by N.D.I." style="width:100%;height:100%;object-fit:cover;transition:transform 900ms cubic-bezier(0.2,0.7,0.2,1)" style-hover="transform:scale(1.05)">
+        <span style="position:absolute;left:0;bottom:0;display:flex;align-items:center;gap:10px;background:var(--color-bg);padding:10px 14px;font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase"><span style="color:var(--color-accent-400)">03</span><span>Tall units to ceiling</span></span>
+      </button>
+      <button onClick="{{ open4 }}" style="position:relative;display:block;padding:0;border:0;cursor:zoom-in;background:#111013;overflow:hidden;aspect-ratio:2/1;grid-column:span 2">
+        <img src="assets/kitchen-08.jpg" alt="Full-width run, stone tops — kitchen fitted by N.D.I." style="width:100%;height:100%;object-fit:cover;transition:transform 900ms cubic-bezier(0.2,0.7,0.2,1)" style-hover="transform:scale(1.05)">
+        <span style="position:absolute;left:0;bottom:0;display:flex;align-items:center;gap:10px;background:var(--color-bg);padding:10px 14px;font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase"><span style="color:var(--color-accent-400)">04</span><span>Full-width run, stone tops</span></span>
+      </button>
+      <button onClick="{{ open5 }}" style="position:relative;display:block;padding:0;border:0;cursor:zoom-in;background:#111013;overflow:hidden;aspect-ratio:3/2">
+        <img src="assets/kitchen-02.jpg" alt="Compact galley — kitchen fitted by N.D.I." style="width:100%;height:100%;object-fit:cover;transition:transform 900ms cubic-bezier(0.2,0.7,0.2,1)" style-hover="transform:scale(1.05)">
+        <span style="position:absolute;left:0;bottom:0;display:flex;align-items:center;gap:10px;background:var(--color-bg);padding:10px 14px;font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase"><span style="color:var(--color-accent-400)">05</span><span>Compact galley</span></span>
+      </button>
+      <button onClick="{{ open6 }}" style="position:relative;display:block;padding:0;border:0;cursor:zoom-in;background:#111013;overflow:hidden;aspect-ratio:3/2">
+        <img src="assets/kitchen-05.jpg" alt="Integrated appliances — kitchen fitted by N.D.I." style="width:100%;height:100%;object-fit:cover;transition:transform 900ms cubic-bezier(0.2,0.7,0.2,1)" style-hover="transform:scale(1.05)">
+        <span style="position:absolute;left:0;bottom:0;display:flex;align-items:center;gap:10px;background:var(--color-bg);padding:10px 14px;font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase"><span style="color:var(--color-accent-400)">06</span><span>Integrated appliances</span></span>
+      </button>
+      <button onClick="{{ open7 }}" style="position:relative;display:block;padding:0;border:0;cursor:zoom-in;background:#111013;overflow:hidden;aspect-ratio:5/4;grid-column:span 2">
+        <img src="assets/kitchen-10.jpg" alt="Open-plan living kitchen — fitted by N.D.I." style="width:100%;height:100%;object-fit:cover;transition:transform 900ms cubic-bezier(0.2,0.7,0.2,1)" style-hover="transform:scale(1.05)">
+        <span style="position:absolute;left:0;bottom:0;display:flex;align-items:center;gap:10px;background:var(--color-bg);padding:10px 14px;font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase"><span style="color:var(--color-accent-400)">07</span><span>Open-plan living kitchen</span></span>
+      </button>
+      <button onClick="{{ open8 }}" style="position:relative;display:block;padding:0;border:0;cursor:zoom-in;background:#111013;overflow:hidden;aspect-ratio:3/2">
+        <img src="assets/kitchen-03.jpg" alt="Cupboards and scullery door — fitted by N.D.I." style="width:100%;height:100%;object-fit:cover;transition:transform 900ms cubic-bezier(0.2,0.7,0.2,1)" style-hover="transform:scale(1.05)">
+        <span style="position:absolute;left:0;bottom:0;display:flex;align-items:center;gap:10px;background:var(--color-bg);padding:10px 14px;font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase"><span style="color:var(--color-accent-400)">08</span><span>Cupboards and scullery door</span></span>
+      </button>
+      <button onClick="{{ open9 }}" style="position:relative;display:block;padding:0;border:0;cursor:zoom-in;background:#111013;overflow:hidden;aspect-ratio:3/2">
+        <img src="assets/kitchen-06.jpg" alt="Scullery and pantry wall — fitted by N.D.I." style="width:100%;height:100%;object-fit:cover;transition:transform 900ms cubic-bezier(0.2,0.7,0.2,1)" style-hover="transform:scale(1.05)">
+        <span style="position:absolute;left:0;bottom:0;display:flex;align-items:center;gap:10px;background:var(--color-bg);padding:10px 14px;font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase"><span style="color:var(--color-accent-400)">09</span><span>Scullery and pantry wall</span></span>
+      </button>
+      <button onClick="{{ open10 }}" style="position:relative;display:block;padding:0;border:0;cursor:zoom-in;background:#111013;overflow:hidden;aspect-ratio:3/2">
+        <img src="assets/kitchen-09.jpg" alt="Door and handle detail — fitted by N.D.I." style="width:100%;height:100%;object-fit:cover;transition:transform 900ms cubic-bezier(0.2,0.7,0.2,1)" style-hover="transform:scale(1.05)">
+        <span style="position:absolute;left:0;bottom:0;display:flex;align-items:center;gap:10px;background:var(--color-bg);padding:10px 14px;font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase"><span style="color:var(--color-accent-400)">10</span><span>Door and handle detail</span></span>
+      </button>
+    </div>
+  </section>
+
+  <section data-screen-label="Cupboards grid" style="display:{{ show.cupboards }};position:relative;margin:clamp(18px,2.6vw,38px) auto;width:calc(100% - clamp(32px,5.2vw,76px));max-width:1720px;background:var(--color-surface);border:2px solid #2e2a27;border-radius:20px;overflow:hidden;box-shadow:inset 0 2px 0 rgba(255,255,255,0.05), 0 30px 60px -22px rgba(0,0,0,0.95), 0 80px 120px -60px rgba(188,19,19,0.22)">
+    <div style="display:flex;flex-wrap:wrap;align-items:center;gap:14px;padding:22px clamp(16px,2.4vw,30px);border-bottom:2px solid var(--color-divider)">
+      <span style="width:30px;height:4px;background:var(--color-accent)"></span>
+      <span style="font-family:var(--font-heading);font-weight:800;font-size:13px;letter-spacing:0.16em;text-transform:uppercase">Built-in cupboards</span>
+      <span style="font-size:13px;color:var(--color-neutral-600)">Wardrobes, dressing rooms, hallway and linen cupboards, floor to ceiling.</span>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:2px;background:var(--color-divider)">
+      <div style="position:relative;background:#111013;aspect-ratio:2/1;grid-column:span 2"><image-slot id="ndi-bic-1" shape="rect" fit="cover" placeholder="Bedroom wardrobe run"></image-slot></div>
+      <div style="position:relative;background:#111013;aspect-ratio:3/4"><image-slot id="ndi-bic-2" shape="rect" fit="cover" placeholder="Walk-in dressing room"></image-slot></div>
+      <div style="position:relative;background:#111013;aspect-ratio:3/2"><image-slot id="ndi-bic-3" shape="rect" fit="cover" placeholder="Drawer bank and rails"></image-slot></div>
+      <div style="position:relative;background:#111013;aspect-ratio:3/2"><image-slot id="ndi-bic-4" shape="rect" fit="cover" placeholder="Hallway cupboard"></image-slot></div>
+      <div style="position:relative;background:#111013;aspect-ratio:16/10;grid-column:span 2"><image-slot id="ndi-bic-5" shape="rect" fit="cover" placeholder="Sliding door wardrobe"></image-slot></div>
+      <div style="position:relative;background:#111013;aspect-ratio:3/2"><image-slot id="ndi-bic-6" shape="rect" fit="cover" placeholder="Linen and shelving detail"></image-slot></div>
+    </div>
+  </section>
+
+  <section data-screen-label="Vanities grid" style="display:{{ show.vanities }};position:relative;margin:clamp(18px,2.6vw,38px) auto;width:calc(100% - clamp(32px,5.2vw,76px));max-width:1720px;background:var(--color-surface);border:2px solid #2e2a27;border-radius:20px;overflow:hidden;box-shadow:inset 0 2px 0 rgba(255,255,255,0.05), 0 30px 60px -22px rgba(0,0,0,0.95), 0 80px 120px -60px rgba(188,19,19,0.22)">
+    <div style="display:flex;flex-wrap:wrap;align-items:center;gap:14px;padding:22px clamp(16px,2.4vw,30px);border-bottom:2px solid var(--color-divider)">
+      <span style="width:30px;height:4px;background:var(--color-accent)"></span>
+      <span style="font-family:var(--font-heading);font-weight:800;font-size:13px;letter-spacing:0.16em;text-transform:uppercase">Vanities &amp; bathrooms</span>
+      <span style="font-size:13px;color:var(--color-neutral-600)">Moisture-rated boards, sealed edges, stone tops cut to the basin.</span>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:2px;background:var(--color-divider)">
+      <div style="position:relative;background:#111013;aspect-ratio:16/10;grid-column:span 2"><image-slot id="ndi-van-1" shape="rect" fit="cover" placeholder="Floating vanity — wide shot"></image-slot></div>
+      <div style="position:relative;background:#111013;aspect-ratio:3/4"><image-slot id="ndi-van-2" shape="rect" fit="cover" placeholder="Tall mirror cabinet"></image-slot></div>
+      <div style="position:relative;background:#111013;aspect-ratio:3/2"><image-slot id="ndi-van-3" shape="rect" fit="cover" placeholder="Basin and stone top detail"></image-slot></div>
+      <div style="position:relative;background:#111013;aspect-ratio:3/2"><image-slot id="ndi-van-4" shape="rect" fit="cover" placeholder="Guest bathroom vanity"></image-slot></div>
+      <div style="position:relative;background:#111013;aspect-ratio:2/1;grid-column:span 2"><image-slot id="ndi-van-5" shape="rect" fit="cover" placeholder="Main en-suite, full wall"></image-slot></div>
+      <div style="position:relative;background:#111013;aspect-ratio:3/2"><image-slot id="ndi-van-6" shape="rect" fit="cover" placeholder="Linen cupboard"></image-slot></div>
+    </div>
+  </section>
+
+  <section data-screen-label="Home decor grid" style="display:{{ show.decor }};position:relative;margin:clamp(18px,2.6vw,38px) auto;width:calc(100% - clamp(32px,5.2vw,76px));max-width:1720px;background:var(--color-surface);border:2px solid #2e2a27;border-radius:20px;overflow:hidden;box-shadow:inset 0 2px 0 rgba(255,255,255,0.05), 0 30px 60px -22px rgba(0,0,0,0.95), 0 80px 120px -60px rgba(188,19,19,0.22)">
+    <div style="display:flex;flex-wrap:wrap;align-items:center;gap:14px;padding:22px clamp(16px,2.4vw,30px);border-bottom:2px solid var(--color-divider)">
+      <span style="width:30px;height:4px;background:var(--color-accent)"></span>
+      <span style="font-family:var(--font-heading);font-weight:800;font-size:13px;letter-spacing:0.16em;text-transform:uppercase">Home decor</span>
+      <span style="font-size:13px;color:var(--color-neutral-600)">Wall units, floating shelves, surrounds, bars, desks and headboards.</span>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:2px;background:var(--color-divider)">
+      <div style="position:relative;background:#111013;aspect-ratio:2/1;grid-column:span 2"><image-slot id="ndi-dec-1" shape="rect" fit="cover" placeholder="Wall unit / media wall"></image-slot></div>
+      <div style="position:relative;background:#111013;aspect-ratio:3/2"><image-slot id="ndi-dec-2" shape="rect" fit="cover" placeholder="Floating shelves"></image-slot></div>
+      <div style="position:relative;background:#111013;aspect-ratio:3/2"><image-slot id="ndi-dec-3" shape="rect" fit="cover" placeholder="Fireplace or TV surround"></image-slot></div>
+      <div style="position:relative;background:#111013;aspect-ratio:3/4"><image-slot id="ndi-dec-4" shape="rect" fit="cover" placeholder="Bar or servery"></image-slot></div>
+      <div style="position:relative;background:#111013;aspect-ratio:16/10;grid-column:span 2"><image-slot id="ndi-dec-5" shape="rect" fit="cover" placeholder="Study desk, full wall"></image-slot></div>
+    </div>
+  </section>
+
+  <section data-screen-label="Suppliers" style="position:relative;margin:clamp(18px,2.6vw,38px) auto;width:calc(100% - clamp(32px,5.2vw,76px));max-width:1720px;background:var(--color-surface);border:2px solid #2e2a27;border-radius:20px;overflow:hidden;box-shadow:inset 0 2px 0 rgba(255,255,255,0.05), 0 30px 60px -22px rgba(0,0,0,0.95), 0 80px 120px -60px rgba(188,19,19,0.22)">
+    <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:20px;padding:26px clamp(16px,2.4vw,32px);border-bottom:2px solid var(--color-divider)">
+      <span style="font-size:11px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:var(--color-accent-400)">Materials &amp; suppliers</span>
+      <span style="font-size:14px;line-height:1.5;color:var(--color-neutral-600);max-width:52ch">Board, stone and hardware from established South African and European suppliers.</span>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:20px clamp(16px,2vw,32px);padding:clamp(24px,3vw,40px) clamp(16px,2.4vw,32px)">
+        <span style="font-family:var(--font-heading);font-weight:800;font-size:clamp(15px,1.5vw,21px);letter-spacing:-0.01em;color:var(--color-neutral-700)" style-hover="color:#fff">PG Bison</span>
+        <span style="font-family:var(--font-heading);font-weight:800;font-size:clamp(15px,1.5vw,21px);letter-spacing:-0.01em;color:var(--color-neutral-700)" style-hover="color:#fff">Sonae Novolam</span>
+        <span style="font-family:var(--font-heading);font-weight:800;font-size:clamp(15px,1.5vw,21px);letter-spacing:-0.01em;color:var(--color-neutral-700)" style-hover="color:#fff">SenoSA</span>
+        <span style="font-family:var(--font-heading);font-weight:800;font-size:clamp(15px,1.5vw,21px);letter-spacing:-0.01em;color:var(--color-neutral-700)" style-hover="color:#fff">Egger</span>
+        <span style="font-family:var(--font-heading);font-weight:800;font-size:clamp(15px,1.5vw,21px);letter-spacing:-0.01em;color:var(--color-neutral-700)" style-hover="color:#fff">AG Marble and Granite</span>
+        <span style="font-family:var(--font-heading);font-weight:800;font-size:clamp(15px,1.5vw,21px);letter-spacing:-0.01em;color:var(--color-neutral-700)" style-hover="color:#fff">Wood@Ease</span>
+    </div>
+  </section>
+
+  <section style="position:relative;background:var(--color-accent);color:#fff;border-top:2px solid #6d0d0d;border-bottom:2px solid #6d0d0d;box-shadow:0 40px 90px -30px rgba(188,19,19,0.5);padding:clamp(40px,7vw,96px) clamp(16px,3vw,40px);display:flex;flex-direction:column;gap:24px;align-items:flex-start">
+    <h2 style="margin:0;font-family:var(--font-heading);font-weight:900;font-size:clamp(30px,5vw,72px);line-height:0.95;letter-spacing:-0.035em;max-width:18em">Send us a photo of your room. We'll send back a plan.</h2>
+    <a href="{{ waHref }}" target="_blank" style="display:inline-flex;align-items:center;gap:12px;background:#fff;color:var(--color-accent-700);font-family:var(--font-heading);font-weight:800;font-size:14px;letter-spacing:0.06em;text-transform:uppercase;padding:20px 28px" style-hover="background:var(--color-accent-100)">WhatsApp us</a>
+  </section>
+
+  <div style="height:clamp(18px,2.6vw,38px)"></div>
+  <dc-import name="SiteFooter" hint-size="100%,180px"></dc-import>
+
+  <sc-if value="{{ lightboxOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="position:fixed;inset:0;z-index:200;background:rgba(6,6,6,0.95);display:flex;align-items:center;justify-content:center;padding:clamp(16px,4vw,72px);animation:ndiRise 240ms ease-out">
+      <div role="img" aria-label="Project photograph" style="width:100%;height:100%;background-image:url({{ lightboxSrc }});background-size:contain;background-repeat:no-repeat;background-position:center"></div>
+      <button onClick="{{ prev }}" style="position:absolute;left:16px;top:50%;width:52px;height:52px;background:rgba(255,255,255,0.1);border:2px solid rgba(255,255,255,0.45);color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center" style-hover="background:var(--color-accent);border-color:var(--color-accent)">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 18l-6-6 6-6"></path></svg>
+      </button>
+      <button onClick="{{ next }}" style="position:absolute;right:16px;top:50%;width:52px;height:52px;background:rgba(255,255,255,0.1);border:2px solid rgba(255,255,255,0.45);color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center" style-hover="background:var(--color-accent);border-color:var(--color-accent)">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+      </button>
+      <button onClick="{{ close }}" style="position:absolute;top:20px;right:20px;width:48px;height:48px;background:transparent;border:2px solid rgba(255,255,255,0.5);color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center" style-hover="background:var(--color-accent);border-color:var(--color-accent)">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"></path></svg>
+      </button>
+      <span style="position:absolute;bottom:22px;left:24px;color:#fff;font-family:var(--font-heading);font-weight:800;font-size:13px;letter-spacing:0.12em;text-transform:uppercase">{{ lightboxLabel }}</span>
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;whatsappNumber&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;27000000000&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  state = { cat: 'all', at: null };
+
+  componentDidMount() {
+    this.onKey = e => {
+      if (this.state.at === null) return;
+      if (e.key === 'Escape') this.setState({ at: null });
+      if (e.key === 'ArrowRight') this.step(1);
+      if (e.key === 'ArrowLeft') this.step(-1);
+    };
+    window.addEventListener('keydown', this.onKey);
+  }
+  componentWillUnmount() { window.removeEventListener('keydown', this.onKey); }
+
+  step(d) {
+    const n = this.shots().length;
+    this.setState(s => ({ at: (s.at + d + n) % n }));
+  }
+
+  shots() {
+    return [
+      ['assets/kitchen-01.jpg', 'Marble island, walnut fronts'],
+      ['assets/kitchen-04.jpg', 'Lit island, travertine'],
+      ['assets/kitchen-07.jpg', 'Tall units to ceiling'],
+      ['assets/kitchen-08.jpg', 'Full-width run, stone tops'],
+      ['assets/kitchen-02.jpg', 'Compact galley'],
+      ['assets/kitchen-05.jpg', 'Integrated appliances'],
+      ['assets/kitchen-10.jpg', 'Open-plan living kitchen'],
+      ['assets/kitchen-03.jpg', 'Cupboards and scullery door'],
+      ['assets/kitchen-06.jpg', 'Scullery and pantry wall'],
+      ['assets/kitchen-09.jpg', 'Door and handle detail']
+    ];
+  }
+
+  renderVals() {
+    const list = this.shots();
+    const at = this.state.at;
+    const cat = this.state.cat;
+    const opens = {};
+    list.forEach((row, i) => { opens['open' + (i + 1)] = () => this.setState({ at: i }); });
+
+    const filter = {};
+    for (const k of ['all', 'kitchens', 'cupboards', 'vanities', 'decor']) {
+      const on = cat === k;
+      filter[k + 'Bg'] = on ? 'var(--color-accent)' : 'transparent';
+      filter[k + 'Border'] = on ? 'var(--color-accent)' : 'var(--color-neutral-400)';
+      filter[k + 'Color'] = on ? '#fff' : 'var(--color-neutral-700)';
+      filter[k + 'Go'] = () => this.setState({ cat: k });
+    }
+
+    const vis = k => (cat === 'all' || cat === k ? 'block' : 'none');
+
+    return {
+      ...opens,
+      filter,
+      show: { kitchens: vis('kitchens'), cupboards: vis('cupboards'), vanities: vis('vanities'), decor: vis('decor') },
+      waHref: 'https://wa.me/' + String(this.props.whatsappNumber ?? '27000000000').replace(/[^0-9]/g, ''),
+      lightboxOpen: at !== null,
+      lightboxSrc: at === null ? '' : list[at][0],
+      lightboxLabel: at === null ? '' : list[at][1],
+      close: () => this.setState({ at: null }),
+      prev: () => this.step(-1),
+      next: () => this.step(1)
+    };
+  }
+}
+</script>
+</body>
+</html>

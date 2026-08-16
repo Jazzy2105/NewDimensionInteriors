@@ -1,0 +1,96 @@
+---
+// About preview — raised panel, copy left, two stacked photos right.
+import { Image } from 'astro:assets';
+import { getPhotos, getPhotoByFilename } from '../../data/photo-library.js';
+import IconArrowRight from '../icons/IconArrowRight.astro';
+
+// Two fixed photos rather than a gallery pick — fall back to whatever's
+// first/second in the library if these particular files ever go away.
+const allKitchens = getPhotos('kitchens');
+const photoTop = getPhotoByFilename('kitchens', 'kitchen-10') || allKitchens[0];
+const photoBottom = getPhotoByFilename('kitchens', 'kitchen-05') || allKitchens[1] || allKitchens[0];
+---
+
+<section id="about" class="raised-panel about-preview">
+  <div class="about-preview__copy">
+    <span class="kicker">About N.D.I.</span>
+    <h2 class="about-preview__heading">A family workshop, not a showroom chain.</h2>
+    <p class="about-preview__body">
+      N.D.I. has been making kitchens and built-in cupboards for three decades. The person who measures your room is
+      the person who draws it, and the workshop that cuts it is fifteen minutes from your house.
+    </p>
+    <p class="about-preview__body">
+      That's the whole proposition: fewer hands, better joints, and a phone number that answers after the invoice is
+      paid.
+    </p>
+    <a href="/about" class="arrow-link">
+      More about us
+      <IconArrowRight />
+    </a>
+  </div>
+  <div class="about-preview__photos">
+    {
+      photoTop && (
+        <div class="about-preview__photo">
+          <Image src={photoTop.image} alt={photoTop.alt} width={900} format="webp" loading="lazy" class="about-preview__img" />
+        </div>
+      )
+    }
+    {
+      photoBottom && (
+        <div class="about-preview__photo">
+          <Image src={photoBottom.image} alt={photoBottom.alt} width={900} format="webp" loading="lazy" class="about-preview__img" />
+        </div>
+      )
+    }
+  </div>
+</section>
+
+<style>
+  .about-preview {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  }
+
+  .about-preview__copy {
+    padding: clamp(40px, 6vw, 88px) var(--section-pad-x);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    border-right: 2px solid var(--color-divider);
+  }
+
+  .about-preview__heading {
+    font-size: clamp(30px, 3.8vw, 56px);
+    line-height: 0.98;
+    letter-spacing: -0.03em;
+  }
+
+  .about-preview__body {
+    margin: 0;
+    max-width: 560px;
+    font-size: 16px;
+    line-height: 1.65;
+    color: var(--color-neutral-700);
+  }
+
+  .about-preview__photos {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+  }
+
+  .about-preview__photo {
+    position: relative;
+    min-height: 220px;
+    overflow: hidden;
+  }
+  .about-preview__photo:first-child {
+    border-bottom: 2px solid var(--color-divider);
+  }
+
+  .about-preview__photo :global(.about-preview__img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+</style>

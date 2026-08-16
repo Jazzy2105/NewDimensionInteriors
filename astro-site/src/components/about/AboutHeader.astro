@@ -1,0 +1,24 @@
+---
+// Flat page header: kicker + display h1.
+---
+
+<section class="flat-section about-header">
+  <span class="kicker">About</span>
+  <h1 class="about-header__heading">Three decades at the same bench.</h1>
+</section>
+
+<style>
+  .about-header {
+    padding: clamp(36px, 6vw, 80px) var(--section-pad-x) clamp(28px, 4vw, 48px);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .about-header__heading {
+    font-size: clamp(38px, 6.4vw, 92px);
+    line-height: 0.94;
+    letter-spacing: -0.035em;
+    max-width: 22em;
+  }
+</style>

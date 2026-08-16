@@ -1,0 +1,41 @@
+---
+// Shared page shell: fonts, global tokens, the animated background, and the
+// meta tags every page needs. Nav/footer are NOT here — each page includes
+// them directly so it can pass its own `active` tab.
+import '@fontsource-variable/archivo';
+import '../styles/global.css';
+import SiteAtmosphere from '../components/atmosphere/SiteAtmosphere.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+const {
+  title,
+  description = 'N.D.I. — custom kitchens, built-in cupboards, vanities and home decor joinery, designed, made and fitted by one workshop in Gauteng, South Africa.',
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title} · N.D.I. Kitchens</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  </head>
+  <body>
+    <SiteAtmosphere />
+    <div class="page">
+      <slot />
+    </div>
+  </body>
+</html>
+
+<style>
+  .page {
+    min-height: 100vh;
+  }
+</style>

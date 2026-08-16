@@ -1,0 +1,131 @@
+---
+// "01 — Kitchens" — raised panel, six-tile photo grid opening the page's
+// lightbox (rendered once, at the bottom of index.astro).
+import { Image, getImage } from 'astro:assets';
+import { getFeatured } from '../../data/photo-library.js';
+import IconArrowRight from '../icons/IconArrowRight.astro';
+
+// Which 6 photos appear here is controlled by `featured` in
+// src/data/photo-meta.js (falls back to the first 6 if none are marked).
+const tiles = getFeatured('kitchens', 6);
+
+// A larger rendition of each photo for the lightbox, generated once at build
+// time alongside the grid thumbnail.
+const gallery = await Promise.all(
+  tiles.map(async (tile) => {
+    const full = await getImage({ src: tile.image, width: 1800, format: 'webp', quality: 82 });
+    return { ...tile, fullSrc: full.src };
+  })
+);
+---
+
+<section id="kitchens" class="raised-panel kitchens">
+  <div class="kitchens__header">
+    <div class="kitchens__intro">
+      <span class="kicker">01 — Kitchens</span>
+      <h2 class="kitchens__heading">Every kitchen is drawn around one house.</h2>
+      <p class="kitchens__body">
+        Stone tops, veneer and matt finishes, soft-close hardware, tall units that use the ceiling. We measure on
+        site, cut in our own workshop, and fit it ourselves.
+      </p>
+    </div>
+    <a href="/projects" class="arrow-link">
+      View the kitchen gallery
+      <IconArrowRight />
+    </a>
+  </div>
+
+  <div class="kitchens__grid">
+    {
+      gallery.map((tile) => (
+        <button
+          type="button"
+          class="kitchens__tile"
+          data-lightbox-trigger="home-kitchens"
+          data-full={tile.fullSrc}
+          data-caption={tile.homeCaption}
+          data-alt={tile.alt}
+        >
+          <Image src={tile.image} alt={tile.alt} width={900} format="webp" quality={80} loading="lazy" class="kitchens__img" />
+          <span class="kitchens__caption">{tile.homeCaption}</span>
+        </button>
+      ))
+    }
+  </div>
+</section>
+
+<style>
+  .kitchens__header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+    padding: clamp(40px, 6vw, 88px) var(--section-pad-x) clamp(24px, 3vw, 40px);
+  }
+
+  .kitchens__intro {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    max-width: 720px;
+  }
+
+  .kitchens__heading {
+    font-size: clamp(32px, 4.6vw, 68px);
+    line-height: 0.98;
+    letter-spacing: -0.03em;
+  }
+
+  .kitchens__body {
+    margin: 0;
+    max-width: 560px;
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--color-neutral-700);
+  }
+
+  .kitchens__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2px;
+    background: var(--color-divider);
+    border-top: 2px solid var(--color-text);
+  }
+
+  .kitchens__tile {
+    position: relative;
+    display: block;
+    padding: 0;
+    border: 0;
+    cursor: zoom-in;
+    background: var(--color-tile-bg);
+    overflow: hidden;
+    aspect-ratio: 4 / 3;
+  }
+
+  .kitchens__tile :global(.kitchens__img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 900ms cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+  .kitchens__tile:hover :global(.kitchens__img) {
+    transform: scale(1.06);
+  }
+
+  .kitchens__caption {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--color-bg);
+    padding: 10px 14px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+</style>
