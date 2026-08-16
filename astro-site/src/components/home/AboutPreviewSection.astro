@@ -1,14 +1,12 @@
 ---
-// About preview — raised panel, copy left, two stacked photos right.
+// About preview — raised panel, copy left, one photo right (aligned with
+// the copy — see photo-meta.js `order` to pin a specific photo here).
 import { Image } from 'astro:assets';
-import { getPhotos, getPhotoByFilename } from '../../data/photo-library.js';
+import { getPhotos } from '../../data/photo-library.js';
+import { withBase } from '../../lib/url.js';
 import IconArrowRight from '../icons/IconArrowRight.astro';
 
-// Two fixed photos rather than a gallery pick — fall back to whatever's
-// first/second in the library if these particular files ever go away.
-const allKitchens = getPhotos('kitchens');
-const photoTop = getPhotoByFilename('kitchens', 'kitchen-10') || allKitchens[0];
-const photoBottom = getPhotoByFilename('kitchens', 'kitchen-05') || allKitchens[1] || allKitchens[0];
+const photo = getPhotos('kitchens')[0];
 ---
 
 <section id="about" class="raised-panel about-preview">
@@ -23,26 +21,13 @@ const photoBottom = getPhotoByFilename('kitchens', 'kitchen-05') || allKitchens[
       That's the whole proposition: fewer hands, better joints, and a phone number that answers after the invoice is
       paid.
     </p>
-    <a href="/about" class="arrow-link">
+    <a href={withBase('/about')} class="arrow-link">
       More about us
       <IconArrowRight />
     </a>
   </div>
-  <div class="about-preview__photos">
-    {
-      photoTop && (
-        <div class="about-preview__photo">
-          <Image src={photoTop.image} alt={photoTop.alt} width={900} format="webp" loading="lazy" class="about-preview__img" />
-        </div>
-      )
-    }
-    {
-      photoBottom && (
-        <div class="about-preview__photo">
-          <Image src={photoBottom.image} alt={photoBottom.alt} width={900} format="webp" loading="lazy" class="about-preview__img" />
-        </div>
-      )
-    }
+  <div class="about-preview__photo">
+    {photo && <Image src={photo.image} alt={photo.alt} width={900} format="webp" loading="lazy" class="about-preview__img" />}
   </div>
 </section>
 
@@ -74,18 +59,10 @@ const photoBottom = getPhotoByFilename('kitchens', 'kitchen-05') || allKitchens[
     color: var(--color-neutral-700);
   }
 
-  .about-preview__photos {
-    display: grid;
-    grid-template-rows: 1fr 1fr;
-  }
-
   .about-preview__photo {
     position: relative;
-    min-height: 220px;
+    min-height: 320px;
     overflow: hidden;
-  }
-  .about-preview__photo:first-child {
-    border-bottom: 2px solid var(--color-divider);
   }
 
   .about-preview__photo :global(.about-preview__img) {

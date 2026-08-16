@@ -3,6 +3,7 @@
 // lightbox (rendered once, at the bottom of index.astro).
 import { Image, getImage } from 'astro:assets';
 import { getFeatured } from '../../data/photo-library.js';
+import { withBase } from '../../lib/url.js';
 import IconArrowRight from '../icons/IconArrowRight.astro';
 
 // Which 6 photos appear here is controlled by `featured` in
@@ -29,7 +30,7 @@ const gallery = await Promise.all(
         site, cut in our own workshop, and fit it ourselves.
       </p>
     </div>
-    <a href="/projects" class="arrow-link">
+    <a href={withBase('/projects')} class="arrow-link">
       View the kitchen gallery
       <IconArrowRight />
     </a>
@@ -43,11 +44,11 @@ const gallery = await Promise.all(
           class="kitchens__tile"
           data-lightbox-trigger="home-kitchens"
           data-full={tile.fullSrc}
-          data-caption={tile.homeCaption}
+          data-caption={tile.hasCaption ? tile.homeCaption : ''}
           data-alt={tile.alt}
         >
           <Image src={tile.image} alt={tile.alt} width={900} format="webp" quality={80} loading="lazy" class="kitchens__img" />
-          <span class="kitchens__caption">{tile.homeCaption}</span>
+          {tile.hasCaption && <span class="kitchens__caption">{tile.homeCaption}</span>}
         </button>
       ))
     }

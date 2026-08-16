@@ -3,6 +3,7 @@
 // CupboardsSection). Shows a real photo once one exists — see that file.
 import { Image } from 'astro:assets';
 import { getFeatured } from '../../data/photo-library.js';
+import { withBase } from '../../lib/url.js';
 import IconArrowRight from '../icons/IconArrowRight.astro';
 import PlaceholderPhoto from '../ui/PlaceholderPhoto.astro';
 
@@ -17,7 +18,7 @@ const photo = getFeatured('vanities', 1)[0];
       Moisture-rated boards, sealed edges and stone tops cut to the basin. Floating vanities, mirror cabinets and
       matching linen cupboards in the same finish as your kitchen.
     </p>
-    <a href="/projects" class="arrow-link">
+    <a href={withBase('/projects')} class="arrow-link">
       See vanities
       <IconArrowRight />
     </a>

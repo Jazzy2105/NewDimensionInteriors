@@ -8,7 +8,8 @@ Once there's at least one photo here, the Home page's "Home decor" section
 and the Projects gallery both switch from the placeholder frame to a real
 photo grid automatically.
 
-To improve a photo's caption (otherwise it just uses the filename), add an
-entry in `../../../data/photo-meta.js` — see that file for the format.
+A photo shows with no caption chip until you give it one (its filename
+isn't shown as-is). To add a real caption, add an entry in
+`../../../data/photo-meta.js` — see that file for the format.
 
 This file itself isn't a photo, so it's ignored.

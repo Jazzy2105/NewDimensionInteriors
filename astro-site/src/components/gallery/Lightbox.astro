@@ -151,7 +151,10 @@ const { groupId, withNav = false } = Astro.props;
       const alt = trigger.getAttribute('data-alt') || 'Project photograph';
       imageEl.style.backgroundImage = `url("${full}")`;
       imageEl.setAttribute('aria-label', alt);
-      if (captionEl) captionEl.textContent = caption;
+      if (captionEl) {
+        captionEl.textContent = caption;
+        captionEl.style.display = caption ? '' : 'none';
+      }
       root.hidden = false;
     };
 

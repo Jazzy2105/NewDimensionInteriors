@@ -56,6 +56,11 @@ for (const category of CATEGORIES) {
   });
 
   byCategory[category] = raw.map(({ filename, image, meta }, index) => {
+    // Only a real `caption` in photo-meta.js counts as "captioned" — a
+    // caption auto-generated from the filename (e.g. a WhatsApp export like
+    // "IMG-20260816-WA0060.jpg") is a fallback for `alt` text, not something
+    // to print on the page, so callers check `hasCaption` before showing it.
+    const hasCaption = Boolean(meta.caption);
     const caption = meta.caption || prettify(filename);
     const alt = meta.alt || `${caption} — ${CATEGORY_NOUN[category]} by N.D.I.`;
     // Every 5th photo (by final sort position) spans two grid columns by
@@ -67,6 +72,7 @@ for (const category of CATEGORIES) {
       filename,
       image,
       caption,
+      hasCaption,
       // The Home page's small preview grid uses a shorter caption than the
       // full Projects gallery where there's room for detail — falls back to
       // the regular caption if no shorter one is given.
@@ -77,7 +83,6 @@ for (const category of CATEGORIES) {
       hero: meta.hero ?? false,
       heroOrder: meta.heroOrder ?? meta.order ?? index,
       wide,
-      aspect: meta.aspect || (wide ? '2/1' : '3/2'),
     };
   });
 }

@@ -3,6 +3,7 @@
 // CupboardsSection. Shows a real photo once one exists — see that file.
 import { Image } from 'astro:assets';
 import { getFeatured } from '../../data/photo-library.js';
+import { withBase } from '../../lib/url.js';
 import IconArrowRight from '../icons/IconArrowRight.astro';
 import PlaceholderPhoto from '../ui/PlaceholderPhoto.astro';
 
@@ -26,7 +27,7 @@ const photo = getFeatured('decor', 1)[0];
       Wall units, floating shelves, TV and fireplace surrounds, bars, study desks and headboards — made in the same
       timbers and finishes as the rest of the house so nothing looks bought in.
     </p>
-    <a href="/projects" class="arrow-link">
+    <a href={withBase('/projects')} class="arrow-link">
       See home decor
       <IconArrowRight />
     </a>

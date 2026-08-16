@@ -5,6 +5,7 @@
 import { Image } from 'astro:assets';
 import logo from '../../assets/images/ndi-logo.png';
 import { siteConfig, waHref } from '../../data/site-config.js';
+import { withBase } from '../../lib/url.js';
 import IconMessageSquare from '../icons/IconMessageSquare.astro';
 
 interface Props {
@@ -15,16 +16,16 @@ interface Props {
 const { active } = Astro.props;
 
 const tabs = [
-  { key: 'home', label: 'Home', href: '/' },
-  { key: 'about', label: 'About Us', href: '/about' },
-  { key: 'projects', label: 'Projects', href: '/projects' },
-  { key: 'contact', label: 'Contact Us', href: '/#contact' },
+  { key: 'home', label: 'Home', href: withBase('/') },
+  { key: 'about', label: 'About Us', href: withBase('/about') },
+  { key: 'projects', label: 'Projects', href: withBase('/projects') },
+  { key: 'contact', label: 'Contact Us', href: withBase('/#contact') },
 ];
 ---
 
 <header class="site-nav" data-site-nav data-initial-active={active}>
   <div class="site-nav__row">
-    <a href="/" class="site-nav__brand" data-nav-link data-nav-label="Home">
+    <a href={withBase('/')} class="site-nav__brand" data-nav-link data-nav-label="Home">
       <Image src={logo} alt="N.D.I." height={46} style="height: 46px; width: auto;" />
       <span class="site-nav__brand-label">Kitchens &amp; Cupboards</span>
     </a>

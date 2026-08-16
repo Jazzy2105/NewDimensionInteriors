@@ -1,10 +1,14 @@
 // Optional per-photo overrides, keyed by "<category>/<filename-without-extension>".
-// A photo with NO entry here still works everywhere — it just gets an
-// auto-generated caption (its filename, prettified) and falls in wherever
-// the default sort/layout puts it. Add an entry only to improve on that.
+// A photo with NO entry here still works everywhere — it just shows with no
+// caption chip (its accessible `alt` text still falls back to the filename,
+// prettified, but that's not printed on the page — a raw camera/WhatsApp
+// filename like "IMG-20260816-WA0060" isn't something to show visitors).
+// Add an entry only to give a photo a real caption or to feature it.
 //
 // Fields (all optional):
-//   caption    — label shown on the Projects gallery tile and in its lightbox
+//   caption    — label shown on the Projects gallery tile and in its
+//                lightbox; a photo with no `caption` here shows no chip at
+//                all rather than falling back to its filename
 //   homeCaption — a shorter caption for the Home page's small preview grid,
 //                if `caption` is too long to sit comfortably there; defaults
 //                to `caption`
@@ -20,98 +24,66 @@
 //   heroOrder  — explicit position within the hero carousel specifically;
 //                omit to reuse `order`
 //   wide       — true to make this tile span two grid columns on the
-//                Projects gallery; omit to let every 5th photo do this
+//                Projects gallery (every tile is the same fixed height —
+//                see .projects-panel__grid's `grid-auto-rows` — so a wide
+//                tile is just proportionally wider, never taller, and never
+//                leaves a gap); omit to let every 5th photo do this
 //                automatically
-//   aspect     — explicit CSS aspect-ratio for the Projects gallery tile,
-//                e.g. "16/10"; omit to use a sensible default
 //
 // See src/assets/images/*/README.md for how to actually add photo files.
 export const photoMeta = {
-  'kitchens/kitchen-01': {
-    caption: 'Marble island, walnut fronts',
-    homeCaption: 'Marble island',
-    alt: 'Marble island kitchen with walnut cabinetry, fitted by N.D.I.',
-    heroAlt: 'Marble island kitchen with walnut cabinetry',
-    featured: true,
+  // The homepage hero carousel, in order (Spotlight1 → Spotlight6).
+  'kitchens/Spotlight1': {
+    caption: 'Double-volume kitchen, glass splashback',
+    alt: 'Double-volume kitchen with a teal glass splashback and island seating, fitted by N.D.I.',
     hero: true,
-    order: 1,
     heroOrder: 1,
-    wide: true,
-    aspect: '16/10',
   },
-  'kitchens/kitchen-04': {
-    caption: 'Lit island, travertine',
-    homeCaption: 'Lit island',
-    alt: 'Lit island kitchen with travertine finishes, fitted by N.D.I.',
-    featured: true,
-    order: 2,
-    aspect: '3/4',
-  },
-  'kitchens/kitchen-07': {
-    caption: 'Tall units to ceiling',
-    homeCaption: 'Tall units',
-    alt: 'Tall kitchen units fitted to the ceiling by N.D.I.',
-    heroAlt: 'Contemporary kitchen with tall units',
-    featured: true,
+  'kitchens/Spotlight2': {
+    caption: 'Charcoal cabinetry, hex-tile splashback',
+    alt: 'Charcoal kitchen cabinetry with an oak waterfall island and hexagon tile splashback, fitted by N.D.I.',
     hero: true,
-    order: 3,
+    heroOrder: 2,
+  },
+  'kitchens/Spotlight3': {
+    caption: 'Backlit onyx island, walnut trim',
+    alt: 'Kitchen with a backlit onyx waterfall island and walnut cabinetry trim, fitted by N.D.I.',
+    hero: true,
     heroOrder: 3,
   },
-  'kitchens/kitchen-08': {
-    caption: 'Full-width run, stone tops',
-    alt: 'Full-width fitted kitchen with stone tops, by N.D.I.',
-    heroAlt: 'Wide fitted kitchen with stone tops',
+  'kitchens/Spotlight4': {
+    caption: 'Open shelving, industrial-style kitchen',
+    alt: 'Industrial-style kitchen with open steel-framed shelving, fitted by N.D.I.',
     hero: true,
-    order: 4,
-    heroOrder: 2,
-    wide: true,
-    aspect: '2/1',
+    heroOrder: 4,
   },
-  'kitchens/kitchen-02': {
-    caption: 'Compact galley',
-    homeCaption: 'Galley run',
-    alt: 'Compact galley kitchen fitted by N.D.I.',
-    featured: true,
-    order: 5,
-  },
-  'kitchens/kitchen-05': {
-    caption: 'Integrated appliances',
-    alt: 'Kitchen with integrated appliances, fitted by N.D.I.',
-    heroAlt: 'Kitchen detail with integrated appliances',
+  'kitchens/Spotlight5': {
+    caption: 'Matte black & oak, waterfall island',
+    alt: 'Matte black and oak kitchen with a timber waterfall island, fitted by N.D.I.',
     hero: true,
-    order: 6,
     heroOrder: 5,
   },
-  'kitchens/kitchen-10': {
-    caption: 'Open-plan living kitchen',
-    alt: 'Open-plan living kitchen fitted by N.D.I.',
-    heroAlt: 'Open-plan kitchen and living space',
+  'kitchens/Spotlight6': {
+    caption: 'Gloss white kitchen, black island base',
+    alt: 'Gloss white kitchen with a black island base and stone waterfall top, fitted by N.D.I.',
     hero: true,
-    order: 7,
-    heroOrder: 4,
-    wide: true,
-    aspect: '5/4',
-  },
-  'kitchens/kitchen-03': {
-    caption: 'Cupboards and scullery door',
-    alt: 'Cupboards and scullery door fitted by N.D.I.',
-    heroAlt: 'Built-in cupboards in a fitted kitchen',
-    hero: true,
-    order: 8,
     heroOrder: 6,
   },
-  'kitchens/kitchen-06': {
-    caption: 'Scullery and pantry wall',
-    homeCaption: 'Scullery',
-    alt: 'Scullery and pantry wall fitted by N.D.I.',
+
+  // The single photo in each category's Home page split-layout section.
+  'cupboards/MainCupboard': {
+    caption: 'Study desk & media wall',
+    alt: 'Built-in study desk and media wall unit with a slatted timber feature wall, by N.D.I.',
     featured: true,
-    order: 9,
   },
-  'kitchens/kitchen-09': {
-    caption: 'Door and handle detail',
-    homeCaption: 'Cupboard detail',
-    alt: 'Door and handle detail, cabinetry by N.D.I.',
+  'vanities/MainVanity': {
+    caption: 'Floating double vanity, backlit mirror',
+    alt: 'Floating black double vanity with a backlit LED mirror, by N.D.I.',
     featured: true,
-    order: 10,
+  },
+  'decor/MainDecor': {
+    caption: 'Home bar & wine wall',
+    alt: 'Fitted home bar with integrated wine fridges and glass display shelving, by N.D.I.',
+    featured: true,
   },
 };

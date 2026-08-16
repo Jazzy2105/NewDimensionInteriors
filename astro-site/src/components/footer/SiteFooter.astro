@@ -3,12 +3,13 @@
 import { Image } from 'astro:assets';
 import logo from '../../assets/images/ndi-logo.png';
 import { siteConfig } from '../../data/site-config.js';
+import { withBase } from '../../lib/url.js';
 
 const navLinks = [
-  { label: 'Home', href: '/' },
-  { label: 'About Us', href: '/about' },
-  { label: 'Projects', href: '/projects' },
-  { label: 'Contact Us', href: '/#contact' },
+  { label: 'Home', href: withBase('/') },
+  { label: 'About Us', href: withBase('/about') },
+  { label: 'Projects', href: withBase('/projects') },
+  { label: 'Contact Us', href: withBase('/#contact') },
 ];
 const year = new Date().getFullYear();
 ---
