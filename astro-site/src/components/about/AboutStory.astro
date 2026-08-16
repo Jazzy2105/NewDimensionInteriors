@@ -40,7 +40,7 @@ const specs = [
 <style>
   .story {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
   }
 
   .story__copy {
@@ -49,6 +49,16 @@ const specs = [
     display: flex;
     flex-direction: column;
     gap: 18px;
+  }
+
+  /* Below this, the two auto-fit columns above have already wrapped to one
+     (2 × the 320px minimum), so a right-hand divider would just dangle
+     under the copy with nothing beside it — a bottom divider instead. */
+  @media (max-width: 639px) {
+    .story__copy {
+      border-right: 0;
+      border-bottom: 2px solid var(--color-divider);
+    }
   }
 
   .story__heading {

@@ -28,7 +28,7 @@ const { category, title, description, tiles } = Astro.props;
   <div class="projects-panel__grid">
     {
       tiles.map((tile) => (
-        <div class="projects-panel__cell" style={{ gridColumn: tile.wide ? 'span 2' : undefined }}>
+        <div class="projects-panel__cell" style={{ '--col-span': tile.wide ? 2 : 1 }}>
           <PlaceholderPhoto brief={tile.brief} />
         </div>
       ))
@@ -67,7 +67,7 @@ const { category, title, description, tiles } = Astro.props;
 
   .projects-panel__grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(min(320px, 100%), 1fr));
     /* See PhotoGridPanel.astro's identical rule — a fixed row height means a
        "wide" cell only ever gets wider, never taller, so it can't leave a
        gap next to shorter neighbours. */
@@ -79,8 +79,17 @@ const { category, title, description, tiles } = Astro.props;
 
   .projects-panel__cell {
     position: relative;
+    grid-column: span var(--col-span, 1);
     width: 100%;
     height: 100%;
     background: var(--color-tile-bg);
+  }
+
+  @media (max-width: 640px) {
+    /* See PhotoGridPanel.astro's identical rule — !important is required to
+       outrank the inline style that sets --col-span per-cell. */
+    .projects-panel__cell {
+      --col-span: 1 !important;
+    }
   }
 </style>

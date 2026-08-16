@@ -39,7 +39,7 @@ const gallery = await Promise.all(
         <button
           type="button"
           class="projects-panel__tile"
-          style={{ gridColumn: photo.wide ? 'span 2' : undefined }}
+          style={{ '--col-span': photo.wide ? 2 : 1 }}
           data-lightbox-trigger={lightboxGroup}
           data-full={photo.fullSrc}
           data-caption={photo.hasCaption ? photo.caption : ''}
@@ -91,7 +91,7 @@ const gallery = await Promise.all(
 
   .projects-panel__grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(min(320px, 100%), 1fr));
     /* Every row is this one fixed height — a "wide" tile only ever gets
        proportionally wider (spanning 2 columns), never taller, so it can
        never leave a gap next to shorter neighbours in the same row
@@ -105,6 +105,7 @@ const gallery = await Promise.all(
   .projects-panel__tile {
     position: relative;
     display: block;
+    grid-column: span var(--col-span, 1);
     width: 100%;
     height: 100%;
     padding: 0;
@@ -141,5 +142,18 @@ const gallery = await Promise.all(
 
   .projects-panel__number {
     color: var(--color-accent-400);
+  }
+
+  @media (max-width: 640px) {
+    /* Below one column's worth of width, auto-fill only ever produces a
+       single track — a tile still asking to span 2 would force the grid to
+       invent a second, half-width column just for it (squeezing every
+       other tile too), so "wide" is disabled entirely on phones.
+       !important because --col-span is otherwise set per-tile via inline
+       style, which an ordinary stylesheet rule can't outrank regardless of
+       the media query — only !important beats an inline style. */
+    .projects-panel__tile {
+      --col-span: 1 !important;
+    }
   }
 </style>

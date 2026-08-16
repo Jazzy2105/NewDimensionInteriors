@@ -40,21 +40,50 @@ const steps = [
     letter-spacing: -0.03em;
   }
 
+  /* Same fixed-4-cell divider approach as StatsSection.astro — see its
+     comment for why this is keyed to explicit positions instead of
+     auto-fit + :last-child. */
   .process__grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    grid-template-columns: 1fr;
     border-top: 2px solid var(--color-text);
   }
 
   .process__cell {
     padding: clamp(24px, 3vw, 36px);
-    border-right: 2px solid var(--color-divider);
     display: flex;
     flex-direction: column;
     gap: 12px;
   }
-  .process__cell:last-child {
-    border-right: 0;
+  .process__cell:nth-child(1),
+  .process__cell:nth-child(2),
+  .process__cell:nth-child(3) {
+    border-bottom: 2px solid var(--color-divider);
+  }
+
+  @media (min-width: 560px) {
+    .process__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .process__cell:nth-child(1) {
+      border-right: 2px solid var(--color-divider);
+    }
+    .process__cell:nth-child(3) {
+      border-right: 2px solid var(--color-divider);
+      border-bottom: 0;
+    }
+  }
+
+  @media (min-width: 900px) {
+    .process__grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+    .process__cell:nth-child(1),
+    .process__cell:nth-child(2),
+    .process__cell:nth-child(3) {
+      border-right: 2px solid var(--color-divider);
+      border-bottom: 0;
+    }
   }
 
   .process__number {

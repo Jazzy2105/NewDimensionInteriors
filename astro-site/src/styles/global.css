@@ -146,6 +146,10 @@ body {
   color: var(--color-text);
   font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
+  /* Defensive: the fluid clamp()/grid layout is built not to overflow, but
+     this is the backstop against the odd sub-pixel rounding case rather
+     than a mobile horizontal scrollbar. */
+  overflow-x: hidden;
 }
 
 h1,

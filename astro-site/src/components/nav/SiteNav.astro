@@ -1,12 +1,16 @@
 ---
-// Sticky site header: logo, the four tabs, the WhatsApp CTA, and the red
-// panel that slides up on navigation. See "Shared: site nav" in
-// ../../../README.md for the full behavior spec.
+// Sticky site header: logo, the four tabs (a hamburger + dropdown below
+// ~900px — four fixed-width tabs plus a logo and a button simply don't fit
+// a phone screen), the WhatsApp CTA, and the red panel that slides up on
+// navigation. See "Shared: site nav" in ../../../README.md for the full
+// desktop behavior spec this was built from.
 import { Image } from 'astro:assets';
 import logo from '../../assets/images/ndi-logo.png';
 import { siteConfig, waHref } from '../../data/site-config.js';
 import { withBase } from '../../lib/url.js';
 import IconMessageSquare from '../icons/IconMessageSquare.astro';
+import IconMenu from '../icons/IconMenu.astro';
+import IconClose from '../icons/IconClose.astro';
 
 interface Props {
   /** Which tab is active for this page. Home only: a scroll listener can
@@ -30,16 +34,15 @@ const tabs = [
       <span class="site-nav__brand-label">Kitchens &amp; Cupboards</span>
     </a>
 
-    <nav class="site-nav__tabs">
+    <nav class="site-nav__tabs" aria-label="Primary">
       {
         tabs.map((tab) => (
           <a
             href={tab.href}
-            class="site-nav__tab"
+            class={`site-nav__tab ${active === tab.key ? 'is-active' : ''}`}
             data-nav-link
             data-nav-label={tab.label}
             data-tab={tab.key}
-            style={{ borderBottomColor: active === tab.key ? 'var(--color-accent)' : 'transparent' }}
           >
             {tab.label}
           </a>
@@ -47,11 +50,44 @@ const tabs = [
       }
     </nav>
 
-    <a href={waHref()} target="_blank" rel="noopener" class="site-nav__whatsapp">
-      <IconMessageSquare size={16} />
-      <span>WhatsApp us</span>
-    </a>
+    <div class="site-nav__actions">
+      <a href={waHref()} target="_blank" rel="noopener" class="site-nav__whatsapp">
+        <IconMessageSquare size={16} />
+        <span>WhatsApp us</span>
+      </a>
+      <button
+        type="button"
+        class="site-nav__menu-btn"
+        data-nav-menu-btn
+        aria-expanded="false"
+        aria-controls="site-nav-mobile-menu"
+        aria-label="Open menu"
+      >
+        <span class="site-nav__menu-icon site-nav__menu-icon--open">
+          <IconMenu size={22} />
+        </span>
+        <span class="site-nav__menu-icon site-nav__menu-icon--close">
+          <IconClose size={20} />
+        </span>
+      </button>
+    </div>
   </div>
+
+  <nav class="site-nav__mobile-menu" id="site-nav-mobile-menu" data-nav-mobile-menu aria-label="Primary, mobile">
+    {
+      tabs.map((tab) => (
+        <a
+          href={tab.href}
+          class={`site-nav__mobile-link ${active === tab.key ? 'is-active' : ''}`}
+          data-nav-link
+          data-nav-label={tab.label}
+          data-tab={tab.key}
+        >
+          {tab.label}
+        </a>
+      ))
+    }
+  </nav>
 </header>
 
 <div class="nav-transition-panel" data-nav-panel>
@@ -88,6 +124,7 @@ const tabs = [
     display: flex;
     align-items: center;
     gap: 14px;
+    flex: none; /* the logo alone is a fixed, known size — never shrink it */
   }
 
   .site-nav__brand-label {
@@ -98,6 +135,13 @@ const tabs = [
     color: var(--color-neutral-600);
     max-width: 8em;
     line-height: 1.5;
+  }
+  @media (max-width: 900px) {
+    /* Secondary label, not navigational — dropped once the hamburger takes
+       over so logo + WhatsApp + menu button always have room to breathe. */
+    .site-nav__brand-label {
+      display: none;
+    }
   }
 
   .site-nav__tabs {
@@ -120,6 +164,15 @@ const tabs = [
     border-bottom: 4px solid transparent;
     transition: border-color 200ms ease;
   }
+  .site-nav__tab.is-active {
+    border-bottom-color: var(--color-accent);
+  }
+
+  .site-nav__actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
 
   .site-nav__whatsapp {
     align-self: center;
@@ -138,6 +191,91 @@ const tabs = [
   }
   .site-nav__whatsapp:hover {
     background: var(--color-accent-600);
+  }
+
+  /* — mobile menu: hidden above the nav breakpoint, where the full tab row
+       fits instead — */
+  .site-nav__menu-btn {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    flex: none;
+    background: transparent;
+    border: 2px solid var(--color-neutral-400);
+    color: var(--color-text);
+    cursor: pointer;
+  }
+  .site-nav__menu-btn:hover {
+    border-color: var(--color-text);
+  }
+
+  .site-nav__menu-icon {
+    display: none;
+  }
+  .site-nav__menu-icon--open {
+    display: flex;
+  }
+  .site-nav__menu-btn[aria-expanded='true'] .site-nav__menu-icon--open {
+    display: none;
+  }
+  .site-nav__menu-btn[aria-expanded='true'] .site-nav__menu-icon--close {
+    display: flex;
+  }
+
+  .site-nav__mobile-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    background: rgba(10, 10, 10, 0.97);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border-bottom: 2px solid var(--color-divider);
+    box-shadow: var(--shadow-nav);
+  }
+  .site-nav__mobile-menu.is-open {
+    display: flex;
+  }
+
+  .site-nav__mobile-link {
+    padding: 18px var(--section-pad-x);
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-neutral-700);
+    border-bottom: 1px solid var(--color-divider);
+    border-left: 4px solid transparent;
+  }
+  .site-nav__mobile-link:last-child {
+    border-bottom: 0;
+  }
+  .site-nav__mobile-link.is-active {
+    color: #fff;
+    border-left-color: var(--color-accent);
+    background: rgba(188, 19, 19, 0.08);
+  }
+
+  @media (max-width: 900px) {
+    .site-nav__tabs {
+      display: none;
+    }
+    .site-nav__menu-btn {
+      display: flex;
+    }
+  }
+  /* Belt-and-suspenders: if the window is resized back above the
+     breakpoint while the mobile menu happens to be open, force it closed
+     regardless of JS state (the matchMedia listener below also handles
+     this, but CSS shouldn't depend on JS having run). */
+  @media (min-width: 901px) {
+    .site-nav__mobile-menu {
+      display: none !important;
+    }
   }
 
   /* the full-viewport red panel that slides up on tab navigation */
@@ -192,17 +330,21 @@ const tabs = [
   // once #contact scrolls near the top of the viewport (Home page only —
   // other pages simply don't have a #contact element, so this is a no-op
   // there); (2) a page-transition panel that slides up over the tab labels
-  // before the browser actually navigates, matching the handoff spec.
+  // before the browser actually navigates, matching the handoff spec;
+  // (3) the mobile hamburger menu's open/close state.
   const nav = document.querySelector<HTMLElement>('[data-site-nav]');
   const panel = document.querySelector<HTMLElement>('[data-nav-panel]');
   const panelLabel = document.querySelector<HTMLElement>('[data-nav-panel-label]');
+  const menuBtn = document.querySelector<HTMLButtonElement>('[data-nav-menu-btn]');
+  const mobileMenu = document.querySelector<HTMLElement>('[data-nav-mobile-menu]');
+
   if (nav && panel && panelLabel) {
     const tabs = Array.from(nav.querySelectorAll<HTMLAnchorElement>('[data-tab]'));
     const initialActive = nav.dataset.initialActive || '';
 
     const paint = (activeKey: string) => {
       for (const tab of tabs) {
-        tab.style.borderBottomColor = tab.dataset.tab === activeKey ? 'var(--color-accent)' : 'transparent';
+        tab.classList.toggle('is-active', tab.dataset.tab === activeKey);
       }
     };
 
@@ -217,10 +359,40 @@ const tabs = [
       onScroll();
     }
 
+    if (menuBtn && mobileMenu) {
+      const closeMenu = () => {
+        menuBtn.setAttribute('aria-expanded', 'false');
+        mobileMenu.classList.remove('is-open');
+      };
+      const toggleMenu = () => {
+        const willOpen = menuBtn.getAttribute('aria-expanded') !== 'true';
+        menuBtn.setAttribute('aria-expanded', String(willOpen));
+        mobileMenu.classList.toggle('is-open', willOpen);
+      };
+      menuBtn.addEventListener('click', toggleMenu);
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') closeMenu();
+      });
+      document.addEventListener('click', (event) => {
+        const target = event.target as Node;
+        if (!nav.contains(target)) closeMenu();
+      });
+      // If the window grows past the nav breakpoint while the menu happens
+      // to be open, reset the button state to match (CSS already force-hides
+      // the panel itself above that width — see the min-width: 901px rule).
+      const desktopQuery = window.matchMedia('(min-width: 901px)');
+      desktopQuery.addEventListener('change', (event) => {
+        if (event.matches) closeMenu();
+      });
+    }
+
     let leaving = false;
     const links = document.querySelectorAll<HTMLAnchorElement>('[data-nav-link]');
     for (const link of links) {
       link.addEventListener('click', (event) => {
+        menuBtn?.setAttribute('aria-expanded', 'false');
+        mobileMenu?.classList.remove('is-open');
+
         const href = link.getAttribute('href') || '';
         const hashIndex = href.indexOf('#');
 

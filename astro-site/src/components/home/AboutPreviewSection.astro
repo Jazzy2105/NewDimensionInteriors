@@ -34,7 +34,7 @@ const photo = getPhotos('kitchens')[0];
 <style>
   .about-preview {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
   }
 
   .about-preview__copy {
@@ -43,6 +43,16 @@ const photo = getPhotos('kitchens')[0];
     flex-direction: column;
     gap: 20px;
     border-right: 2px solid var(--color-divider);
+  }
+
+  /* See AboutStory.astro's identical comment — once the two auto-fit
+     columns wrap to one, a bottom divider reads correctly, a right one
+     wouldn't. */
+  @media (max-width: 639px) {
+    .about-preview__copy {
+      border-right: 0;
+      border-bottom: 2px solid var(--color-divider);
+    }
   }
 
   .about-preview__heading {

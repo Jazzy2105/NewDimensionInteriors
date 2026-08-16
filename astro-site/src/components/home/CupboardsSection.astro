@@ -38,7 +38,7 @@ const photo = getFeatured('cupboards', 1)[0];
 <style>
   .split {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(340px, 100%), 1fr));
   }
 
   .split__media {
@@ -58,6 +58,15 @@ const photo = getFeatured('cupboards', 1)[0];
     gap: 18px;
     justify-content: center;
     border-left: 2px solid var(--color-divider);
+  }
+
+  /* Once the two auto-fit columns wrap to one, the photo sits above the
+     copy — a left-hand divider would dangle, a top one reads correctly. */
+  @media (max-width: 679px) {
+    .split__copy {
+      border-left: 0;
+      border-top: 2px solid var(--color-divider);
+    }
   }
 
   .split__heading {

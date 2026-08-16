@@ -61,10 +61,20 @@ const slides = getHeroPhotos(6);
 <style>
   .hero {
     position: relative;
-    height: calc(100vh - 76px);
+    height: calc(100vh - 76px); /* fallback for browsers without dvh */
+    height: calc(100dvh - 76px); /* accounts for mobile browser chrome */
     min-height: 600px;
     overflow: hidden;
     background: var(--color-hero-bg);
+  }
+
+  @media (max-width: 640px) {
+    .hero {
+      /* Mobile browser chrome eats a lot more of a short viewport than it
+         does on desktop — 600px plus the nav bar is too tall a floor on a
+         phone in portrait and pushes the CTA/progress bars off-screen. */
+      min-height: 480px;
+    }
   }
 
   .hero__slides {

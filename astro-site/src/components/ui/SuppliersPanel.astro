@@ -45,6 +45,14 @@ const { note } = Astro.props;
     gap: 20px clamp(16px, 2vw, 32px);
     padding: clamp(24px, 3vw, 40px) clamp(16px, 2.4vw, 32px);
   }
+  /* `space-between` looks great with one full row of names; once they wrap
+     to a ragged last row on a narrow screen it stretches a couple of names
+     awkwardly far apart, so switch to a plain left-aligned wrap there. */
+  @media (max-width: 639px) {
+    .suppliers__row {
+      justify-content: flex-start;
+    }
+  }
 
   .suppliers__name {
     font-family: var(--font-heading);

@@ -27,20 +27,63 @@ const stats = [
 </section>
 
 <style>
+  /* A fixed 4-cell grid (not a dynamic list), so the responsive column
+     count and divider placement below are keyed to exact positions rather
+     than auto-fit — auto-fit's own border-right-except-:last-child doesn't
+     work once the grid wraps to 2 or 1 columns (the border would dangle at
+     the end of every row, not just the very last cell). Mobile-first: 1
+     column by default, 2 from 560px, the original 4-across from 900px.
+     See SiteNav.astro's comment for why 900px is this site's nav/mobile
+     breakpoint too. */
   .stats__grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    grid-template-columns: 1fr;
   }
 
   .stats__cell {
     padding: clamp(24px, 3vw, 40px);
-    border-right: 2px solid var(--color-divider);
     display: flex;
     flex-direction: column;
     gap: 8px;
   }
-  .stats__cell:last-child {
-    border-right: 0;
+  .stats__cell:nth-child(1),
+  .stats__cell:nth-child(2),
+  .stats__cell:nth-child(3) {
+    border-bottom: 2px solid var(--color-divider);
+  }
+  .stats__cell:nth-child(4) {
+    border-bottom: 0;
+  }
+
+  @media (min-width: 560px) {
+    .stats__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .stats__cell:nth-child(1) {
+      border-right: 2px solid var(--color-divider);
+    }
+    .stats__cell:nth-child(2) {
+      border-right: 0;
+    }
+    .stats__cell:nth-child(3) {
+      border-right: 2px solid var(--color-divider);
+      border-bottom: 0;
+    }
+  }
+
+  @media (min-width: 900px) {
+    .stats__grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+    .stats__cell:nth-child(1),
+    .stats__cell:nth-child(2),
+    .stats__cell:nth-child(3) {
+      border-right: 2px solid var(--color-divider);
+      border-bottom: 0;
+    }
+    .stats__cell:nth-child(4) {
+      border-right: 0;
+    }
   }
 
   .stats__value {

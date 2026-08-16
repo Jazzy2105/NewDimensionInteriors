@@ -37,12 +37,22 @@ const photo = getFeatured('vanities', 1)[0];
 <style>
   .split {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(340px, 100%), 1fr));
   }
 
   .split--mirrored .split__copy {
     border-left: 0;
     border-right: 2px solid var(--color-divider);
+  }
+
+  /* Here the copy comes first in the DOM (text-left/image-right on
+     desktop), so once the columns wrap to one, copy sits above the photo —
+     a bottom divider on the copy reads correctly, a right one wouldn't. */
+  @media (max-width: 679px) {
+    .split--mirrored .split__copy {
+      border-right: 0;
+      border-bottom: 2px solid var(--color-divider);
+    }
   }
 
   .split__media {
