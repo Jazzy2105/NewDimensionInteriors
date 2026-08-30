@@ -3,10 +3,13 @@
 import { siteConfig } from '../../data/site-config.js';
 
 const stats = [
-  { value: siteConfig.yearsAtBench, suffix: '+', label: 'Years at the bench' },
+  { value: siteConfig.yearsAtBench, suffix: '+', label: 'Years of solid experience' },
   { value: 'One', suffix: '', label: 'Workshop, start to finish' },
-  { value: siteConfig.clientsServed, suffix: '+', label: 'Clients served' },
-  { value: 'Free', suffix: '', label: 'Measure & quotation' },
+  { value: siteConfig.clientsServed, suffix: '+', label: 'Happy and satisfied customers' },
+  // "Complimentary" is a whole word where the other three values are a
+  // number or something short — `long` drops it to its own, smaller type
+  // scale so it still fits the cell at the 4-across breakpoint.
+  { value: 'Complimentary', suffix: '', label: 'Consultation and proposal', long: true },
 ];
 ---
 
@@ -15,7 +18,7 @@ const stats = [
     {
       stats.map((stat) => (
         <div class="stats__cell">
-          <span class="stats__value">
+          <span class={`stats__value ${stat.long ? 'is-long' : ''}`}>
             {stat.value}
             {stat.suffix && <span class="stats__plus">{stat.suffix}</span>}
           </span>
@@ -41,7 +44,10 @@ const stats = [
   }
 
   .stats__cell {
-    padding: clamp(24px, 3vw, 40px);
+    /* Kept tight on the sides: the narrower the padding, the more of the
+       cell is usable width, which is what lets the equal-width tracks
+       above hold COMPLIMENTARY at full size. */
+    padding: clamp(20px, 2.2vw, 24px);
     display: flex;
     flex-direction: column;
     gap: 8px;
@@ -57,7 +63,8 @@ const stats = [
 
   @media (min-width: 560px) {
     .stats__grid {
-      grid-template-columns: repeat(2, 1fr);
+      /* Second track carries COMPLIMENTARY — see the 900px block below. */
+      grid-template-columns: 1fr minmax(min-content, 1fr);
     }
     .stats__cell:nth-child(1) {
       border-right: 2px solid var(--color-divider);
@@ -73,7 +80,12 @@ const stats = [
 
   @media (min-width: 900px) {
     .stats__grid {
-      grid-template-columns: repeat(4, 1fr);
+      /* All four tracks are an equal 1fr; the last one just refuses to go
+         narrower than the word it holds. On a wide screen COMPLIMENTARY
+         fits inside its equal quarter and every block is the same size —
+         it only steals width from the others when the screen is too narrow
+         for 13 capitals at the full value size. */
+      grid-template-columns: repeat(3, 1fr) minmax(min-content, 1fr);
     }
     .stats__cell:nth-child(1),
     .stats__cell:nth-child(2),
@@ -89,9 +101,35 @@ const stats = [
   .stats__value {
     font-family: var(--font-heading);
     font-weight: 900;
-    font-size: clamp(30px, 3.4vw, 46px);
+    /* Every value shares one size so the four blocks read as a set. The
+       ceiling is whatever COMPLIMENTARY — much the longest — can be while
+       still fitting an equal quarter-width cell on one line, so the tracks
+       never have to go uneven to accommodate it. Full 46px from ~1870px
+       up; below that all four step down together. */
+    font-size: min(clamp(30px, 3.4vw, 46px), calc(11vw - 4.5px));
     line-height: 1;
     letter-spacing: -0.03em;
+    text-transform: uppercase;
+  }
+  /* One shared size means one shared line box, so the values sit on a
+     common line and their labels do too — no alignment fix needed. The
+     ceiling tightens as the grid gains columns and each cell gets less
+     room; see the grid breakpoints above. */
+  @media (min-width: 560px) {
+    .stats__value {
+      font-size: min(clamp(30px, 3.4vw, 46px), calc(5.5vw - 4.6px));
+    }
+  }
+  @media (min-width: 900px) {
+    .stats__value {
+      font-size: min(clamp(30px, 3.4vw, 46px), calc(2.74vw - 5.7px));
+    }
+  }
+  /* COMPLIMENTARY must stay on one line: it is a single word, so it would
+     overflow rather than wrap. Tighter tracking than the numbers buys the
+     pixels that let it fit an equal-width cell — invisible at this size. */
+  .stats__value.is-long {
+    letter-spacing: -0.075em;
   }
   .stats__plus {
     color: var(--color-accent);

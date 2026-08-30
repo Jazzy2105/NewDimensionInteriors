@@ -5,7 +5,6 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SiteNav from '../components/nav/SiteNav.astro';
 import SiteFooter from '../components/footer/SiteFooter.astro';
-import Lightbox from '../components/gallery/Lightbox.astro';
 import HeroSection from '../components/home/HeroSection.astro';
 import StatsSection from '../components/home/StatsSection.astro';
 import KitchensSection from '../components/home/KitchensSection.astro';
@@ -32,11 +31,9 @@ import CtaBand from '../components/ui/CtaBand.astro';
     <ProcessSection />
     <SuppliersPanel note="We buy board, stone and hardware from established South African and European suppliers — so the finish you choose is one we can match again in five years." />
     <AboutPreviewSection />
-    <CtaBand heading="Built in our workshop. Fitted in your home." withIcon variant="home" />
+    <CtaBand />
     <ContactSection />
   </main>
 
   <SiteFooter />
-
-  <Lightbox groupId="home-kitchens" />
 </BaseLayout>

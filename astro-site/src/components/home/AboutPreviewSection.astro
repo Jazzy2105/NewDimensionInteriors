@@ -12,14 +12,17 @@ const photo = getPhotos('kitchens')[0];
 <section id="about" class="raised-panel about-preview">
   <div class="about-preview__copy">
     <span class="kicker">About N.D.I.</span>
-    <h2 class="about-preview__heading">A family workshop, not a showroom chain.</h2>
+    <h2 class="about-preview__heading">
+      <span>A True Story To Tell ---</span>
+      <span>A family workshop, not a trending showroom chain…</span>
+    </h2>
     <p class="about-preview__body">
-      N.D.I. has been making kitchens and built-in cupboards for three decades. The person who measures your room is
-      the person who draws it, and the workshop that cuts it is fifteen minutes from your house.
-    </p>
-    <p class="about-preview__body">
-      That's the whole proposition: fewer hands, better joints, and a phone number that answers after the invoice is
-      paid.
+      New Dimension Interiors (Pty) Ltd is not a franchise, it is rather a family affair since its inception back in
+      2002. We pride ourselves on the personal touch in which project control and management is directly under the
+      supervision of the owners. We do not outsource our installation. Hence our attention to client needs and
+      satisfaction is uppermost. Our fundamental belief lies in the fact that clients are our salespeople and their
+      homes are our showroom. Over the years, we’ve become a trusted name in the industry, thanks to our commitment
+      to excellence and innovative approach to cabinetry design.
     </p>
     <a href={withBase('/about')} class="arrow-link">
       More about us
@@ -56,6 +59,11 @@ const photo = getPhotos('kitchens')[0];
   }
 
   .about-preview__heading {
+    /* Two statements with a blank line between them in the supplied copy, so
+       the lines are spans in a column rather than one wrapped run. */
+    display: flex;
+    flex-direction: column;
+    gap: 0.4em;
     font-size: clamp(30px, 3.8vw, 56px);
     line-height: 0.98;
     letter-spacing: -0.03em;

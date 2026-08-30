@@ -1,17 +1,33 @@
 ---
 // "How it works" — four numbered steps, flat section.
 const steps = [
-  { n: '01', title: 'Site measure', body: 'We come to you, measure the room and talk through how you cook and store.' },
-  { n: '02', title: 'Drawing & quote', body: "A layout, finish samples and a fixed written price. No line items you can't read." },
-  { n: '03', title: 'Manufacture', body: 'Cut, edged and assembled in our workshop, so tolerances stay ours to fix.' },
-  { n: '04', title: 'Installation', body: 'Our own team fits, levels and hands over — plus a snag visit after two weeks.' },
+  {
+    n: '01',
+    title: 'Initial Engagement and Site Audit',
+    body: 'We come to you. Measure the room, discuss ideas and talk you through the practical process.',
+  },
+  {
+    n: '02',
+    title: 'Requirements Definition',
+    body: 'We provide a set of 3D renders, samples and finishes at the next meeting together with our comprehensive professional proposal.',
+  },
+  {
+    n: '03',
+    title: 'Manufacture',
+    body: 'Cut, edged and assembled in our workshop, so tolerances stay ours to fix.',
+  },
+  {
+    n: '04',
+    title: 'Installation',
+    body: 'Our teams deliver & install while our qualified project managers run the show! Your handover will never be this easy.',
+  },
 ];
 ---
 
 <section class="flat-section process">
   <div class="process__header">
     <span class="kicker">How it works</span>
-    <h2 class="process__heading">Four steps, one point of contact.</h2>
+    <h2 class="process__heading">Four Steps | One Point of Contact</h2>
   </div>
   <div class="process__grid">
     {
@@ -51,8 +67,13 @@ const steps = [
 
   .process__cell {
     padding: clamp(24px, 3vw, 36px);
-    display: flex;
-    flex-direction: column;
+    /* Subgrid so number / title / body line up across the cells in a row.
+       The title row is exactly as tall as the tallest title in that row
+       needs — bodies stay in line when one title wraps, without leaving
+       dead space under the titles when none of them do. */
+    display: grid;
+    grid-template-rows: subgrid;
+    grid-row: span 3;
     gap: 12px;
   }
   .process__cell:nth-child(1),
@@ -97,6 +118,7 @@ const steps = [
     font-size: 20px;
     font-weight: 800;
     letter-spacing: -0.01em;
+    line-height: 1.25;
   }
 
   .process__body {

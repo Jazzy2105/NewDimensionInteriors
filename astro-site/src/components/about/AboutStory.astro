@@ -14,15 +14,19 @@ const specs = [
 
 <section class="flat-section story">
   <div class="story__copy">
-    <h2 class="story__heading">A family workshop, not a showroom chain.</h2>
+    <h2 class="story__heading">
+      <span class="story__heading-name">New Dimension Interiors</span>
+      <span>Exceptional Design. Bespoke Craftsmanship. Inspired Living.</span>
+    </h2>
     <p class="story__body">
-      N.D.I. began as one man, one van and a bandsaw. Three decades later the same principle runs the business: the
-      person who measures your room is the person who draws it, and the workshop that cuts it is fifteen minutes
-      from your house.
+      New Dimension Interiors (NDI) is a proudly South African, privately owned interior design and custom joinery
+      company established in 2002. From our beginnings as a small business, we have evolved into a trusted name in
+      the middle to upmarket home improvement sector, delivering distinctive design, superior craftsmanship and
+      exceptional service.
     </p>
     <p class="story__body">
-      We don't sell flat-packs and we don't subcontract the fitting. Fewer hands touch the work, which is why the
-      joints line up and why the number you called still answers after the invoice is paid.
+      Based in the south of Johannesburg, NDI has established a strong reputation for creating and installing
+      bespoke interiors in some of Gauteng’s most prestigious estates and neighbourhoods.
     </p>
   </div>
   <dl class="story__specs">
@@ -62,9 +66,18 @@ const specs = [
   }
 
   .story__heading {
+    /* Two lines in the supplied copy — the company name over its tagline —
+       so they are spans in a column rather than one wrapped run. */
+    display: flex;
+    flex-direction: column;
+    gap: 0.3em;
     font-size: clamp(24px, 2.6vw, 34px);
     line-height: 1.05;
     letter-spacing: -0.02em;
+  }
+  .story__heading-name {
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
   }
 
   .story__body {

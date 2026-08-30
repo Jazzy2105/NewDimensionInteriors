@@ -5,6 +5,7 @@ import { Image } from 'astro:assets';
 import { getHeroPhotos } from '../../data/photo-library.js';
 import { siteConfig, waHref } from '../../data/site-config.js';
 import logo from '../../assets/images/ndi-logo.png';
+import IconWhatsApp from '../icons/IconWhatsApp.astro';
 
 const HERO_SECONDS = 6;
 
@@ -31,13 +32,20 @@ const slides = getHeroPhotos(6);
         <Image src={logo} alt="N.D.I." width={176} format="webp" class="hero__logo" />
         <span class="hero__kicker">{siteConfig.tagline}</span>
       </div>
-      <h1 class="hero__heading">The kitchen is<br />the room you<br />actually live in.</h1>
+      <h1 class="hero__heading">Exclusive &amp; Custom Style Cabinetry</h1>
       <p class="hero__body">
-        Designed, manufactured and fitted by one workshop — kitchens, vanities and built-in cupboards made to
-        measure, with no middleman between the drawing and the door.
+        Experienced “turn key” solutions for your home renovation projects. Whether you are embarking on
+        remodeling your existing home, or building a new home, we will help in planning, designing, ordering,
+        installing and coordinating the entire project. Our area of expertise include kitchen, bedroom, bathroom
+        and home décor solutions. Our designers and project managers are trained to accommodate your experience
+        professionally. We guarantee our product and installation. Our highly skilled management and staff are
+        academically qualified and certified to ensure you full peace of mind.
       </p>
       <div class="hero__actions">
-        <a href={waHref()} target="_blank" rel="noopener" class="btn btn-accent">WhatsApp us</a>
+        <a href={waHref()} target="_blank" rel="noopener" class="btn btn-accent">
+          <IconWhatsApp size={18} />
+          <span>WhatsApp us</span>
+        </a>
         <a href="#kitchens" class="btn btn-ghost">See the work</a>
       </div>
     </div>
@@ -61,9 +69,13 @@ const slides = getHeroPhotos(6);
 <style>
   .hero {
     position: relative;
-    height: calc(100vh - 76px); /* fallback for browsers without dvh */
-    height: calc(100dvh - 76px); /* accounts for mobile browser chrome */
-    min-height: 600px;
+    display: flex;
+    /* Aim for a full-viewport hero, but let the section grow rather than
+       clip when the intro copy is taller than the viewport allows (short
+       laptop screens, phones in landscape). */
+    min-height: 600px; /* fallback for browsers without dvh */
+    min-height: max(600px, calc(100vh - 76px));
+    min-height: max(600px, calc(100dvh - 76px));
     overflow: hidden;
     background: var(--color-hero-bg);
   }
@@ -72,8 +84,10 @@ const slides = getHeroPhotos(6);
     .hero {
       /* Mobile browser chrome eats a lot more of a short viewport than it
          does on desktop — 600px plus the nav bar is too tall a floor on a
-         phone in portrait and pushes the CTA/progress bars off-screen. */
-      min-height: 480px;
+         phone in portrait, so drop the floor here (the viewport-height
+         target above still applies). */
+      min-height: max(480px, calc(100vh - 76px));
+      min-height: max(480px, calc(100dvh - 76px));
     }
   }
 
@@ -103,19 +117,21 @@ const slides = getHeroPhotos(6);
   }
 
   .hero__content {
-    position: absolute;
-    inset: 0;
+    position: relative;
+    z-index: 1;
+    flex: 1;
+    min-width: 0;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    gap: 36px;
+    gap: 28px;
     padding: clamp(24px, 4vw, 64px);
   }
 
   .hero__intro {
     display: flex;
     flex-direction: column;
-    gap: 22px;
+    gap: 20px;
     max-width: min(940px, 80vw);
   }
 
@@ -133,6 +149,7 @@ const slides = getHeroPhotos(6);
   .hero__kicker {
     color: #fff;
     font-size: 11px;
+    line-height: 1.6;
     font-weight: 700;
     letter-spacing: 0.22em;
     text-transform: uppercase;
@@ -140,7 +157,7 @@ const slides = getHeroPhotos(6);
 
   .hero__heading {
     color: #fff;
-    font-size: clamp(40px, 7.2vw, 104px);
+    font-size: clamp(38px, 6.2vw, 92px);
     line-height: 0.92;
     letter-spacing: -0.035em;
     text-wrap: balance;
@@ -148,9 +165,12 @@ const slides = getHeroPhotos(6);
 
   .hero__body {
     margin: 0;
-    max-width: 560px;
-    color: rgba(255, 255, 255, 0.82);
-    font-size: clamp(15px, 1.3vw, 19px);
+    /* Wider and a touch smaller than a typical lede: the intro copy runs
+       long, and this keeps it a compact block under the headline instead
+       of a narrow ten-line column. */
+    max-width: 760px;
+    color: rgba(255, 255, 255, 0.88);
+    font-size: clamp(15px, 1.15vw, 17.5px);
     line-height: 1.55;
   }
 

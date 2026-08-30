@@ -5,12 +5,13 @@
 
 export const siteConfig = {
   businessName: 'N.D.I.',
-  tagline: 'Custom cabinetry · Gauteng',
+  tagline: 'Kitchens, BIC’s, Vanities, Home Décor',
 
-  // TODO(client): confirm these — currently the dummy values from the handoff.
-  whatsappNumber: '27000000000',
-  phoneDisplay: '+27 (0) 00 000 0000',
-  phoneHref: 'tel:+27000000000',
+  // TODO(client): confirm the email below — the phone and WhatsApp number are
+  // the real cell the client supplied on 2026-08-30.
+  whatsappNumber: '27727867144',
+  phoneDisplay: '+27 72 786 7144',
+  phoneHref: 'tel:+27727867144',
   email: 'info@n-d-i.co.za',
   workshopLocation: 'Gauteng, South Africa',
 

@@ -17,7 +17,7 @@ const year = new Date().getFullYear();
 <footer class="site-footer">
   <div class="site-footer__row">
     <div class="site-footer__brand">
-      <Image src={logo} alt="N.D.I." height={60} style="height: 60px; width: auto; margin-left: -6px;" />
+      <Image src={logo} alt="N.D.I." height={60} class="site-footer__logo" />
       <span class="site-footer__tagline">Kitchens &middot; Built-in cupboards &middot; Vanities &middot; Home decor</span>
       <span class="site-footer__address">{siteConfig.workshopLocation} &middot; {siteConfig.email}</span>
     </div>
@@ -55,7 +55,18 @@ const year = new Date().getFullYear();
   .site-footer__brand {
     display: flex;
     flex-direction: column;
+    /* Without this the logo stretches: a column flex container stretches its
+       children across the cross axis, and an image whose width is auto is
+       exactly what `stretch` acts on — it was rendering 430px wide at 60px
+       tall. Aligning to the start lets it keep its own aspect ratio. */
+    align-items: flex-start;
     gap: 8px;
+  }
+
+  .site-footer__brand :global(.site-footer__logo) {
+    height: 60px;
+    width: auto;
+    margin-left: -6px;
   }
 
   .site-footer__tagline {

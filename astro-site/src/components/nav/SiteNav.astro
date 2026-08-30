@@ -1,14 +1,13 @@
 ---
 // Sticky site header: logo, the four tabs (a hamburger + dropdown below
-// ~900px — four fixed-width tabs plus a logo and a button simply don't fit
-// a phone screen), the WhatsApp CTA, and the red panel that slides up on
-// navigation. See "Shared: site nav" in ../../../README.md for the full
-// desktop behavior spec this was built from.
+// ~900px — four fixed-width tabs plus a logo simply don't fit a phone
+// screen), and the red panel that slides up on navigation. See "Shared:
+// site nav" in ../../../README.md for the full desktop behavior spec this
+// was built from.
 import { Image } from 'astro:assets';
 import logo from '../../assets/images/ndi-logo.png';
-import { siteConfig, waHref } from '../../data/site-config.js';
+import { siteConfig } from '../../data/site-config.js';
 import { withBase } from '../../lib/url.js';
-import IconMessageSquare from '../icons/IconMessageSquare.astro';
 import IconMenu from '../icons/IconMenu.astro';
 import IconClose from '../icons/IconClose.astro';
 
@@ -31,7 +30,7 @@ const tabs = [
   <div class="site-nav__row">
     <a href={withBase('/')} class="site-nav__brand" data-nav-link data-nav-label="Home">
       <Image src={logo} alt="N.D.I." height={46} style="height: 46px; width: auto;" />
-      <span class="site-nav__brand-label">Kitchens &amp; Cupboards</span>
+      <span class="site-nav__brand-label">New Dimension Interiors</span>
     </a>
 
     <nav class="site-nav__tabs" aria-label="Primary">
@@ -51,10 +50,6 @@ const tabs = [
     </nav>
 
     <div class="site-nav__actions">
-      <a href={waHref()} target="_blank" rel="noopener" class="site-nav__whatsapp">
-        <IconMessageSquare size={16} />
-        <span>WhatsApp us</span>
-      </a>
       <button
         type="button"
         class="site-nav__menu-btn"
@@ -133,12 +128,12 @@ const tabs = [
     letter-spacing: 0.18em;
     text-transform: uppercase;
     color: var(--color-neutral-600);
-    max-width: 8em;
+    max-width: 11em;
     line-height: 1.5;
   }
   @media (max-width: 900px) {
     /* Secondary label, not navigational — dropped once the hamburger takes
-       over so logo + WhatsApp + menu button always have room to breathe. */
+       over so the logo and menu button always have room to breathe. */
     .site-nav__brand-label {
       display: none;
     }
@@ -172,25 +167,6 @@ const tabs = [
     display: flex;
     align-items: center;
     gap: 12px;
-  }
-
-  .site-nav__whatsapp {
-    align-self: center;
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    background: var(--color-accent);
-    color: #fff;
-    font-family: var(--font-heading);
-    font-weight: 800;
-    font-size: 13px;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    padding: 14px 20px;
-    white-space: nowrap;
-  }
-  .site-nav__whatsapp:hover {
-    background: var(--color-accent-600);
   }
 
   /* — mobile menu: hidden above the nav breakpoint, where the full tab row

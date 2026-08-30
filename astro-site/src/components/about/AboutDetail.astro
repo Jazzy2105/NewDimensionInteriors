@@ -1,0 +1,210 @@
+---
+// The long-form About copy that sits under AboutStory. Each block is its own
+// section so the page keeps the home page's rhythm — a flat square band, then
+// a raised rounded panel, alternating. AboutStory above is flat, so the first
+// block here is raised to keep that alternation going.
+//
+// Within a block: the heading sits on its own, held to half the width so it
+// breaks into a stack rather than one long thin line, with the body copy
+// underneath at full width. Wording is the client's own copy — see the memory
+// note on not editing it without their sign-off.
+const solutions = [
+  'Upmarket kitchens and custom cabinetry',
+  'Bedroom built-in cupboards, dressing rooms and associated furniture',
+  'Executive bars and Mediterranean pubs',
+  'Exclusive TV units and entertainment areas',
+  'Studies and home offices',
+  'Libraries and bookcases',
+  'Bathroom vanities and related fittings',
+  'Wall units and display cabinetry',
+  'Slatted and feature wall panels',
+  'Bespoke shelving and storage solutions',
+  'New range steel / glass fabricated wall units',
+];
+---
+
+<section class="raised-panel about-block">
+  <h2 class="about-block__heading">Bespoke Interiors, Designed Around You</h2>
+  <div class="about-block__copy">
+    <p>Our philosophy is simple: your home should be as individual as you are.</p>
+    <p>
+      We specialise in creating customised spaces that combine timeless design with contemporary functionality. From
+      the initial concept and space planning through to manufacture and installation, every project is carefully
+      considered and tailored to our client’s lifestyle, taste and requirements.
+    </p>
+    <p>
+      Our expertise extends beyond kitchens and cupboards to a comprehensive range of bespoke interior solutions,
+      including:
+    </p>
+    <ul class="about-block__list">
+      {solutions.map((item) => <li>{item}</li>)}
+    </ul>
+    <p>
+      We also incorporate premium finishes and carefully selected accessories, including quartz stone tops, glass
+      cladding, aluminium and glass doors, suspended shelving, imported sinks, hardware and integrated appliances,
+      creating interiors that are both visually striking and highly practical.
+    </p>
+  </div>
+</section>
+
+<section class="flat-section about-block">
+  <h2 class="about-block__heading">Where Traditional Craft Meets Modern Design</h2>
+  <div class="about-block__copy">
+    <p>
+      At NDI, we believe great interiors are created by combining the character and charm of timeless design with the
+      innovation and technology of today.
+    </p>
+    <p>
+      Our advanced design software allows clients to visualise their proposed space in impressive graphic detail
+      before production begins. Every cabinet and element is purpose-made to the approved design and manufactured to
+      the client’s exact specifications. We do not believe in forcing your home into standard sizes — we create
+      customised solutions specifically for your space.
+    </p>
+    <p>
+      From concept to completion, our experienced team maintains close attention to detail, ensuring that design
+      intent, quality and craftsmanship are carried through every stage of the project.
+    </p>
+  </div>
+</section>
+
+<section class="raised-panel about-block">
+  <h2 class="about-block__heading">Our Commitment</h2>
+  <div class="about-block__copy">
+    <p>
+      Our mission is to create distinctive and unique expressions of your lifestyle through thoughtful design and
+      exceptional workmanship.
+    </p>
+    <p>
+      We believe that integrity, communication, courtesy and attention to detail are the foundations of lasting
+      client relationships. Our hands-on approach means we remain personally involved throughout the process, from
+      the first consultation to final installation.
+    </p>
+    <p>
+      The result is more than cabinetry. It is a carefully crafted interior that enhances the way you live and
+      provides something you can take pride in for years to come.
+    </p>
+  </div>
+</section>
+
+<section class="flat-section about-block">
+  <h2 class="about-block__heading">Our Philosophy</h2>
+  <div class="about-block__copy">
+    <p>
+      We believe our clients are our greatest ambassadors. Much of our growth has been built on trust, referrals and
+      word-of-mouth recommendations, earned through consistently delivering quality products and personalised
+      service.
+    </p>
+    <p>
+      At New Dimension Interiors, every project is an opportunity to create something exceptional — designed for you,
+      made for your space and built to last.
+    </p>
+  </div>
+</section>
+
+<section class="raised-panel about-block">
+  <h2 class="about-block__heading">Who We Are</h2>
+  <div class="about-block__copy">
+    <p>
+      Since starting out back in 2002 as a small business, over the past ten years the young current Chief Exec —
+      Tamsin Scott — has re-branded and re-invented the new company by transforming it into a successful privately
+      owned company which continues to evolve from strength to strength delivering high quality, excellent service
+      into the middle and upmarket segment of home improvement.
+    </p>
+    <p>
+      After completing her formal schooling Tamsin, a prominent 32 year old “southern suburbs Johannesburg girl”,
+      spent a year in the USA visiting and working in 22 states, and is now fully qualified with a Bachelor’s Degree
+      in Business Administration.
+    </p>
+    <p>
+      She has developed a passion for Executive Home Improvement, apart from successfully managing high end cabinetry
+      installations.
+    </p>
+    <p>
+      Her attention to detail is relentless and she will never leave a client dissatisfied at any cost. Through her
+      “hands-on” approach in every business engagement, she is personally involved in every facet of the business,
+      and customers are provided with the ultimate in product and service quality from start to finish.
+    </p>
+    <p>
+      Tamsin believes that “With high end design software, we are able to provide our customers with a presentation
+      of how the final result will look in graphic detail before we proceed with production”. She goes on to say:
+      “Our production and on-site management is state of the art. All cabinets are purpose made to client
+      specification, in accordance with the design. We don’t stick to standard sizes. Our final product is of the
+      highest quality”.
+    </p>
+    <p>
+      Tamsin believes in the “art of relationship selling” and “word of mouth” advertising. Her motto is “Our clients
+      are our sales force” and “Our customer’s home is our showroom”.
+    </p>
+  </div>
+</section>
+
+<style>
+  .about-block {
+    padding: clamp(32px, 5vw, 72px) var(--section-pad-x);
+  }
+
+  .about-block__heading {
+    font-size: clamp(24px, 2.8vw, 40px);
+    line-height: 1.06;
+    letter-spacing: -0.025em;
+    margin-bottom: clamp(18px, 2vw, 28px);
+  }
+  /* Held to half the width so a heading breaks into a stacked block instead
+     of running as one long line. Full width on a phone, where half a screen
+     is too narrow to set a heading in. */
+  @media (min-width: 700px) {
+    .about-block__heading {
+      max-width: 50%;
+    }
+  }
+
+  .about-block__copy {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .about-block__copy p {
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.65;
+    color: var(--color-neutral-700);
+  }
+
+  .about-block__list {
+    margin: 4px 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 10px 32px;
+  }
+  /* The list has the full width to work with now, so it columnises further
+     than it did rather than running eleven items down one edge. */
+  @media (min-width: 700px) {
+    .about-block__list {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  @media (min-width: 1200px) {
+    .about-block__list {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  .about-block__list li {
+    position: relative;
+    padding-left: 20px;
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--color-neutral-700);
+  }
+  .about-block__list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.55em;
+    width: 7px;
+    height: 7px;
+    background: var(--color-accent);
+  }
+</style>
