@@ -20,9 +20,9 @@ const photos = getPhotos(category);
 // A larger rendition of each photo for the lightbox, generated once at
 // build time alongside the grid thumbnail.
 const gallery = await Promise.all(
-  photos.map(async (photo, i) => {
+  photos.map(async (photo) => {
     const full = await getImage({ src: photo.image, width: 1800, format: 'webp', quality: 82 });
-    return { ...photo, fullSrc: full.src, number: String(i + 1).padStart(2, '0') };
+    return { ...photo, fullSrc: full.src };
   })
 );
 ---
@@ -42,18 +42,9 @@ const gallery = await Promise.all(
           style={{ '--col-span': photo.wide ? 2 : 1 }}
           data-lightbox-trigger={lightboxGroup}
           data-full={photo.fullSrc}
-          data-caption={photo.hasCaption ? photo.caption : ''}
           data-alt={photo.alt}
         >
           <Image src={photo.image} alt={photo.alt} width={900} format="webp" quality={80} loading="lazy" class="projects-panel__img" />
-          {
-            photo.hasCaption && (
-              <span class="projects-panel__caption">
-                <span class="projects-panel__number">{photo.number}</span>
-                <span>{photo.caption}</span>
-              </span>
-            )
-          }
         </button>
       ))
     }
@@ -123,25 +114,6 @@ const gallery = await Promise.all(
   }
   .projects-panel__tile:hover :global(.projects-panel__img) {
     transform: scale(1.05);
-  }
-
-  .projects-panel__caption {
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    background: var(--color-bg);
-    padding: 10px 14px;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-  }
-
-  .projects-panel__number {
-    color: var(--color-accent-400);
   }
 
   @media (max-width: 640px) {

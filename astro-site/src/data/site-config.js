@@ -20,7 +20,7 @@ export const siteConfig = {
   // never duplicated.
   yearsAtBench: '25',
   clientsServed: '5000',
-  established: 'Early 1990s',
+  established: 'Early 2000s',
 };
 
 /** Builds a `wa.me` deep link from the configured WhatsApp number. */

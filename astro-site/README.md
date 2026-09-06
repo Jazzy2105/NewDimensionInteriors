@@ -93,7 +93,7 @@ src/
 │   │   ├── ProcessSection.astro
 │   │   ├── AboutPreviewSection.astro
 │   │   └── ContactSection.astro       (the quote-request form)
-│   ├── about/                   # AboutHeader, AboutPhoto, AboutStory
+│   ├── about/                   # AboutHeader, AboutStory
 │   └── projects/                # ProjectsHeader (filter pills),
 │                                   PhotoGridPanel (generic real-photo grid),
 │                                   KitchensGridPanel (always real),

@@ -20,12 +20,14 @@ const { note } = Astro.props;
 </section>
 
 <style>
+  /* Kicker on its own line with the note spanning the full panel width
+     underneath, rather than the two sitting side by side — the note was
+     being squeezed into the right-hand third and wrapping over three lines. */
   .suppliers__header {
     display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    gap: 20px;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
     padding: 26px clamp(16px, 2.4vw, 32px);
     border-bottom: 2px solid var(--color-divider);
   }
@@ -34,7 +36,6 @@ const { note } = Astro.props;
     font-size: 14px;
     line-height: 1.5;
     color: var(--color-neutral-600);
-    max-width: 52ch;
   }
 
   .suppliers__row {

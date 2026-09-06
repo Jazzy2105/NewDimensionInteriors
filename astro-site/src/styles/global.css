@@ -41,6 +41,10 @@
   --color-neutral-900: #f2f0ef;
 
   /* type */
+  /* Display headings (h1-h4). Separate from --font-heading, which dresses the
+     small chrome — nav links, buttons, kickers, stat numbers — and stays
+     Archivo. Only the 700 weight is loaded, so do not ask for a heavier one. */
+  --font-display: 'Poppins', system-ui, sans-serif;
   --font-heading: 'Archivo Variable', system-ui, sans-serif;
   --font-body: 'Archivo Variable', system-ui, sans-serif;
 
@@ -156,8 +160,8 @@ h1,
 h2,
 h3,
 h4 {
-  font-family: var(--font-heading);
-  font-weight: 900;
+  font-family: var(--font-display);
+  font-weight: 700;
   margin: 0;
 }
 

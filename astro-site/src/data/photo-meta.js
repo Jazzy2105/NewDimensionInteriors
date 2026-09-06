@@ -1,14 +1,16 @@
 // Optional per-photo overrides, keyed by "<category>/<filename-without-extension>".
-// A photo with NO entry here still works everywhere — it just shows with no
-// caption chip (its accessible `alt` text still falls back to the filename,
-// prettified, but that's not printed on the page — a raw camera/WhatsApp
-// filename like "IMG-20260816-WA0060" isn't something to show visitors).
-// Add an entry only to give a photo a real caption or to feature it.
+// A photo with NO entry here still works everywhere — its accessible `alt`
+// text just falls back to the filename, prettified, which is never printed on
+// the page but does read poorly to a screen reader for a raw camera/WhatsApp
+// filename like "IMG-20260816-WA0060".
+// Add an entry to give a photo real alt text or to feature it.
 //
 // Fields (all optional):
-//   caption    — label shown on the Projects gallery tile and in its
-//                lightbox; a photo with no `caption` here shows no chip at
-//                all rather than falling back to its filename
+//   caption    — a short human description of the photo. Nothing on the site
+//                prints it: the Projects gallery deliberately shows no label
+//                on any tile or in the lightbox. It is still worth writing,
+//                because `alt` defaults to it, and a real sentence makes far
+//                better alt text than a prettified WhatsApp filename
 //   homeCaption — a shorter caption for the Home page's small preview grid,
 //                if `caption` is too long to sit comfortably there; defaults
 //                to `caption`
@@ -71,6 +73,11 @@ export const photoMeta = {
   },
 
   // The single photo in each category's Home page split-layout section.
+  'kitchens/MainKitchen': {
+    caption: 'Oak & matte grey kitchen, mirror splashback',
+    alt: 'Light oak and matte grey kitchen with lit glass display cabinets above a black mirror splashback, by N.D.I.',
+    featured: true,
+  },
   'cupboards/MainCupboard': {
     caption: 'Study desk & media wall',
     alt: 'Built-in study desk and media wall unit with a slatted timber feature wall, by N.D.I.',

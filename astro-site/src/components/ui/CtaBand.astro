@@ -20,14 +20,20 @@
 
   .cta__statement {
     margin: 0;
-    font-family: var(--font-heading);
-    font-weight: 900;
-    /* Sized to run nearly the full width of the band on one line — it is a
-       single short phrase, so a wrap would read as a mistake. The ceiling
-       keeps it from outgrowing very wide monitors. */
+    /* Script face, so no --font-heading token: it is used only here. Ships
+       with Windows and Office; the generic cursive keeps the tone elsewhere. */
+    font-family: 'Brush Script MT', 'Brush Script Std', 'Segoe Script', cursive;
+    /* The face has one weight — asking for 900 only gets a smeared synthetic
+       bold, and tight tracking collides the joined strokes. */
+    font-weight: 400;
+    /* Kept on one line — it is a single short phrase, so a wrap would read as
+       a mistake. The ceiling stops it outgrowing very wide monitors. The
+       script face runs narrower than the old sans, so it sits centred with
+       air either side rather than spanning the band. */
     font-size: min(6.2vw, 108px);
-    line-height: 1.06;
-    letter-spacing: -0.03em;
+    /* Room for the descenders and the tall f/l loops, which 1.06 clipped. */
+    line-height: 1.2;
+    letter-spacing: normal;
     text-align: center;
     white-space: nowrap;
   }

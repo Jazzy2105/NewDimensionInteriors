@@ -3,6 +3,9 @@
 // meta tags every page needs. Nav/footer are NOT here — each page includes
 // them directly so it can pass its own `active` tab.
 import '@fontsource-variable/archivo';
+// Headings only, and only the one weight they use — the full Poppins package
+// ships every weight in five scripts, which is far more than this site needs.
+import '@fontsource/poppins/latin-700.css';
 import '../styles/global.css';
 import SiteAtmosphere from '../components/atmosphere/SiteAtmosphere.astro';
 import { withBase } from '../lib/url.js';
