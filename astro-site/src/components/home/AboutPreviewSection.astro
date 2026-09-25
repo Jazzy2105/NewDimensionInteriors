@@ -1,12 +1,13 @@
 ---
-// About preview — raised panel, copy left, one photo right (aligned with
-// the copy — see photo-meta.js `order` to pin a specific photo here).
+// About preview — raised panel, copy left, one fixed photo right. The photo
+// is pinned to src/assets/images/about us/AboutUsMain.png (see the README
+// there) rather than drawn from the gallery library, so it never changes
+// when gallery photos are added or reordered.
 import { Image } from 'astro:assets';
-import { getPhotos } from '../../data/photo-library.js';
+import aboutPhoto from '../../assets/images/about us/AboutUsMain.png';
 import { withBase } from '../../lib/url.js';
 import IconArrowRight from '../icons/IconArrowRight.astro';
 
-const photo = getPhotos('kitchens')[0];
 ---
 
 <section id="about" class="raised-panel about-preview">
@@ -30,7 +31,14 @@ const photo = getPhotos('kitchens')[0];
     </a>
   </div>
   <div class="about-preview__photo">
-    {photo && <Image src={photo.image} alt={photo.alt} width={900} format="webp" loading="lazy" class="about-preview__img" />}
+    <Image
+      src={aboutPhoto}
+      alt="A kitchen fitted by N.D.I."
+      width={900}
+      format="webp"
+      loading="lazy"
+      class="about-preview__img"
+    />
   </div>
 </section>
 
