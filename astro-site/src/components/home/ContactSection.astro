@@ -1,69 +1,40 @@
 ---
-// The quote-request form. Per the handoff (README.md: "The form is not
-// wired — no endpoint, no validation"), this only swaps the button label on
-// submit for now. Wire `data-contact-form`'s submit handler below to a real
-// endpoint (a serverless function, Formspree, etc.) when the client decides
-// where enquiries should land.
-import { siteConfig } from '../../data/site-config.js';
+// Contact details plus a WhatsApp call-to-action. The design handoff's
+// quote-request form was removed: the site is static hosting with no mail
+// endpoint, so enquiries go through phone, email or WhatsApp instead.
+import { siteConfig, waHref } from '../../data/site-config.js';
+import IconWhatsApp from '../icons/IconWhatsApp.astro';
 ---
 
 <section id="contact" class="raised-panel contact">
-  <div class="contact__info">
-    <span class="kicker">Get a quote</span>
-    <h2 class="contact__heading">Get in Touch</h2>
-    <div class="contact__details">
-      <a href={siteConfig.phoneHref} class="contact__detail">
-        <span class="contact__detail-label">Phone</span>
-        <span>{siteConfig.phoneDisplay}</span>
-      </a>
-      <a href={`mailto:${siteConfig.email}`} class="contact__detail">
-        <span class="contact__detail-label">Email</span>
-        <span>{siteConfig.email}</span>
-      </a>
-      <div class="contact__detail contact__detail--static">
-        <span class="contact__detail-label">Workshop</span>
-        <span>{siteConfig.workshopLocation}</span>
-      </div>
+  <span class="kicker">Get a quote</span>
+  <h2 class="contact__heading">Get in Touch</h2>
+  <div class="contact__details">
+    <a href={siteConfig.phoneHref} class="contact__detail">
+      <span class="contact__detail-label">Phone</span>
+      <span>{siteConfig.phoneDisplay}</span>
+    </a>
+    <a href={`mailto:${siteConfig.email}`} class="contact__detail">
+      <span class="contact__detail-label">Email</span>
+      <span>{siteConfig.email}</span>
+    </a>
+    <div class="contact__detail contact__detail--static">
+      <span class="contact__detail-label">Workshop</span>
+      <span>{siteConfig.workshopLocation}</span>
     </div>
   </div>
-
-  <form class="contact__form" data-contact-form>
-    <div class="contact__field">
-      <label for="ndi-name">Name</label>
-      <input id="ndi-name" name="name" class="input" type="text" placeholder="Your name" required />
-    </div>
-    <div class="contact__field">
-      <label for="ndi-contact">Phone or email</label>
-      <input id="ndi-contact" name="contact" class="input" type="text" placeholder="How should we reach you?" required />
-    </div>
-    <div class="contact__field">
-      <label for="ndi-brief">What are you planning?</label>
-      <textarea id="ndi-brief" name="brief" class="input" rows="4" placeholder="New kitchen, replacing doors, vanity for a guest bathroom…"></textarea>
-    </div>
-    <button type="submit" class="btn btn-accent contact__submit" data-contact-submit>Send the enquiry</button>
-  </form>
+  <a href={waHref()} target="_blank" rel="noopener" class="btn btn-accent contact__whatsapp">
+    <IconWhatsApp size={18} />
+    <span>WhatsApp us</span>
+  </a>
 </section>
 
 <style>
   .contact {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
-  }
-
-  .contact__info {
     padding: clamp(40px, 6vw, 80px) var(--section-pad-x);
     display: flex;
     flex-direction: column;
     gap: 18px;
-    border-right: 2px solid var(--color-divider);
-  }
-
-  /* See AboutStory.astro's identical comment. */
-  @media (max-width: 639px) {
-    .contact__info {
-      border-right: 0;
-      border-bottom: 2px solid var(--color-divider);
-    }
   }
 
   .contact__heading {
@@ -105,73 +76,8 @@ import { siteConfig } from '../../data/site-config.js';
     color: var(--color-neutral-600);
   }
 
-  .contact__form {
-    padding: clamp(40px, 6vw, 80px) var(--section-pad-x);
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
-  }
-
-  .contact__field {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-  .contact__field label {
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--color-neutral-700);
-  }
-
-  .contact__submit {
+  .contact__whatsapp {
     align-self: flex-start;
-    font-size: 13.5px;
+    margin-top: 8px;
   }
 </style>
-
-<style is:global>
-  /* Shared field styling for the contact form's inputs/textarea. */
-  .input {
-    width: 100%;
-    min-height: 44px;
-    padding: 10px 12px;
-    font: inherit;
-    font-size: 15px;
-    color: var(--color-text);
-    background: var(--color-neutral-100);
-    border: 1px solid var(--color-neutral-400);
-    caret-color: var(--color-accent);
-  }
-  .input::placeholder {
-    color: var(--color-neutral-500);
-  }
-  .input:hover {
-    border-color: var(--color-neutral-500);
-  }
-  .input:focus-visible {
-    outline: 2px solid var(--color-accent);
-    outline-offset: 0;
-    border-color: var(--color-accent);
-  }
-  textarea.input {
-    min-height: 96px;
-    resize: vertical;
-    font-family: var(--font-body);
-  }
-</style>
-
-<script>
-  const form = document.querySelector('[data-contact-form]');
-  const submitBtn = document.querySelector('[data-contact-submit]');
-  if (form && submitBtn) {
-    form.addEventListener('submit', (event) => {
-      event.preventDefault();
-      // TODO: POST the form data to a real endpoint here once the client
-      // confirms where enquiries should be delivered (README "Open items").
-      submitBtn.textContent = "Thank you — we'll be in touch";
-      submitBtn.setAttribute('disabled', 'true');
-    });
-  }
-</script>

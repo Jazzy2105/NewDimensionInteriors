@@ -117,16 +117,12 @@ Sections have no client-side framework — just Astro components with a plain
 transition, project filters). That keeps the site fast and dependency-light,
 which is what a mostly-static, photography-led site like this wants.
 
-## Known placeholders — see `../README.md` "Open items for the client"
+## Client details
 
-- **Contact details are dummy.** Edit `src/data/site-config.js` once the
-  client confirms phone/email/WhatsApp number/workshop address.
+- **Contact details and business facts** live in `src/data/site-config.js`
+  and were confirmed by the client before launch.
+- **There is no contact form.** The site is static hosting with no mail
+  endpoint, so the contact section offers phone, email and WhatsApp instead.
 - **Any category with no photos yet** shows a labeled placeholder frame
   instead — see "Adding photos" above for how that resolves itself the
   moment real photos exist for it.
-- **The contact form isn't wired to anything** — submitting it just swaps
-  the button label client-side (matches the original design handoff exactly).
-  `ContactSection.astro`'s `<script>` has a `TODO` marking where to POST to a
-  real endpoint once the client decides where enquiries should land.
-- **Business facts** ("25+ years", "5000+ clients", "established early
-  1990s") are the client's stated figures per the handoff, not yet confirmed.
