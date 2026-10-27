@@ -12,6 +12,10 @@ export const siteConfig = {
   email: 'info@n-d-i.co.za',
   workshopLocation: 'Gauteng, South Africa',
 
+  // Served from public/docs/ — pass through withBase() before linking.
+  termsPdfPath: '/docs/ndi-terms-and-conditions-2025.pdf',
+  termsPdfFilename: 'New Dimension Interiors (NDI) - Terms and Conditions 2025.pdf',
+
   // Bare numbers — the red "+" is added by StatsSection.astro, not stored
   // here, so it's never duplicated.
   yearsAtBench: '25',

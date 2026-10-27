@@ -1,0 +1,15 @@
+---
+// Document outline with a red "PDF" tag across it, so a link to a PDF reads
+// as one at a glance. Used by the Terms & Conditions download.
+interface Props {
+  size?: number;
+}
+const { size = 40 } = Astro.props;
+---
+
+<svg width={size} height={size} viewBox="0 0 40 40" fill="none" aria-hidden="true">
+  <path d="M9 3h15l9 9v23a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"></path>
+  <path d="M24 3v9h9" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"></path>
+  <rect x="3" y="19" width="26" height="12" rx="2" fill="var(--color-accent)"></rect>
+  <text x="16" y="28.2" text-anchor="middle" fill="#fff" font-family="var(--font-body), sans-serif" font-size="8.5" font-weight="800" letter-spacing="0.5">PDF</text>
+</svg>

@@ -4,6 +4,7 @@ import { Image } from 'astro:assets';
 import logo from '../../assets/images/ndi-logo.png';
 import { siteConfig } from '../../data/site-config.js';
 import { withBase } from '../../lib/url.js';
+import IconPdf from '../icons/IconPdf.astro';
 
 const navLinks = [
   { label: 'Home', href: withBase('/') },
@@ -20,6 +21,10 @@ const year = new Date().getFullYear();
       <Image src={logo} alt="N.D.I." height={60} class="site-footer__logo" />
       <span class="site-footer__tagline">Kitchens &middot; Built-in cupboards &middot; Vanities &middot; Home decor</span>
       <span class="site-footer__address">{siteConfig.workshopLocation} &middot; {siteConfig.email}</span>
+      <a href={withBase(siteConfig.termsPdfPath)} download={siteConfig.termsPdfFilename} class="site-footer__terms">
+        <IconPdf size={22} />
+        <span>Terms &amp; Conditions (PDF)</span>
+      </a>
     </div>
 
     <nav class="site-footer__nav">
@@ -80,6 +85,18 @@ const year = new Date().getFullYear();
     font-size: 13px;
     color: var(--color-neutral-500);
     margin-top: 6px;
+  }
+
+  .site-footer__terms {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 6px;
+    font-size: 13px;
+    color: var(--color-neutral-600);
+  }
+  .site-footer__terms:hover {
+    color: #fff;
   }
 
   .site-footer__nav {
